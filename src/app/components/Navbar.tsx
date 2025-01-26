@@ -72,13 +72,13 @@ export default function Navbar() {
 
       {/* Frosted Navbar */}
       <nav
-        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[16%] max-w-3xl px-3 py-1 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 shadow-lg border border-white/30"
+        className="fixed top-4 left-1/2 transform antialiased  -translate-x-1/2  z-50 max-w-3xl px-1 py-1 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 shadow-lg border border-white/30"
       >
         <ul className="relative flex gap-5 font-fixelDisplay">
           {/* Sliding Indicator */}
           <div
             ref={indicatorRef}
-            className="absolute top-0 left-0 rounded-full bg-black/5 pointer-events-none transition-all duration-200"
+            className="absolute top-0 left-0 rounded-full bg-black/10 pointer-events-none transition-all duration-200"
           ></div>
 
           {/* Info Link */}
@@ -92,8 +92,8 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.info);
               }}
-              className={`z-10 inline-flex text-8 items-center px-8 py-2 rounded-full transition-all duration-200 ${
-                activeLink === "info" ? "text-black" : "text-black"
+              className={`z-10 inline-flex text-xl items-center px-8 py-3 rounded-full transition-all duration-200 ${
+                activeLink === "info" ? "text-black antialiased" : "text-black antialiased"
               }`}
             >
               Info
@@ -111,8 +111,8 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.work);
               }}
-              className={`z-10 inline-flex items-center px-8 py-2 rounded-full transition-all duration-200 ${
-                activeLink === "work" ? "text-black" : "text-black"
+              className={`z-10 inline-flex text-xl items-center px-8 py-3 rounded-full transition-all duration-200 ${
+                activeLink === "work" ? "text-black antialiased" : "text-black antialiased"
               }`}
             >
               Work
@@ -129,7 +129,7 @@ export default function Navbar() {
             e.preventDefault();
             handleSmoothScroll(sections.contact);
           }}
-          className={`relative z-10 inline-flex items-center px-8 py-3 rounded-full transition-all duration-200 bg-white/20 backdrop-blur-sm shadow-lg border border-white/30 ${
+          className={`relative z-10 inline-flex text-xl items-center px-8 py-4 rounded-full transition-all duration-200 bg-white/20 backdrop-blur-sm shadow-lg border border-white/30 ${
             activeLink === "contact" ? "text-black font-fixelDisplay" : "text-black font-fixelDisplay"
           }`}
         >

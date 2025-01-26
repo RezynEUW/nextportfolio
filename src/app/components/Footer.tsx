@@ -6,7 +6,7 @@ export default function Footer() {
       {/* Cropped and Inverted SVG at the top */}
       <div
         className="absolute top-[-8px] left-0 w-screen overflow-hidden" // Moves the SVG up by 8px
-        style={{ height: "158px", clipPath: "inset(8px 0 0 0)" }} // Crops the top 8px
+        style={{ width: "100%", clipPath: "inset(8px 0 0 0)" }} // Crops the top 8px
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

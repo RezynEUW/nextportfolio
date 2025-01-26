@@ -83,12 +83,12 @@ export default function Logo() {
         className="fixed top-4 left-4 z-50 opacity-1"
         style={{ visibility: "visible", transform: "translateX(0)" }}
       >
-        <div className="relative z-10 inline-flex items-center px-8 py-3 rounded-full text-black transition-all duration-500 bg-white/20 backdrop-blur-sm shadow-lg dark:bg-black/20 border border-white/30 dark:border-black/30">
+        <div className="relative z-10 inline-flex items-center px-8 py-4 rounded-full text-black transition-all duration-500 bg-white/20 backdrop-blur-sm shadow-lg dark:bg-black/20 border border-white/30 dark:border-black/30">
           <span
             className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-400/10 via-gray-400/10 to-transparent
               opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           ></span>
-          <span className="relative z-10 font-fixelDisplay">Lukas Hedström</span>
+          <span className="relative z-10 text-xl font-fixelDisplay font-">Lukas</span><span className="relative z-10 text-xl font-fixelDisplay whitespace-pre"> Hedström</span>
         </div>
       </div>
 
@@ -101,24 +101,18 @@ export default function Logo() {
         <Link href="/">
           <svg
             ref={logoSvgRef}
-            className="w-16 h-auto text-current" // Adjusted width to make logo smaller
+            className="w-24 h-auto text-current"
             width="520"
-            height="312" // Scaled down proportions
+            height="312"
             viewBox="0 0 650 390"
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M0 2.19947e-06H130V130H0V2.19947e-06Z" fill="currentColor" />
-            <path d="M0 130H130V260H0V130Z" fill="currentColor" />
-            <path d="M130 130L260 130V260H130V130Z" fill="currentColor" />
-            <path d="M260 130H390V260H260V130Z" fill="currentColor" />
-            <path d="M260 0H390V130H260L260 0Z" fill="currentColor" />
-            <path d="M390 130H520V260H390V130Z" fill="currentColor" />
-            <path d="M520 130H650V260H520V130Z" fill="currentColor" />
-            <path d="M520 0H650V130H520L520 0Z" fill="currentColor" />
-            <path d="M520 260H650V390H520L520 260Z" fill="currentColor" />
-            <path d="M260 260H390V390H260L260 260Z" fill="currentColor" />
-          </svg>
+          <path
+          d="M0 0H130V130H0V0ZM0 130H130V260H0V130ZM130 130H260V260H130V130ZM260 130H390V260H260V130ZM260 0H390V130H260V0ZM390 130H520V260H390V130ZM520 130H650V260H520V130ZM520 0H650V130H520V0ZM520 260H650V390H520V260ZM260 260H390V390H260V260Z"
+          fill="currentColor"
+          />
+        </svg>
         </Link>
       </div>
     </>
