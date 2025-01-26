@@ -32,7 +32,7 @@ export default function AboutSection() {
         gsap.to(textElement, {
           opacity: 0, // Fade out
           y: 100, // Slide down slightly
-          duration: 1.2,
+          duration: 2,
           ease: "power4.inOut", // Smooth ease for slide out
           onComplete: () => {
             currentIndex = (currentIndex + 1) % titles.length; // Cycle through titles
@@ -44,7 +44,7 @@ export default function AboutSection() {
               {
                 opacity: 1, // Fade in
                 y: 0, // Reset position
-                duration: 1.0,
+                duration: 1.5,
                 ease: "power4.out", // Smooth ease for slide in
               }
             );
