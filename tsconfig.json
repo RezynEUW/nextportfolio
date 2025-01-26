@@ -8,20 +8,30 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node", // Ensure Node module resolution is used
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": "./src", // Base directory for imports is 'src'
+    "paths": {
+      "@app/*": ["app/*"], // Matches 'src/app/*'
+      "@assets/*": ["assets/*"], // Matches 'src/assets/*'
+      "@components/*": ["app/components/*"], // Matches 'src/app/components/*'
+      "@styles/*": ["styles/*"], // Matches 'src/styles/*'
+      "@utils/*": ["utils/*"] // Matches 'src/utils/*'
+    },
     "plugins": [
       {
-        "name": "next"
+        "name": "next" // Enables Next.js TypeScript integration
       }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }
