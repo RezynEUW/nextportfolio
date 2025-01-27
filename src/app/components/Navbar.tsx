@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Logo from "@components/Logo";
 import { gsap } from "gsap";
+import { MessageCircle } from "lucide-react"; // Importing from Lucide
+import Spinner from "@components/Spinner";
 
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("info"); // Default active link
@@ -15,6 +17,7 @@ export default function Navbar() {
     work: "projects", // Matches the id in CaseStudies.tsx
     contact: "contact", // Matches the id in ContactSection.tsx
   };
+  
 
   // Smooth scrolling to sections
   const handleSmoothScroll = (id: string) => {
@@ -72,13 +75,25 @@ export default function Navbar() {
 
       {/* Frosted Navbar */}
       <nav
-        className="fixed top-4 left-1/2 transform antialiased  -translate-x-1/2  z-50 max-w-3xl px-1 py-1 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 shadow-lg border border-white/30"
+        className="fixed top-4 left-1/2 transform antialiased -translate-x-1/2 z-50 max-w-3xl px-2 py-2 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 shadow border border-white/30"
+        style={{
+          boxShadow:
+            "0 4px 8px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.10)", // Inner and outer shadow combined
+        }}
       >
         <ul className="relative flex gap-5 font-fixelDisplay">
-          {/* Sliding Indicator */}
+          {/* Sliding Indicator with Glass Effect */}
           <div
             ref={indicatorRef}
-            className="absolute top-0 left-0 rounded-full bg-black/10 pointer-events-none transition-all duration-200"
+            className="absolute top-0 left-0 rounded-full pointer-events-none transition-all duration-200"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05))", // Subtle frosted effect
+              border: "1px solid rgba(255, 255, 255, 0.3)", // Glass border effect
+              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.05)", // Frosted glow
+              backdropFilter: "blur(10px)", // Frosted effect
+              WebkitBackdropFilter: "blur(10px)", // For Safari
+            }}
           ></div>
 
           {/* Info Link */}
@@ -92,8 +107,10 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.info);
               }}
-              className={`z-10 inline-flex text-xl items-center px-8 py-3 rounded-full transition-all duration-200 ${
-                activeLink === "info" ? "text-black antialiased" : "text-black antialiased"
+              className={`z-10 inline-flex text-xl items-center px-8 py-2 rounded-full transition-all duration-200 ${
+                activeLink === "info"
+                  ? "text-black antialiased"
+                  : "text-black antialiased"
               }`}
             >
               Info
@@ -111,8 +128,10 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.work);
               }}
-              className={`z-10 inline-flex text-xl items-center px-8 py-3 rounded-full transition-all duration-200 ${
-                activeLink === "work" ? "text-black antialiased" : "text-black antialiased"
+              className={`z-10 inline-flex text-xl items-center px-8 py-2 rounded-full transition-all duration-200 ${
+                activeLink === "work"
+                  ? "text-black antialiased"
+                  : "text-black antialiased"
               }`}
             >
               Work
@@ -121,21 +140,27 @@ export default function Navbar() {
         </ul>
       </nav>
 
-      {/* "Get in Touch" Button */}
-      <div className="fixed top-4 right-4 z-50">
+      {/* "Contact" Button */}
+      <div
+        className="fixed top-5 right-5 z-50 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 border border-white/30"
+        style={{
+          boxShadow:
+            "0 4px 8px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.10)", // Same shadow as the navbar
+        }}
+      >
         <a
           href="#contact"
           onClick={(e) => {
             e.preventDefault();
             handleSmoothScroll(sections.contact);
           }}
-          className={`relative z-10 inline-flex text-xl items-center px-8 py-4 rounded-full transition-all duration-200 bg-white/20 backdrop-blur-sm shadow-lg border border-white/30 ${
-            activeLink === "contact" ? "text-black font-fixelDisplay" : "text-black font-fixelDisplay"
-          }`}
+          className="relative z-10 inline-flex text-xl items-center transition-all duration-200 text-black font-fixelDisplay"
         >
-          Get in Touch
+          <MessageCircle className="w-5 h-5 mr-2 text-current" />
+          Contact
         </a>
       </div>
+      <Spinner />
     </>
   );
 }

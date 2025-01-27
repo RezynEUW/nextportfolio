@@ -16,8 +16,19 @@ const config: Config = {
         secondary: "var(--secondary)",
       },
       fontFamily: {
-        fixelDisplay: [
+        display: [
+          "FixelGT",
           "FixelDisplay", // Custom font
+          "FixelText",
+          "sans-serif",   // Fallback
+        ],
+        sans: [
+          "FixelGT",
+          "FixelText",
+          "sans-serif",   // Fallback
+        ],
+        serif: [
+          "source-serif-4",
           "sans-serif",   // Fallback
         ],
       },

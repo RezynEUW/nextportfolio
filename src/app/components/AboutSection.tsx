@@ -21,7 +21,7 @@ export default function AboutSection() {
     }
 
     // Title cycling animation
-    const titles = ["UX Designer", "Developer", "Creator", "Innovator"]; // List of titles
+    const titles = ["Designer", "Developer", "Creator", "Competitor", "Yapper"]; // List of titles
     const textElement = textRef.current;
 
     if (textElement) {

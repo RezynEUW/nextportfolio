@@ -80,15 +80,26 @@ export default function Logo() {
       {/* Hero Page Branding */}
       <div
         ref={brandingRef}
-        className="fixed top-4 left-4 z-50 opacity-1"
+        className="fixed top-5 left-5 z-50 opacity-1"
         style={{ visibility: "visible", transform: "translateX(0)" }}
       >
-        <div className="relative z-10 inline-flex items-center px-8 py-4 rounded-full text-black transition-all duration-500 bg-white/20 backdrop-blur-sm shadow-lg dark:bg-black/20 border border-white/30 dark:border-black/30">
-          <span
-            className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-400/10 via-gray-400/10 to-transparent
+        {/* Wrapper for Frosted Glass and Background Image */}
+        <div className="relative flex items-center justify-center">
+          {/* Background Image */}
+          <img
+            src="/LHLT.png"
+            alt="Background Image"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 z-[-1]" // Full size, centered behind frosted glass
+          />
+          {/* Text with Frosted Glass */}
+          <div className="relative z-10 inline-flex items-center px-6 py-3 rounded-full text-black transition-all duration-500 bg-white/20 backdrop-blur-md shadow-md dark:bg-black/20 border border-white/30 dark:border-black/30">
+            <span
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-400/10 via-gray-400/10 to-transparent
               opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          ></span>
-          <span className="relative z-10 text-xl font-fixelDisplay font-">Lukas</span><span className="relative z-10 text-xl font-fixelDisplay whitespace-pre"> Hedström</span>
+            ></span>
+            <span className="relative z-10 text-xl font-fixelDisplay">Lukas</span>
+            <span className="relative z-10 text-xl font-fixelDisplay whitespace-pre"> Hedström</span>
+          </div>
         </div>
       </div>
 
@@ -108,11 +119,11 @@ export default function Logo() {
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
           >
-          <path
-          d="M0 0H130V130H0V0ZM0 130H130V260H0V130ZM130 130H260V260H130V130ZM260 130H390V260H260V130ZM260 0H390V130H260V0ZM390 130H520V260H390V130ZM520 130H650V260H520V130ZM520 0H650V130H520V0ZM520 260H650V390H520V260ZM260 260H390V390H260V260Z"
-          fill="currentColor"
-          />
-        </svg>
+            <path
+              d="M0 0H130V130H0V0ZM0 130H130V260H0V130ZM130 130H260V260H130V130ZM260 130H390V260H260V130ZM260 0H390V130H260V0ZM390 130H520V260H390V130ZM520 130H650V260H520V130ZM520 0H650V130H520V0ZM520 260H650V390H520V260ZM260 260H390V390H260V260Z"
+              fill="currentColor"
+            />
+          </svg>
         </Link>
       </div>
     </>
