@@ -7,20 +7,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Spinner() {
-  const spinnerRef = useRef<HTMLDivElement>(null); // Ref for the rotating 'B'
+  const spinnerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const spinnerElement = spinnerRef.current;
 
     if (spinnerElement) {
       gsap.to(spinnerElement, {
-        rotation: -360, // Counterclockwise rotation
+        rotation: -360,
         ease: "none",
         scrollTrigger: {
-          trigger: document.body, // Triggers on the entire page scroll
+          trigger: document.body,
           start: "top top",
           end: "bottom bottom",
-          scrub: true, // Sync with scroll
+          scrub: true,
         },
       });
     }
@@ -29,12 +29,21 @@ export default function Spinner() {
   return (
     <div
       ref={spinnerRef}
-      className="fixed bottom-5 right-5 z-50 text-black font-display text-5xl"
-      style={{
-        pointerEvents: "none", // Prevent interaction
-      }}
+      className="fixed bottom-5 right-5 z-50"
+      style={{ pointerEvents: "none" }}
     >
-      B
+      <svg
+        className="w-16 h-16 text-black" // Add Tailwind classes to control size and color
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      >
+        <path
+          d="M2 16s9-15 20-4C11 23 2 8 2 8"
+          className="stroke-black" // Add class to control path color
+        />
+      </svg>
     </div>
   );
 }
