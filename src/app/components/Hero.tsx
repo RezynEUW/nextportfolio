@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 interface HeroProps {
-  backgroundVideoOpacity?: number; // Opacity for the fullscreen background video (video13.mp4)
+  backgroundVideoOpacity?: number;
   playbackRate?: number;
 }
 
@@ -37,26 +37,47 @@ export default function Hero({
       </div>
 
       {/* Content Overlay */}
-      <div className="relative font-display z-10 flex flex-col md:flex-row items-center justify-center gap-8 px-8">
-        <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-          <h1 className="text-6xl md:text-9xl font-bold bg-gradient-to-r from-[#00B86E] to-[#0099FF] text-transparent bg-clip-text">
-            Hej!
-          </h1>
-          <h2 className="text-3xl md:text-5xl font-semibold">
-            I'm Lukas, a Front End Developer &amp; UX Designer.
-          </h2>
-          <p className="text-xl md:text-3xl">
-            I create immersive digital experiences.
-          </p>
-        </div>
-        <div className="flex justify-center items-center">
-          <Image
-            src="/Intersect.png"
-            alt="Intersect Graphic"
-            width={400}
-            height={400}
-            className="object-contain rounded-3xl"
-          />
+      <div className="relative z-10 container mx-auto px-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+          {/* Text Content */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 md:max-w-2xl">
+            <h1 className="text-6xl md:text-8xl xl:text-9xl font-display font-bold">
+              <span className="bg-gradient-to-r from-[#00B86E] to-[#0099FF] text-transparent bg-clip-text">
+                Hej!
+              </span>
+            </h1>
+            <div className="space-y-4">
+              <h2 className="text-3xl md:text-5xl font-sans font-semibold">
+                I'm Lukas, a Front End Developer &amp; UX Designer.
+              </h2>
+              <p className="text-xl md:text-3xl font-serif">
+                I create immersive digital experiences.
+              </p>
+            </div>
+            <div className="flex gap-4 pt-4">
+              <a
+                href="#projects"
+                className="px-8 py-3 bg-gradient-to-r from-[#00B86E] to-[#0099FF] text-white rounded-lg font-sans hover:opacity-90 transition-all"
+              >
+                View Work
+              </a>
+            </div>
+          </div>
+
+          {/* Image with Enhanced Container */}
+          <div className="relative md:w-2/5">
+            <div className="relative aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#00B86E]/10 to-[#0099FF]/10 rounded-3xl transform -rotate-3" />
+              <Image
+                src="/Intersect.png"
+                alt="Intersect Graphic"
+                width={500}
+                height={500}
+                className="relative rounded-3xl object-contain transform transition-transform duration-500 hover:scale-105"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

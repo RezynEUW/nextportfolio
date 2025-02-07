@@ -2,102 +2,148 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Palette, Code2, Database } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  const cards = [
+    {
+      title: "UX Design",
+      subtitle: "The Foundation",
+      icon: Palette,
+      description: "UX is at the core of how I approach development. With a background in user-centered design, accessibility, and system architecture, I focus on making digital experiences intuitive and functional. Understanding what makes design work helps me bridge the gap between users and technology.",
+      gradient: "from-emerald-500/20 to-emerald-500/5",
+      borderGradient: "from-emerald-500 via-emerald-400 to-transparent",
+      iconColor: "text-emerald-500",
+      step: "01"
+    },
+    {
+      title: "Front-End Development",
+      subtitle: "The Focus",
+      icon: Code2,
+      description: "I enjoy working with modern web frameworks like React, Next.js, and React Native, building intuitive and scalable interfaces. Front-End development is where design and logic meet, and I'm particularly interested in performance optimization, accessibility, and creating seamless user experiences.",
+      gradient: "from-blue-500/20 to-blue-500/5",
+      borderGradient: "from-blue-500 via-blue-400 to-transparent",
+      iconColor: "text-blue-500",
+      featured: true,
+      step: "02"
+    },
+    {
+      title: "Full-Stack Journey",
+      subtitle: "The Goal",
+      icon: Database,
+      description: "While Front-End is my main focus, I'm interested in expanding my Full-Stack knowledge—especially in APIs, databases, and performance-driven architectures. Learning more about the backend will help me build more holistic and efficient web applications.",
+      gradient: "from-indigo-500/20 to-indigo-500/5",
+      borderGradient: "from-indigo-500 via-indigo-400 to-transparent",
+      iconColor: "text-indigo-500",
+      step: "03"
+    }
+  ];
 
   useEffect(() => {
-    const videoElement = videoRef.current;
+    if (!sectionRef.current) return;
 
-    // Apply infinite hue rotation to the video background
-    if (videoElement) {
-      gsap.to(videoElement, {
-        filter: "hue-rotate(360deg)", // Rotate through all hues
-        duration: 20, // Duration for one full rotation
-        repeat: -1, // Infinite repetition
-        ease: "linear", // Smooth looping
-      });
-    }
+    cardsRef.current.forEach((card, index) => {
+      if (!card) return;
 
-    // Title cycling animation
-    const titles = ["Designer", "Developer", "Creator", "Competitor", "Yapper"]; // List of titles
-    const textElement = textRef.current;
-
-    if (textElement) {
-      let currentIndex = 0;
-
-      // Function to update the text content
-      const updateText = () => {
-        gsap.to(textElement, {
-          opacity: 0, // Fade out
-          y: 100, // Slide down slightly
-          duration: 2,
-          ease: "power4.inOut", // Smooth ease for slide out
-          onComplete: () => {
-            currentIndex = (currentIndex + 1) % titles.length; // Cycle through titles
-            textElement.innerText = titles[currentIndex];
-
-            gsap.fromTo(
-              textElement,
-              { y: -100 }, // Start position (slide in from above)
-              {
-                opacity: 1, // Fade in
-                y: 0, // Reset position
-                duration: 1.5,
-                ease: "power4.out", // Smooth ease for slide in
-              }
-            );
+      gsap.fromTo(
+        card,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom-=100",
+            end: "bottom center",
+            toggleActions: "play none none reverse",
           },
-        });
-      };
-
-      // Loop through titles with a delay
-      const interval = setInterval(updateText, 5000); // Change every 5 seconds
-      return () => clearInterval(interval); // Cleanup on unmount
-    }
+        }
+      );
+    });
   }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="about"
-      className="h-screen bg-gray-100 flex items-center justify-center"
+      className="min-h-screen bg-gradient-to-b from-background to-background/95 py-24 px-6 lg:px-8"
     >
-      {/* Video Background */}
-      <div
-        className="relative flex justify-center items-center"
-        style={{
-          width: "80vw", // Video width: 80% of the viewport width
-          height: "65vh", // Video height: 65% of the viewport height
-        }}
-      >
-        {/* Video Element */}
-        <video
-          ref={videoRef}
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          src="/video10.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+      {/* Section Header */}
+      <div className="max-w-7xl mx-auto mb-16 text-center">
+        <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+          Bridging Creativity & Technology
+        </h2>
+        <p className="text-xl font-serif text-foreground/60 max-w-3xl mx-auto">
+          I've always been fascinated by the intersection of design and development.
+          Here's how I bring both worlds together.
+        </p>
+      </div>
 
-        {/* Dark Tint Overlay */}
-        <div className="absolute top-0 left-0 w-full h-full bg-gray-700 opacity-20 pointer-events-none"></div>
-
-        {/* Animated Text */}
-        <div className="absolute text-center">
-          <h1
-            ref={textRef}
-            className="text-9xl font-fixelDisplay font-black text-transparent"
-            style={{
-              WebkitTextStroke: "1px rgba(255, 255, 255, 0)", // Frosted-like edge
-              WebkitTextFillColor: "rgba(255, 255, 255, 1)", // Ensures the inside stays transparent
-            }}
+      {/* Cards Container - Earlier breakpoint for mobile/tablet */}
+      <div className="max-w-7xl mx-auto grid gap-8 
+        grid-cols-1 lg:grid-cols-3">
+        {cards.map((card, index) => (
+          <div
+            key={card.title}
+            ref={(el) => cardsRef.current[index] = el}
+            className="relative group"
           >
-            UX Designer
-          </h1>
-        </div>
+            {/* Card */}
+            <div
+              className={`h-full p-8 rounded-2xl backdrop-blur-sm 
+                border border-white/10 
+                bg-gradient-to-br ${card.gradient}
+                hover:shadow-lg transition-all duration-500
+                ${card.featured ? 'border-opacity-50' : 'border-opacity-30'}`}
+            >
+              {/* Step indicator */}
+              <div className="absolute top-4 right-4 text-sm font-mono opacity-50">
+                {card.step}
+              </div>
+
+              {/* Title with Icon */}
+              <div className="mb-6 relative">
+                <div className="flex items-center gap-3 mb-2">
+                  <card.icon className={`w-6 h-6 ${card.iconColor}`} />
+                  <div>
+                    <h3 className="text-2xl font-sans font-semibold">
+                      {card.title}
+                    </h3>
+                    <p className={`text-sm ${card.iconColor} font-medium`}>
+                      {card.subtitle}
+                    </p>
+                  </div>
+                </div>
+                {/* Enhanced gradient line with animation */}
+                <div className="relative h-1 w-24 group-hover:w-32 transition-all duration-500">
+                  <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${card.borderGradient} opacity-50`} />
+                  <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${card.borderGradient} blur-sm`} />
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className="text-lg font-serif leading-relaxed text-foreground/80">
+                {card.description}
+              </p>
+            </div>
+
+            {/* Connector line for timeline (visible on mobile) */}
+            {index < cards.length - 1 && (
+              <div className="lg:hidden h-8 w-px mx-auto my-0 bg-gradient-to-b from-white/20 to-transparent" />
+            )}
+          </div>
+        ))}
       </div>
     </section>
   );
