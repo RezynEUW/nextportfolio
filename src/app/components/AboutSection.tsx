@@ -77,73 +77,89 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="min-h-screen bg-gradient-to-b from-background to-background/95 py-24 px-6 lg:px-8"
+      className="min-h-screen bg-gradient-to-b from-background to-background/95 flex items-center"
     >
-      {/* Section Header */}
-      <div className="max-w-7xl mx-auto mb-16 text-center">
-        <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-          Bridging Creativity & Technology
-        </h2>
-        <p className="text-xl font-serif text-foreground/60 max-w-3xl mx-auto">
-          I've always been fascinated by the intersection of design and development.
-          Here's how I bring both worlds together.
-        </p>
-      </div>
+      <div className="w-full py-24 px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="max-w-7xl mx-auto mb-16 text-center">
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            Bridging Creativity & Technology
+          </h2>
+          <p className="text-xl font-serif text-foreground/60 max-w-3xl mx-auto">
+            I've always been fascinated by the intersection of design and development.
+            Here's how I bring both worlds together.
+          </p>
+        </div>
 
-      {/* Cards Container - Earlier breakpoint for mobile/tablet */}
-      <div className="max-w-7xl mx-auto grid gap-8 
-        grid-cols-1 lg:grid-cols-3">
-        {cards.map((card, index) => (
-          <div
-            key={card.title}
-            ref={(el) => cardsRef.current[index] = el}
-            className="relative group"
-          >
-            {/* Card */}
+        {/* Cards Container */}
+        <div className="max-w-7xl mx-auto grid gap-8 
+          grid-cols-1 lg:grid-cols-3">
+          {cards.map((card, index) => (
             <div
-              className={`h-full p-8 rounded-2xl backdrop-blur-sm 
-                border border-white/10 
-                bg-gradient-to-br ${card.gradient}
-                hover:shadow-lg transition-all duration-500
-                ${card.featured ? 'border-opacity-50' : 'border-opacity-30'}`}
+              key={card.title}
+              ref={(el) => cardsRef.current[index] = el}
+              className="relative group"
             >
-              {/* Step indicator */}
-              <div className="absolute top-4 right-4 text-sm font-mono opacity-50">
-                {card.step}
-              </div>
+              {/* Card */}
+              <div
+                className={`h-full p-8 rounded-2xl backdrop-blur-sm 
+                  border border-white/10 
+                  bg-gradient-to-br ${card.gradient}
+                  hover:shadow-lg transition-all duration-500
+                  ${card.featured ? 'border-opacity-50' : 'border-opacity-30'}`}
+              >
+                {/* Step indicator */}
+                <div className="absolute top-4 right-4 text-sm font-mono opacity-50">
+                  {card.step}
+                </div>
 
-              {/* Title with Icon */}
-              <div className="mb-6 relative">
-                <div className="flex items-center gap-3 mb-2">
-                  <card.icon className={`w-6 h-6 ${card.iconColor}`} />
-                  <div>
-                    <h3 className="text-2xl font-sans font-semibold">
-                      {card.title}
-                    </h3>
-                    <p className={`text-sm ${card.iconColor} font-medium`}>
-                      {card.subtitle}
-                    </p>
+                {/* Title with Icon */}
+                <div className="mb-6 relative">
+                  <div className="flex items-center gap-3 mb-2">
+                    <card.icon className={`w-6 h-6 ${card.iconColor}`} />
+                    <div>
+                      <h3 className="text-2xl font-sans font-semibold">
+                        {card.title}
+                      </h3>
+                      <p className={`text-sm ${card.iconColor} font-medium`}>
+                        {card.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                  {/* Enhanced gradient line with animation */}
+                  <div className="relative h-1 w-24 group-hover:w-32 transition-all duration-500">
+                    <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${card.borderGradient} opacity-50`} />
+                    <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${card.borderGradient} blur-sm`} />
                   </div>
                 </div>
-                {/* Enhanced gradient line with animation */}
-                <div className="relative h-1 w-24 group-hover:w-32 transition-all duration-500">
-                  <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${card.borderGradient} opacity-50`} />
-                  <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${card.borderGradient} blur-sm`} />
-                </div>
+
+                {/* Description */}
+                <p className="text-lg font-serif leading-relaxed text-foreground/80">
+                  {card.description}
+                </p>
               </div>
 
-              {/* Description */}
-              <p className="text-lg font-serif leading-relaxed text-foreground/80">
-                {card.description}
-              </p>
+              {/* Connector line for timeline (visible on mobile) */}
+              {index < cards.length - 1 && (
+                <div className="lg:hidden h-8 w-px mx-auto my-0 bg-gradient-to-b from-white/20 to-transparent" />
+              )}
             </div>
+          ))}
+        </div>
 
-            {/* Connector line for timeline (visible on mobile) */}
-            {index < cards.length - 1 && (
-              <div className="lg:hidden h-8 w-px mx-auto my-0 bg-gradient-to-b from-white/20 to-transparent" />
-            )}
+        {/* Button Section */}
+        <div className="mt-16 text-center">
+          <div className="relative inline-block group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+            <a
+              href="/about"
+              className="relative px-8 py-4 bg-background/90 border border-white/10 rounded-lg leading-none flex items-center divide-x divide-white/20 hover:bg-background/70 transition duration-300"
+            >
+              <span className="pr-6 text-gray-100">Learn more about my journey</span>
+              <span className="pl-6 text-indigo-400 group-hover:text-blue-400 transition duration-300">&rarr;</span>
+            </a>
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

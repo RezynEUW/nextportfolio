@@ -32,17 +32,17 @@ export default function CaseStudies() {
   ];
 
   return (
-    <section id="projects" className="relative min-h-screen h-auto lg:h-screen bg-white">
-      {/* Responsive Grid Container with increased edge padding on desktop */}
-      <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:px-4">
+    <section id="projects" className="relative min-h-screen bg-white flex items-center">
+      {/* Responsive Grid Container */}
+      <div className="w-full h-[95vh] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:px-2">
         {projects.map((project, index) => (
           <div
             key={project.id}
             className="relative w-full group overflow-hidden
               h-[70vh] sm:h-[50vh] lg:h-full"
           >
-            {/* Frame with padding - adjusted for edges and increased internal frames */}
-            <div className={`h-full w-full py-3 px-1.5 lg:py-6 bg-white box-border
+            {/* Frame with padding */}
+            <div className={`h-full w-full py-3 px-1.5 lg:py-8 lg:px-1.5 bg-white box-border
               ${index === 0 ? 'lg:pl-0' : ''} 
               ${index === projects.length - 1 ? 'lg:pr-0' : ''}`}
             >

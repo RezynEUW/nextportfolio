@@ -17,14 +17,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="h-[70vh] bg-gray-800 text-white relative flex flex-col justify-end">
+    <footer className="h-[70vh] bg-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
       {/* SVG Break-in Effect */}
-      <div className="absolute top-[-8px] left-0 w-screen overflow-hidden">
+      <div className="absolute top-[-8px] left-0 right-0 w-full">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1050 158"
           fill="none"
-          className="w-full h-full"
+          className="w-full"
+          preserveAspectRatio="none"
           style={{
             display: "block",
             transform: "rotate(180deg)",
