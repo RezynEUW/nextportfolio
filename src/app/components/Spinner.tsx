@@ -29,11 +29,11 @@ export default function Spinner() {
   return (
     <div
       ref={spinnerRef}
-      className="fixed bottom-5 right-5 z-50"
+      className="fixed bottom-5 right-5 z-50 mix-blend-difference"
       style={{ pointerEvents: "none" }}
     >
       <svg
-        className="w-16 h-16 text-black" // Add Tailwind classes to control size and color
+        className="w-14 h-14 text-white"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -41,7 +41,7 @@ export default function Spinner() {
       >
         <path
           d="M2 16s9-15 20-4C11 23 2 8 2 8"
-          className="stroke-black" // Add class to control path color
+          className="stroke-white"
         />
       </svg>
     </div>
