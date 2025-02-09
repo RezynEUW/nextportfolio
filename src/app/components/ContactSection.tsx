@@ -1,143 +1,174 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { Download, Mail, Linkedin, Github } from "lucide-react";
-import { gsap } from "gsap";
+import { 
+  Mail, 
+  Linkedin, 
+  Copy, 
+  Download, 
+  Eye, 
+  MessageSquare, 
+  ExternalLink,
+  Sparkles,
+  GraduationCap,
+  Briefcase
+} from "lucide-react";
+import { useState } from "react";
 
 export default function ContactSection() {
-  const streamRef = useRef<HTMLDivElement>(null);
+  const [emailCopied, setEmailCopied] = useState(false);
 
-  useEffect(() => {
-    if (!streamRef.current) return;
-
-    gsap.to(streamRef.current, {
-      y: "20px",
-      opacity: 0.7,
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut"
+  const handleEmailCopy = () => {
+    navigator.clipboard.writeText('hello@lukashedstrom.com').then(() => {
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
     });
-  }, []);
+  };
 
   return (
-    <section id="contact" className="min-h-screen bg-gradient-to-b from-background to-background/95 flex items-center justify-center py-20">
-      <div className="max-w-7xl w-full mx-auto px-6">
+    <section className="w-full min-h-screen bg-background px-6 py-24">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="relative mb-16 text-center">
-          <div className="flex items-center justify-center gap-1 text-6xl md:text-7xl font-display font-bold">
-            <span className="bg-gradient-to-r from-[#00B86E] to-[#0099FF] text-transparent bg-clip-text">
-              Let's Connect
+        <div className="text-center mb-24">
+          <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 relative">
+            <span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-transparent bg-clip-text 
+              relative z-10 drop-shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
+              Let's Connect!
             </span>
-          </div>
-          <p className="mt-4 text-xl font-serif text-foreground/60 max-w-2xl mx-auto">
+          </h2>
+          <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
             Whether you have a project in mind or just want to chat about technology and design,
             I'm always excited to connect with like-minded individuals.
           </p>
+          <div className="mt-8 flex flex-wrap gap-4 justify-center">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-500 text-sm">
+              <Sparkles className="w-4 h-4" />
+              Summer Internship 2025
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-500 text-sm">
+              <GraduationCap className="w-4 h-4" />
+              Master Thesis Fall 2025
+            </span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 text-indigo-500 text-sm">
+              <Briefcase className="w-4 h-4" />
+              Full-time Position 2026
+            </span>
+          </div>
         </div>
 
-        {/* Contact Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
-          {/* Left Column - Contact Form */}
-          <div className="space-y-8">
-            <form className="space-y-6">
-              <div className="space-y-4">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="w-full px-6 py-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 
-                    backdrop-blur-sm border border-emerald-500/20 rounded-full
-                    focus:outline-none focus:border-emerald-500/50 transition-all
-                    placeholder:text-foreground/40"
-                />
-                <textarea
-                  placeholder="Your message"
-                  rows={6}
-                  className="w-full px-6 py-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 
-                    backdrop-blur-sm border border-emerald-500/20 rounded-2xl
-                    focus:outline-none focus:border-emerald-500/50 transition-all
-                    placeholder:text-foreground/40"
-                ></textarea>
+        {/* Cards Grid */}
+        <div className="space-y-6">
+          {/* Message Card */}
+          <div className="group rounded-3xl bg-gradient-to-b from-teal-500/10 to-blue-500/5 p-8 backdrop-blur-sm">
+            <div className="flex items-start gap-6">
+              <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-teal-500 to-blue-500">
+                <MessageSquare className="w-6 h-6 text-white" />
               </div>
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-emerald-500/20 to-blue-500/20 backdrop-blur-sm 
-                  border border-emerald-500/20 px-8 py-4 rounded-full
-                  hover:scale-105 transition-all duration-300"
-              >
-                <span className="bg-gradient-to-r from-emerald-500 to-blue-500 text-transparent bg-clip-text font-medium">
-                  Send Message
-                </span>
-              </button>
-            </form>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-2">Send a Message</h3>
+                    <p className="text-sm text-teal-500 font-medium mb-4">Quick and easy way to reach out</p>
+                    <p className="text-foreground/60">
+                      Want to discuss a project or just say hello? Drop me a line through the contact form.
+                    </p>
+                  </div>
+                  <button className="text-xl font-medium flex items-center gap-2 px-4 py-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-teal-500">
+                    <MessageSquare className="w-5 h-5" />
+                    <span>Open Form</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Right Column - Additional Links */}
-          <div className="space-y-6">
-            {/* CV Download */}
-            <a
-              href="/cv.pdf"
-              download
-              className="block p-[1px] rounded-2xl overflow-hidden relative group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 group-hover:opacity-100 opacity-50 transition-opacity" />
-              <div className="relative p-6 bg-background/50 backdrop-blur-sm rounded-2xl 
-                flex items-center gap-4 group-hover:bg-background/40 transition-colors">
-                <Download className="w-6 h-6 text-emerald-500" />
-                <div className="flex-1">
-                  <h3 className="font-medium">Download CV</h3>
-                  <p className="text-sm text-foreground/60">Get my latest resume</p>
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Quick Connect Card */}
+            <div className="group rounded-3xl bg-gradient-to-b from-blue-500/10 to-blue-500/5 p-8 backdrop-blur-sm">
+              <div className="flex flex-col h-full">
+                <div className="flex items-start gap-6 mb-6">
+                  <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-500">
+                    <Mail className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-2">Quick Connect</h3>
+                    <p className="text-sm text-blue-500 font-medium">Direct email communication</p>
+                  </div>
                 </div>
-                <span className="text-blue-500 group-hover:translate-x-1 transition-transform">→</span>
+                <button
+                  onClick={handleEmailCopy}
+                  className="p-4 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors mb-6 w-full text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-blue-500" />
+                    <p className="text-xl font-medium text-blue-500 break-all">
+                      hello@lukashedstrom.com
+                    </p>
+                  </div>
+                </button>
+                <div className="flex gap-4 mt-auto">
+                  <button
+                    onClick={handleEmailCopy}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors flex-1 justify-center"
+                  >
+                    <Copy className="w-4 h-4 text-blue-500" />
+                    <span className="text-blue-500">{emailCopied ? 'Copied!' : 'Copy Email'}</span>
+                  </button>
+                  <a
+                    href="mailto:hello@lukashedstrom.com"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors flex-1 justify-center"
+                  >
+                    <ExternalLink className="w-4 h-4 text-blue-500" />
+                    <span className="text-blue-500">Open Email</span>
+                  </a>
+                </div>
               </div>
-            </a>
-
-            {/* Social Links */}
-            <div className="grid grid-cols-2 gap-4">
-              <a
-                href="mailto:lukas@heathstream.dev"
-                className="p-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 backdrop-blur-sm 
-                  border border-emerald-500/20 rounded-xl hover:scale-105 transition-all
-                  flex items-center justify-center gap-2"
-              >
-                <Mail className="w-5 h-5 text-emerald-500" />
-                <span className="bg-gradient-to-r from-emerald-500 to-blue-500 text-transparent bg-clip-text font-medium">
-                  Email
-                </span>
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 backdrop-blur-sm 
-                  border border-emerald-500/20 rounded-xl hover:scale-105 transition-all
-                  flex items-center justify-center gap-2"
-              >
-                <Linkedin className="w-5 h-5 text-blue-500" />
-                <span className="bg-gradient-to-r from-emerald-500 to-blue-500 text-transparent bg-clip-text font-medium">
-                  LinkedIn
-                </span>
-              </a>
             </div>
 
-            {/* GitHub Link */}
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block p-[1px] rounded-2xl overflow-hidden relative group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 group-hover:opacity-100 opacity-50 transition-opacity" />
-              <div className="relative p-6 bg-background/50 backdrop-blur-sm rounded-2xl 
-                flex items-center gap-4 group-hover:bg-background/40 transition-colors">
-                <Github className="w-6 h-6 text-blue-500" />
-                <div className="flex-1">
-                  <h3 className="font-medium">GitHub Profile</h3>
-                  <p className="text-sm text-foreground/60">Check out my projects</p>
+            {/* Professional Network Card */}
+            <div className="group rounded-3xl bg-gradient-to-b from-indigo-500/10 to-indigo-500/5 p-8 backdrop-blur-sm">
+              <div className="flex flex-col h-full">
+                <div className="flex items-start gap-6 mb-6">
+                  <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500">
+                    <Linkedin className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-2">Professional Network</h3>
+                    <p className="text-sm text-indigo-500 font-medium">Let's connect and grow together</p>
+                  </div>
                 </div>
-                <span className="text-emerald-500 group-hover:translate-x-1 transition-transform">→</span>
+                <a
+                  href="https://linkedin.com/in/lukashedstrom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors mb-6 w-full text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <Linkedin className="w-5 h-5 text-indigo-500" />
+                    <p className="text-xl font-medium text-indigo-500">
+                      Visit Profile
+                    </p>
+                  </div>
+                </a>
+                <div className="flex gap-4">
+                  <a 
+                    href="/cv.pdf" 
+                    download
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 transition-colors flex-1 justify-center"
+                  >
+                    <Download className="w-4 h-4 text-purple-500" />
+                    <span className="text-purple-500">Resume</span>
+                  </a>
+                  <a 
+                    href="/cv.pdf" 
+                    target="_blank"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 transition-colors flex-1 justify-center"
+                  >
+                    <Eye className="w-4 h-4 text-purple-500" />
+                    <span className="text-purple-500">Preview</span>
+                  </a>
+                </div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </div>

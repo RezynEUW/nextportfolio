@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Palette, Code2, Database } from "lucide-react";
+import { Palette, Code2, Database, ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,14 +30,9 @@ export default function AboutSection() {
       description: (
         <p className="relative">
           I enjoy working with modern web frameworks like{' '}
-          <span className="group/react relative inline-block">
-            React
-          </span>
-          ,{' '}
-          <span className="group/next relative inline-block">
-            Next.js
-          </span>
-          , and React Native, building intuitive and scalable interfaces. Front-End development is where design and logic meet, and I'm particularly interested in performance optimization, accessibility, and creating seamless user experiences.
+          <span className="text-blue-500">React</span>,{' '}
+          <span className="text-blue-500">Next.js</span>, and{' '}
+          <span className="text-blue-500">React Native</span>, building intuitive and scalable interfaces. Front-End development is where design and logic meet, and I'm particularly interested in performance optimization, accessibility, and creating seamless user experiences.
         </p>
       ),
       gradient: "from-blue-500/20 to-blue-500/5",
@@ -98,7 +93,10 @@ export default function AboutSection() {
         {/* Section Header */}
         <div className="max-w-7xl mx-auto mb-16 text-center">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            Bridging Creativity & Technology
+            <span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-transparent bg-clip-text 
+              relative z-10 py-1 drop-shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
+              Bridging Creativity & Technology
+            </span>
           </h2>
           <p className="text-xl font-serif text-foreground/60 max-w-3xl mx-auto">
             I've always been fascinated by the intersection of design and development.
@@ -124,13 +122,17 @@ export default function AboutSection() {
                   ${card.featured ? 'border-opacity-50' : 'border-opacity-30'}`}
               >
                 {/* Background gradient with animation */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-100 
-                  group-hover:scale-110 transition-transform duration-700 ease-out`} />
+                <div className={`absolute inset-0 opacity-20 mix-blend-overlay`}>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-50 
+                    group-hover:scale-110 group-hover:opacity-100 transition-all duration-700 ease-out`} />
+                  <div className={`absolute inset-0 bg-gradient-to-tl ${card.gradient} opacity-30 
+                    group-hover:scale-110 group-hover:opacity-80 transition-all duration-700 ease-out delay-100`} />
+                </div>
                 
                 {/* Content container */}
                 <div className="relative z-10">
                   {/* Step indicator */}
-                  <div className="absolute top-0 right-0 text-sm font-mono opacity-50">
+                  <div className="absolute top-0 right-0 text-sm font-mono text-foreground/40">
                     {card.step}
                   </div>
 
@@ -176,12 +178,16 @@ export default function AboutSection() {
           <div className="inline-block">
             <a
               href="/about"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-full backdrop-blur-sm border border-emerald-500/20 hover:scale-105 transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-8 py-4 
+                bg-gradient-to-r from-emerald-500/10 to-indigo-500/10 
+                hover:from-emerald-500/20 hover:to-indigo-500/20 
+                rounded-2xl backdrop-blur-sm border border-white/10 
+                transition-all duration-300"
             >
-              <span className="bg-gradient-to-r from-emerald-500 to-blue-500 text-transparent bg-clip-text font-medium">
+              <span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-transparent bg-clip-text font-medium">
                 Learn more about my journey
               </span>
-              <span className="text-indigo-400">&rarr;</span>
+              <ArrowRight className="w-5 h-5 text-indigo-500 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </div>
