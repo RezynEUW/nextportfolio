@@ -17,7 +17,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="h-[70vh] bg-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
+    <footer className="h-[50vh] bg-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
       {/* SVG Break-in Effect */}
       <div className="absolute top-[-8px] left-0 right-0 w-full">
         <svg
@@ -33,14 +33,13 @@ export default function Footer() {
         >
           <path
             d="M1 157H139.809H902.548H1049L898.524 145.275L874.928 76.5294H826.062H817.563L801.983 61.7059L786.402 76.5294H777.904L722.664 60.2941H712.04L693.627 20.3725L675.214 60.2941H661.758L612.183 40.5294H550.569L510.909 1L495.329 16.5294L479.748 1H348.73L332.441 40.5294V60.2941H282.867L272.952 70.1765H258.079L240.374 52.5294L222.669 70.1765H200.006L161.055 83.5882L143.055 145.784L1 157Z"
-            fill="lightgray"
-            stroke="white"
-            strokeWidth={2}
+            fill="white"
+            stroke="none"
           />
         </svg>
       </div>
 
-      {/* Footer Content */}
+      {/* Rest of the footer remains the same */}
       <div className="relative w-full max-w-7xl mx-auto px-8 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
           {/* Brand Column */}

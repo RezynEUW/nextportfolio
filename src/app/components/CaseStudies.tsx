@@ -52,9 +52,11 @@ export default function CaseStudies() {
                 <img
                   src={project.src}
                   alt={project.title}
-                  className="w-full h-full object-cover transform 
-                    lg:group-hover:-translate-y-8 transition-transform duration-1000
-                    filter lg:group-hover:brightness-90"
+                  className="w-full h-full object-cover 
+                    saturate-60 transition-all duration-1000 ease-in-out 
+                    group-hover:saturate-100
+                    lg:group-hover:-translate-y-8 
+                    filter lg:group-hover:brightness-100"
                 />
               </div>
             </div>

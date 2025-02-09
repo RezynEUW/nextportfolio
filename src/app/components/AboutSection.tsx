@@ -13,23 +13,37 @@ export default function AboutSection() {
 
   const cards = [
     {
-      title: "UX Design",
+      title: "UX Designer",
       subtitle: "The Foundation",
       icon: Palette,
       description: "UX is at the core of how I approach development. With a background in user-centered design, accessibility, and system architecture, I focus on making digital experiences intuitive and functional. Understanding what makes design work helps me bridge the gap between users and technology.",
       gradient: "from-emerald-500/20 to-emerald-500/5",
       borderGradient: "from-emerald-500 via-emerald-400 to-transparent",
       iconColor: "text-emerald-500",
+      borderColor: "border-emerald-500/20",
       step: "01"
     },
     {
-      title: "Front-End Development",
+      title: "Front-End Developer",
       subtitle: "The Focus",
       icon: Code2,
-      description: "I enjoy working with modern web frameworks like React, Next.js, and React Native, building intuitive and scalable interfaces. Front-End development is where design and logic meet, and I'm particularly interested in performance optimization, accessibility, and creating seamless user experiences.",
+      description: (
+        <p className="relative">
+          I enjoy working with modern web frameworks like{' '}
+          <span className="group/react relative inline-block">
+            React
+          </span>
+          ,{' '}
+          <span className="group/next relative inline-block">
+            Next.js
+          </span>
+          , and React Native, building intuitive and scalable interfaces. Front-End development is where design and logic meet, and I'm particularly interested in performance optimization, accessibility, and creating seamless user experiences.
+        </p>
+      ),
       gradient: "from-blue-500/20 to-blue-500/5",
       borderGradient: "from-blue-500 via-blue-400 to-transparent",
       iconColor: "text-blue-500",
+      borderColor: "border-blue-500/20",
       featured: true,
       step: "02"
     },
@@ -41,6 +55,7 @@ export default function AboutSection() {
       gradient: "from-indigo-500/20 to-indigo-500/5",
       borderGradient: "from-indigo-500 via-indigo-400 to-transparent",
       iconColor: "text-indigo-500",
+      borderColor: "border-indigo-500/20",
       step: "03"
     }
   ];
@@ -102,41 +117,50 @@ export default function AboutSection() {
             >
               {/* Card */}
               <div
-                className={`h-full p-8 rounded-2xl backdrop-blur-sm 
-                  border border-white/10 
-                  bg-gradient-to-br ${card.gradient}
-                  hover:shadow-lg transition-all duration-500
+                className={`relative h-full p-8 rounded-2xl backdrop-blur-sm 
+                  border ${card.borderColor}
+                  overflow-hidden
+                  hover:border-opacity-50 transition-all duration-500
                   ${card.featured ? 'border-opacity-50' : 'border-opacity-30'}`}
               >
-                {/* Step indicator */}
-                <div className="absolute top-4 right-4 text-sm font-mono opacity-50">
-                  {card.step}
-                </div>
+                {/* Background gradient with animation */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-100 
+                  group-hover:scale-110 transition-transform duration-700 ease-out`} />
+                
+                {/* Content container */}
+                <div className="relative z-10">
+                  {/* Step indicator */}
+                  <div className="absolute top-0 right-0 text-sm font-mono opacity-50">
+                    {card.step}
+                  </div>
 
-                {/* Title with Icon */}
-                <div className="mb-6 relative">
-                  <div className="flex items-center gap-3 mb-2">
-                    <card.icon className={`w-6 h-6 ${card.iconColor}`} />
-                    <div>
-                      <h3 className="text-2xl font-sans font-semibold">
-                        {card.title}
-                      </h3>
-                      <p className={`text-sm ${card.iconColor} font-medium`}>
-                        {card.subtitle}
-                      </p>
+                  {/* Title with Icon */}
+                  <div className="mb-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className={`p-2 rounded-xl bg-white/5 ${card.iconColor} group-hover:scale-110 transition-transform duration-500`}>
+                        <card.icon className="w-9 h-9" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-sans font-semibold">
+                          {card.title}
+                        </h3>
+                        <p className={`text-sm ${card.iconColor} font-medium`}>
+                          {card.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                    {/* Enhanced gradient line with animation */}
+                    <div className="relative h-px w-24 group-hover:w-64 transition-all duration-1000 mt-4">
+                      <div className={`absolute inset-0 bg-gradient-to-r ${card.borderGradient} opacity-50`} />
+                      <div className={`absolute inset-0 bg-gradient-to-r ${card.borderGradient} blur-sm`} />
                     </div>
                   </div>
-                  {/* Enhanced gradient line with animation */}
-                  <div className="relative h-1 w-24 group-hover:w-32 transition-all duration-500">
-                    <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${card.borderGradient} opacity-50`} />
-                    <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${card.borderGradient} blur-sm`} />
+
+                  {/* Description */}
+                  <div className="text-lg font-serif leading-relaxed text-foreground/80">
+                    {card.description}
                   </div>
                 </div>
-
-                {/* Description */}
-                <p className="text-lg font-serif leading-relaxed text-foreground/80">
-                  {card.description}
-                </p>
               </div>
 
               {/* Connector line for timeline (visible on mobile) */}
@@ -149,14 +173,15 @@ export default function AboutSection() {
 
         {/* Button Section */}
         <div className="mt-16 text-center">
-          <div className="relative inline-block group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+          <div className="inline-block">
             <a
               href="/about"
-              className="relative px-8 py-4 bg-background/90 border border-white/10 rounded-lg leading-none flex items-center divide-x divide-white/20 hover:bg-background/70 transition duration-300"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-full backdrop-blur-sm border border-emerald-500/20 hover:scale-105 transition-all duration-300"
             >
-              <span className="pr-6 text-gray-100">Learn more about my journey</span>
-              <span className="pl-6 text-indigo-400 group-hover:text-blue-400 transition duration-300">&rarr;</span>
+              <span className="bg-gradient-to-r from-emerald-500 to-blue-500 text-transparent bg-clip-text font-medium">
+                Learn more about my journey
+              </span>
+              <span className="text-indigo-400">&rarr;</span>
             </a>
           </div>
         </div>

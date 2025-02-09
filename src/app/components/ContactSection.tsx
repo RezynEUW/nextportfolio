@@ -10,7 +10,6 @@ export default function ContactSection() {
   useEffect(() => {
     if (!streamRef.current) return;
 
-    // Animate the stream effect
     gsap.to(streamRef.current, {
       y: "20px",
       opacity: 0.7,
@@ -22,124 +21,123 @@ export default function ContactSection() {
   }, []);
 
   return (
-    <section id="contact" className="min-h-screen bg-gradient-to-b from-background to-gray-900 flex items-center justify-center py-20">
-      <div className="max-w-4xl w-full mx-auto px-6">
-        {/* Name Concept Visual */}
+    <section id="contact" className="min-h-screen bg-gradient-to-b from-background to-background/95 flex items-center justify-center py-20">
+      <div className="max-w-7xl w-full mx-auto px-6">
+        {/* Header */}
         <div className="relative mb-16 text-center">
           <div className="flex items-center justify-center gap-1 text-6xl md:text-7xl font-display font-bold">
-            <span className="bg-gradient-to-r from-emerald-400 to-emerald-600 text-transparent bg-clip-text">
-              Heath
+            <span className="bg-gradient-to-r from-[#00B86E] to-[#0099FF] text-transparent bg-clip-text">
+              Let's Connect
             </span>
-            <div className="relative mx-1">
-              <div 
-                ref={streamRef}
-                className="absolute -top-2 left-0 w-full h-12 bg-gradient-to-b from-blue-400/20 to-transparent blur-sm"
-              />
-              <span className="bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">
-                stream
-              </span>
-            </div>
           </div>
-          <p className="mt-4 text-lg text-gray-400 font-serif max-w-md mx-auto">
-            Where design flows naturally into development
+          <p className="mt-4 text-xl font-serif text-foreground/60 max-w-2xl mx-auto">
+            Whether you have a project in mind or just want to chat about technology and design,
+            I'm always excited to connect with like-minded individuals.
           </p>
         </div>
 
         {/* Contact Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Left Column - Contact Form */}
           <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-4xl font-display font-bold">Get in Touch</h2>
-              <p className="text-lg text-gray-400 font-serif">
-                Have a project in mind? Let's create something amazing together.
-              </p>
-            </div>
-
-            <form className="space-y-4">
-              <div>
+            <form className="space-y-6">
+              <div className="space-y-4">
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg 
-                    focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-6 py-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 
+                    backdrop-blur-sm border border-emerald-500/20 rounded-full
+                    focus:outline-none focus:border-emerald-500/50 transition-all
+                    placeholder:text-foreground/40"
                 />
-              </div>
-              <div>
                 <textarea
                   placeholder="Your message"
-                  rows={4}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg 
-                    focus:outline-none focus:border-blue-500 transition-colors"
+                  rows={6}
+                  className="w-full px-6 py-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 
+                    backdrop-blur-sm border border-emerald-500/20 rounded-2xl
+                    focus:outline-none focus:border-emerald-500/50 transition-all
+                    placeholder:text-foreground/40"
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-emerald-500 
-                  text-white rounded-lg hover:opacity-90 transition-opacity"
+                className="w-full bg-gradient-to-r from-emerald-500/20 to-blue-500/20 backdrop-blur-sm 
+                  border border-emerald-500/20 px-8 py-4 rounded-full
+                  hover:scale-105 transition-all duration-300"
               >
-                Send Message
+                <span className="bg-gradient-to-r from-emerald-500 to-blue-500 text-transparent bg-clip-text font-medium">
+                  Send Message
+                </span>
               </button>
             </form>
           </div>
 
           {/* Right Column - Additional Links */}
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <a
-                href="/cv.pdf"
-                download
-                className="flex items-center gap-3 px-6 py-4 bg-white/5 border border-white/10 
-                  rounded-lg hover:bg-white/10 transition-colors group"
-              >
-                <Download className="w-5 h-5 text-emerald-400" />
-                <div>
-                  <h3 className="font-sans font-medium">Download CV</h3>
-                  <p className="text-sm text-gray-400">Get my latest resume</p>
+          <div className="space-y-6">
+            {/* CV Download */}
+            <a
+              href="/cv.pdf"
+              download
+              className="block p-[1px] rounded-2xl overflow-hidden relative group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 group-hover:opacity-100 opacity-50 transition-opacity" />
+              <div className="relative p-6 bg-background/50 backdrop-blur-sm rounded-2xl 
+                flex items-center gap-4 group-hover:bg-background/40 transition-colors">
+                <Download className="w-6 h-6 text-emerald-500" />
+                <div className="flex-1">
+                  <h3 className="font-medium">Download CV</h3>
+                  <p className="text-sm text-foreground/60">Get my latest resume</p>
                 </div>
-                <span className="ml-auto text-gray-400 group-hover:translate-x-1 transition-transform">
-                  →
+                <span className="text-blue-500 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+
+            {/* Social Links */}
+            <div className="grid grid-cols-2 gap-4">
+              <a
+                href="mailto:lukas@heathstream.dev"
+                className="p-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 backdrop-blur-sm 
+                  border border-emerald-500/20 rounded-xl hover:scale-105 transition-all
+                  flex items-center justify-center gap-2"
+              >
+                <Mail className="w-5 h-5 text-emerald-500" />
+                <span className="bg-gradient-to-r from-emerald-500 to-blue-500 text-transparent bg-clip-text font-medium">
+                  Email
                 </span>
               </a>
-
-              <div className="flex gap-4">
-                <a
-                  href="mailto:your.email@example.com"
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 
-                    bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
-                >
-                  <Mail className="w-5 h-5" />
-                  <span>Email</span>
-                </a>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 
-                    bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
-                >
-                  <Linkedin className="w-5 h-5" />
-                  <span>LinkedIn</span>
-                </a>
-              </div>
-
               <a
-                href="https://github.com"
+                href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-4 bg-white/5 border border-white/10 
-                  rounded-lg hover:bg-white/10 transition-colors group"
+                className="p-4 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 backdrop-blur-sm 
+                  border border-emerald-500/20 rounded-xl hover:scale-105 transition-all
+                  flex items-center justify-center gap-2"
               >
-                <Github className="w-5 h-5" />
-                <div>
-                  <h3 className="font-sans font-medium">Check My Code</h3>
-                  <p className="text-sm text-gray-400">View my projects on GitHub</p>
-                </div>
-                <span className="ml-auto text-gray-400 group-hover:translate-x-1 transition-transform">
-                  →
+                <Linkedin className="w-5 h-5 text-blue-500" />
+                <span className="bg-gradient-to-r from-emerald-500 to-blue-500 text-transparent bg-clip-text font-medium">
+                  LinkedIn
                 </span>
               </a>
             </div>
+
+            {/* GitHub Link */}
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-[1px] rounded-2xl overflow-hidden relative group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 group-hover:opacity-100 opacity-50 transition-opacity" />
+              <div className="relative p-6 bg-background/50 backdrop-blur-sm rounded-2xl 
+                flex items-center gap-4 group-hover:bg-background/40 transition-colors">
+                <Github className="w-6 h-6 text-blue-500" />
+                <div className="flex-1">
+                  <h3 className="font-medium">GitHub Profile</h3>
+                  <p className="text-sm text-foreground/60">Check out my projects</p>
+                </div>
+                <span className="text-emerald-500 group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>
