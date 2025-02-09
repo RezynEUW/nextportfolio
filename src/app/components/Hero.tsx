@@ -59,14 +59,27 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen bg-background text-foreground overflow-hidden">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-50"
+        >
+          <source src="/2xlow.mp4" type="video/mp4" />
+        </video>
+      </div>
+
       {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/80" />
+      <div className="absolute inset-0 z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background/50" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(0,184,110,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_75%,rgba(99,102,241,0.15),transparent_50%)]" />
       </div>
 
-      <div className="relative w-full h-screen flex flex-col items-center justify-center px-6">
+      <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center px-6">
         {/* Main Content */}
         <div className="max-w-8xl mx-auto text-center">
           {/* Title Section */}
@@ -156,6 +169,28 @@ export default function Hero() {
         >
           <Code2 className="w-24 h-24 text-indigo-500/20" />
         </div>
+      </div>
+      {/* Section Transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/80 to-background z-30" />
+      
+      {/* Decorative Wave Separator */}
+      <div className="absolute -bottom-1 left-0 right-0 z-30">
+        <svg 
+          viewBox="0 0 1440 74" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full drop-shadow-2xl filter"
+          preserveAspectRatio="none"
+        >
+          <path 
+            d="M0 24C240 74 480 74 720 49C960 24 1200 24 1440 49V74H0V24Z" 
+            fill="currentColor" 
+            className="text-background filter drop-shadow-2xl"
+            style={{
+              filter: 'drop-shadow(0 25px 25px rgb(0 0 0 / 0.25))'
+            }}
+          />
+        </svg>
       </div>
     </section>
   );

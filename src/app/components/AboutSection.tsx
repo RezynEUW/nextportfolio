@@ -10,13 +10,19 @@ gsap.registerPlugin(ScrollTrigger);
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   const cards = [
     {
       title: "UX Designer",
       subtitle: "The Foundation",
       icon: Palette,
-      description: "UX is at the core of how I approach development. With a background in user-centered design, accessibility, and system architecture, I focus on making digital experiences intuitive and functional. Understanding what makes design work helps me bridge the gap between users and technology.",
+      description: (
+        <p className="relative">
+          UX is at the core of how I approach development. With a background in user-centered design, accessibility, and software like {' '}
+          <span className="text-emerald-500">Figma</span>, I focus on making digital experiences intuitive and functional. Understanding what makes design work helps me bridge the gap between users and technology.
+        </p>
+      ),
       gradient: "from-emerald-500/20 to-emerald-500/5",
       borderGradient: "from-emerald-500 via-emerald-400 to-transparent",
       iconColor: "text-emerald-500",
@@ -46,7 +52,14 @@ export default function AboutSection() {
       title: "Full-Stack Journey",
       subtitle: "The Goal",
       icon: Database,
-      description: "While Front-End is my main focus, I'm interested in expanding my Full-Stack knowledge—especially in APIs, databases, and performance-driven architectures. Learning more about the backend will help me build more holistic and efficient web applications.",
+      description: (
+        <p className="relative">
+        While Front-End is my main focus, I'm interested in expanding my Full-Stack knowledge—especially when it comes to {' '}
+        <span className="text-indigo-500">APIs</span>,{' '}
+        <span className="text-indigo-500">databases</span>, and {' '}
+        performance-driven architectures. Learning more about the backend will help me build more holistic and efficient web applications.
+        </p>
+      ),
       gradient: "from-indigo-500/20 to-indigo-500/5",
       borderGradient: "from-indigo-500 via-indigo-400 to-transparent",
       iconColor: "text-indigo-500",
@@ -56,7 +69,7 @@ export default function AboutSection() {
   ];
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || !buttonRef.current) return;
 
     cardsRef.current.forEach((card, index) => {
       if (!card) return;
@@ -81,6 +94,27 @@ export default function AboutSection() {
         }
       );
     });
+
+    // Button animation
+    gsap.fromTo(
+      buttonRef.current,
+      {
+        opacity: 0,
+        y: 20,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: buttonRef.current,
+          start: "top 80%",
+          end: "bottom center",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
   }, []);
 
   return (
@@ -118,7 +152,9 @@ export default function AboutSection() {
                 className={`relative h-full p-8 rounded-2xl backdrop-blur-sm 
                   border ${card.borderColor}
                   overflow-hidden
-                  hover:border-opacity-50 transition-all duration-500
+                  hover:border-opacity-50 hover:translate-y-[-1px] hover:scale-[1.00]
+                  hover:shadow-2xl hover:shadow-${card.iconColor}/5
+                  transition-all duration-500 ease-out
                   ${card.featured ? 'border-opacity-50' : 'border-opacity-30'}`}
               >
                 {/* Background gradient with animation */}
@@ -131,8 +167,8 @@ export default function AboutSection() {
                 
                 {/* Content container */}
                 <div className="relative z-10">
-                  {/* Step indicator */}
-                  <div className="absolute top-0 right-0 text-sm font-mono text-foreground/40">
+                  {/* Step indicator - Updated with card's color */}
+                  <div className={`absolute top-[-16] right-[-14] text-sm font-mono ${card.iconColor}`}>
                     {card.step}
                   </div>
 
@@ -174,7 +210,7 @@ export default function AboutSection() {
         </div>
 
         {/* Button Section */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center" ref={buttonRef}>
           <div className="inline-block">
             <a
               href="/about"
