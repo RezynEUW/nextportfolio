@@ -4,7 +4,7 @@ import { Mail, Linkedin, ArrowUp } from "lucide-react";
 
 export default function Footer() {
   const techStack = [
-    "Next.js 14",
+    "Next.js 15",
     "React",
     "TypeScript",
     "Tailwind CSS",
@@ -77,10 +77,10 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Connect</h4>
             <div className="flex flex-col gap-3">
-              <a href="mailto:lukas@heathstream.dev" 
+              <a href="mailto:hello@lukashedstrom.com" 
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                 <Mail className="w-4 h-4" />
-                <span>lukas@heathstream.dev</span>
+                <span>hello@lukashedstrom.com</span>
               </a>
               <a href="https://linkedin.com" 
                 className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
