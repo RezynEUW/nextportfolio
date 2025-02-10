@@ -27,8 +27,8 @@ export default function ContactSection() {
   return (
     <section id="contact" className="w-full min-h-screen bg-background px-6 py-24">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-24">
+        {/* Header - reduced bottom margin from mb-24 to mb-16 */}
+        <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 relative">
             <span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-transparent bg-clip-text 
               relative z-10 drop-shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
@@ -39,7 +39,8 @@ export default function ContactSection() {
             Whether you have a project in mind or just want to chat about technology and design,
             I'm always excited to connect with like-minded individuals.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4 justify-center">
+          {/* Added margin-bottom to the badges container */}
+          <div className="mt-8 mb-12 flex flex-wrap gap-4 justify-center">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-500 text-sm">
               <Sparkles className="w-4 h-4" />
               Summer Internship 2025
@@ -55,10 +56,12 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* Cards Grid */}
-        <div className="space-y-6">
+        {/* Cards Grid - increased gap between cards from space-y-6 to space-y-8 */}
+        <div className="space-y-8">
+          {/* Rest of the component remains the same */}
           {/* Message Card */}
           <div className="group rounded-3xl bg-gradient-to-b from-teal-500/10 to-blue-500/5 p-8 backdrop-blur-sm">
+            {/* Message card content... */}
             <div className="flex items-start gap-6">
               <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-teal-500 to-blue-500">
                 <MessageSquare className="w-6 h-6 text-white" />
@@ -84,6 +87,7 @@ export default function ContactSection() {
           <div className="grid md:grid-cols-2 gap-6">
             {/* Quick Connect Card */}
             <div className="group rounded-3xl bg-gradient-to-b from-blue-500/10 to-blue-500/5 p-8 backdrop-blur-sm">
+              {/* Quick Connect card content... */}
               <div className="flex flex-col h-full">
                 <div className="flex items-start gap-6 mb-6">
                   <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-500">
@@ -126,6 +130,7 @@ export default function ContactSection() {
 
             {/* Professional Network Card */}
             <div className="group rounded-3xl bg-gradient-to-b from-indigo-500/10 to-indigo-500/5 p-8 backdrop-blur-sm">
+              {/* Professional Network card content... */}
               <div className="flex flex-col h-full">
                 <div className="flex items-start gap-6 mb-6">
                   <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500">

@@ -3,163 +3,182 @@
 import { useEffect, useRef, useState } from "react";
 import Logo from "@components/Logo";
 import { gsap } from "gsap";
-import { MessageCircle } from "lucide-react"; // Importing from Lucide
+import { User, Code2, Mail } from "lucide-react";
 import Spinner from "@components/Spinner";
 
 export default function Navbar() {
-  const [activeLink, setActiveLink] = useState("info"); // Default active link
-  const indicatorRef = useRef<HTMLDivElement>(null); // Ref for the sliding indicator
-  const infoRef = useRef<HTMLLIElement>(null); // Ref for Info link
-  const workRef = useRef<HTMLLIElement>(null); // Ref for Work link
+  const [activeLink, setActiveLink] = useState("info");
+  const [shadowOpacity, setShadowOpacity] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLLIElement>(null);
+  const workRef = useRef<HTMLLIElement>(null);
+  const contactRef = useRef<HTMLLIElement>(null);
 
   const sections = {
-    info: "about", // Matches the id in AboutSection.tsx
-    work: "projects", // Matches the id in CaseStudies.tsx
-    contact: "contact", // Matches the id in ContactSection.tsx
+    info: "about",
+    work: "projects",
+    contact: "contact",
   };
-  
 
-  // Smooth scrolling to sections
-  const handleSmoothScroll = (id: string) => {
+  const handleSmoothScroll = (id: string, linkType: "info" | "work" | "contact") => {
+    setActiveLink(linkType);
+    setIsScrolling(true);
+    
     const target = document.getElementById(id);
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  // Scroll observer to update the active link dynamically
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY + window.innerHeight / 3; // Adjust threshold
+      if (isScrolling) return;
+
+      const scrollY = window.scrollY;
+      const threshold = window.innerHeight / 3;
 
       Object.entries(sections).forEach(([key, id]) => {
         const section = document.getElementById(id);
         if (section) {
           const { offsetTop, offsetHeight } = section;
-          if (scrollY >= offsetTop && scrollY < offsetTop + offsetHeight) {
-            setActiveLink(key);
+          if (scrollY + threshold >= offsetTop && scrollY + threshold < offsetTop + offsetHeight) {
+            setActiveLink(key as "info" | "work" | "contact");
           }
         }
       });
+
+      const maxScroll = 100;
+      const newOpacity = Math.min(scrollY / maxScroll, 1);
+      setShadowOpacity(newOpacity);
+    };
+
+    let scrollTimeout: NodeJS.Timeout;
+    const handleScrollEnd = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150); // Adjust this value if needed
     };
 
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScrollEnd);
+    
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScrollEnd);
+      clearTimeout(scrollTimeout);
     };
-  }, []);
+  }, [isScrolling]);
 
-  // Animate sliding indicator
-  useEffect(() => {
-    const indicator = indicatorRef.current;
-    const activeElement =
-      activeLink === "info" ? infoRef.current : workRef.current;
-
-    if (indicator && activeElement) {
-      const { offsetLeft, offsetWidth, offsetHeight } = activeElement;
-
-      gsap.to(indicator, {
-        x: offsetLeft,
-        width: offsetWidth,
-        height: offsetHeight,
-        duration: 0.2, // Snappier transition
-        ease: "power2.out", // Quicker easing
-      });
+  // Get position for the indicator
+  const getIndicatorPosition = () => {
+    let activeElement;
+    switch (activeLink) {
+      case "info":
+        activeElement = infoRef.current;
+        break;
+      case "work":
+        activeElement = workRef.current;
+        break;
+      case "contact":
+        activeElement = contactRef.current;
+        break;
     }
-  }, [activeLink]);
+
+    if (activeElement) {
+      return {
+        width: activeElement.offsetWidth,
+        transform: `translateX(${activeElement.offsetLeft}px)`
+      };
+    }
+    return {};
+  };
 
   return (
     <>
-      {/* Logo */}
       <Logo />
 
-      {/* Frosted Navbar */}
       <nav
-        className="fixed top-4 left-1/2 transform antialiased -translate-x-1/2 z-50 max-w-3xl px-2 py-2 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 shadow border border-white/30"
+        className="fixed top-4 right-4 z-50 px-2 py-1.5 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 transition-shadow duration-300"
         style={{
-          boxShadow:
-            "0 4px 8px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.10)", // Inner and outer shadow combined
+          boxShadow: `0 4px 8px rgba(0, 0, 0, ${shadowOpacity * 0.05}), inset 0 0 10px rgba(255, 255, 255, ${shadowOpacity * 0.1})`,
         }}
       >
         <ul className="relative flex gap-5 font-fixelDisplay">
-          {/* Sliding Indicator with Glass Effect */}
           <div
             ref={indicatorRef}
-            className="absolute top-0 left-0 rounded-full pointer-events-none transition-all duration-200"
+            className="absolute top-0 left-0 rounded-full pointer-events-none transition-all duration-500"
             style={{
-              background:
-                "linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05))", // Subtle frosted effect
-              border: "1px solid rgba(255, 255, 255, 0.3)", // Glass border effect
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.05)", // Frosted glow
-              backdropFilter: "blur(10px)", // Frosted effect
-              WebkitBackdropFilter: "blur(10px)", // For Safari
+              ...getIndicatorPosition(),
+              height: '100%',
+              background: "linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05))",
+              border: "1px solid rgba(255, 255, 255, 0.3)",
+              boxShadow: `0 2px 4px rgba(0, 0, 0, ${shadowOpacity * 0.05}), inset 0 0 10px rgba(255, 255, 255, 0.05)`,
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+              transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
             }}
           ></div>
 
-          {/* Info Link */}
           <li
             ref={infoRef}
-            className="relative group transition-all duration-200"
+            className="relative group transition-all duration-500"
           >
             <a
               href="#about"
               onClick={(e) => {
                 e.preventDefault();
-                handleSmoothScroll(sections.info);
+                handleSmoothScroll(sections.info, "info");
               }}
-              className={`z-10 inline-flex text-xl items-center px-8 py-2 rounded-full transition-all duration-200 ${
-                activeLink === "info"
-                  ? "text-black antialiased"
-                  : "text-black antialiased"
+              className={`z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 ${
+                activeLink === "info" ? "text-black antialiased" : "text-black antialiased"
               }`}
             >
-              Info
+              <User className="w-4 h-4" />
+              <span className="text-xl">About</span>
             </a>
           </li>
 
-          {/* Work Link */}
           <li
             ref={workRef}
-            className="relative group transition-all duration-200"
+            className="relative group transition-all duration-500"
           >
             <a
               href="#projects"
               onClick={(e) => {
                 e.preventDefault();
-                handleSmoothScroll(sections.work);
+                handleSmoothScroll(sections.work, "work");
               }}
-              className={`z-10 inline-flex text-xl items-center px-8 py-2 rounded-full transition-all duration-200 ${
-                activeLink === "work"
-                  ? "text-black antialiased"
-                  : "text-black antialiased"
+              className={`z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 ${
+                activeLink === "work" ? "text-black antialiased" : "text-black antialiased"
               }`}
             >
-              Work
+              <Code2 className="w-4 h-4" />
+              <span className="text-xl">Stack</span>
+            </a>
+          </li>
+
+          <li
+            ref={contactRef}
+            className="relative group transition-all duration-500"
+          >
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSmoothScroll(sections.contact, "contact");
+              }}
+              className={`z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 ${
+                activeLink === "contact" ? "text-black antialiased" : "text-black antialiased"
+              }`}
+            >
+              <Mail className="w-4 h-4" />
+              <span className="text-xl">Email</span>
             </a>
           </li>
         </ul>
       </nav>
-
-      {/* "Contact" Button */}
-      <div
-        className="fixed top-5 right-5 z-50 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 border border-white/30"
-        style={{
-          boxShadow:
-            "0 4px 8px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.10)", // Same shadow as the navbar
-        }}
-      >
-        <a
-          href="#contact"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSmoothScroll(sections.contact);
-          }}
-          className="relative z-10 inline-flex text-xl items-center transition-all duration-200 text-black font-fixelDisplay"
-        >
-          <MessageCircle className="w-5 h-5 mr-2 text-current" />
-          Contact
-        </a>
-      </div>
       <Spinner />
     </>
   );

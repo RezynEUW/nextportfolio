@@ -121,9 +121,9 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="min-h-screen bg-gradient-to-b from-background to-background/95 flex items-center"
+      className="min-h-screen bg-gradient-to-b from-background to-background/95 flex items-center pt-32"
     >
-      <div className="w-full py-24 px-6 lg:px-8">
+      <div className="w-full py-32 px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-7xl mx-auto mb-16 text-center">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
@@ -214,16 +214,16 @@ export default function AboutSection() {
           <div className="inline-block">
             <a
               href="/about"
-              className="group inline-flex items-center gap-3 px-8 py-4 
-                bg-gradient-to-r from-emerald-500/10 to-indigo-500/10 
-                hover:from-emerald-500/20 hover:to-indigo-500/20 
-                rounded-2xl backdrop-blur-sm border border-white/10 
+              className="group inline-flex items-center gap-2 px-6 py-1.5 
+                text-black font-fixelDisplay text-xl
+                rounded-full backdrop-blur-sm bg-white/20
                 transition-all duration-300"
+              style={{
+                boxShadow: `0 4px 8px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.1)`,
+              }}
             >
-              <span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-transparent bg-clip-text font-medium">
-                Learn more about my journey
-              </span>
-              <ArrowRight className="w-5 h-5 text-indigo-500 group-hover:translate-x-1 transition-transform" />
+              <span>About me</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </a>
           </div>
         </div>

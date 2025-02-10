@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 export default function Logo() {
   const logoRef = useRef<HTMLDivElement>(null);
   const brandingRef = useRef<HTMLDivElement>(null);
+  const [shadowOpacity, setShadowOpacity] = useState(0);
 
   useEffect(() => {
     const heroSection = document.querySelector("section");
@@ -17,8 +18,11 @@ export default function Logo() {
     const handleScroll = () => {
       const heroRect = heroSection.getBoundingClientRect();
       const isHeroOutOfView = heroRect.bottom <= 0;
+      const scrollY = window.scrollY;
+      const maxScroll = 100;
+      const newOpacity = Math.min(scrollY / maxScroll, 1);
+      setShadowOpacity(newOpacity);
 
-      // Show/hide logo and branding
       if (isHeroOutOfView) {
         gsap.to(logoRef.current, {
           autoAlpha: 1,
@@ -59,7 +63,7 @@ export default function Logo() {
       {/* Hero Page Branding */}
       <div
         ref={brandingRef}
-        className="fixed top-5 left-5 z-50 opacity-1"
+        className="fixed top-4 left-4 z-50 opacity-1"
         style={{ visibility: "visible", transform: "translateX(0)" }}
       >
         <div className="relative flex items-center justify-center">
@@ -68,10 +72,18 @@ export default function Logo() {
             alt="Background Image"
             className="absolute inset-0 w-full h-full object-cover opacity-0 z-[-1]"
           />
-          <div className="relative z-10 inline-flex items-center px-6 py-3 rounded-full text-black transition-all duration-500 bg-white/20 backdrop-blur-md shadow-md dark:bg-black/20 border border-white/30 dark:border-black/30">
-            <span className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-400/10 via-gray-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span className="relative z-10 text-xl font-fixelDisplay">Lukas</span>
-            <span className="relative z-10 text-xl font-fixelDisplay whitespace-pre"> Hedström</span>
+          {/* Outer container matching navbar */}
+          <div 
+            className="relative z-10 px-2 py-1.5 rounded-full backdrop-blur-sm bg-white/20 transition-shadow duration-300"
+            style={{
+              boxShadow: `0 4px 8px rgba(0, 0, 0, ${shadowOpacity * 0.05}), inset 0 0 10px rgba(255, 255, 255, ${shadowOpacity * 0.1})`,
+            }}
+          >
+            {/* Inner container matching navbar items */}
+            <div className="inline-flex items-center px-6 py-1.5 rounded-full text-black">
+              <span className="text-xl font-fixelDisplay">Lukas</span>
+              <span className="text-xl font-fixelDisplay whitespace-pre"> Hedström</span>
+            </div>
           </div>
         </div>
       </div>

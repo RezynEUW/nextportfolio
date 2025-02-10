@@ -17,7 +17,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="h-[60vh] bg-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
+    <footer className="h-[75vh] bg-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
       {/* SVG Break-in Effect */}
       <div className="absolute top-[-8px] left-0 right-0 w-full">
         <svg
@@ -52,8 +52,7 @@ export default function Footer() {
                 </span>
               </h3>
               <p className="text-gray-400 max-w-sm">
-                Stationed in Umeå, Sweden. Open for summer internships, master thesis opportunities, 
-                and future employment.
+                Stationed in Umeå, Sweden. 
               </p>
             </div>
           </div>

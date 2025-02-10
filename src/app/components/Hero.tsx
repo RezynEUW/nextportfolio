@@ -171,7 +171,7 @@ export default function Hero() {
         </div>
       </div>
       {/* Section Transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/80 to-background z-30" />
+      {/* <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/80 to-background z-30" /> */}
       
       {/* Decorative Wave Separator */}
       <div className="absolute -bottom-1 left-0 right-0 z-30">
