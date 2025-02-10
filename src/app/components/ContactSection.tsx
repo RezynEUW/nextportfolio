@@ -32,12 +32,12 @@ export default function ContactSection() {
           <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 relative">
             <span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-transparent bg-clip-text 
               relative z-10 drop-shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
-              Let's Connect!
+              Let&apos;s Connect!
             </span>
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
             Whether you have a project in mind or just want to chat about technology and design,
-            I'm always excited to connect with like-minded individuals.
+            I&apos;m always excited to connect with like-minded individuals.
           </p>
           {/* Added margin-bottom to the badges container */}
           <div className="mt-8 mb-12 flex flex-wrap gap-4 justify-center">
