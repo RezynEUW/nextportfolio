@@ -1,18 +1,31 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Palette, Code2, Database, ArrowRight } from "lucide-react";
+import { Palette, Code2, Database, ArrowRight, LucideIcon } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
+
+type Card = {
+  title: string;
+  subtitle: string;
+  icon: LucideIcon;
+  description: React.ReactElement;
+  gradient: string;
+  borderGradient: string;
+  iconColor: string;
+  borderColor: string;
+  step: string;
+  featured?: boolean;
+};
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const buttonRef = useRef<HTMLDivElement>(null);
 
-  const cards = [
+  const cards: Card[] = [
     {
       title: "UX Designer",
       subtitle: "The Foundation",
@@ -68,6 +81,23 @@ export default function AboutSection() {
     }
   ];
 
+  const handleAboutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      const windowHeight = window.innerHeight;
+      const aboutHeight = aboutSection.offsetHeight;
+      // Calculate offset to center the section
+      const offset = (windowHeight - aboutHeight) / 2;
+      const targetPosition = aboutSection.offsetTop - Math.max(0, offset);
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   useEffect(() => {
     if (!sectionRef.current || !buttonRef.current) return;
 
@@ -117,6 +147,10 @@ export default function AboutSection() {
     );
   }, []);
 
+  const setCardRef = (el: HTMLDivElement | null, index: number) => {
+    cardsRef.current[index] = el;
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -144,7 +178,7 @@ export default function AboutSection() {
           {cards.map((card, i) => (
             <div
               key={card.title}
-              ref={(el) => cardsRef.current[i] = el}
+              ref={(el) => setCardRef(el, i)}
               className="relative group"
             >
               {/* Card */}
@@ -167,7 +201,7 @@ export default function AboutSection() {
                 
                 {/* Content container */}
                 <div className="relative z-10">
-                  {/* Step indicator - Updated with card&apos;s color */}
+                  {/* Step indicator */}
                   <div className={`absolute top-[-16] right-[-14] text-sm font-mono ${card.iconColor}`}>
                     {card.step}
                   </div>
@@ -214,6 +248,7 @@ export default function AboutSection() {
           <div className="inline-block">
             <a
               href="/about"
+              onClick={handleAboutClick}
               className="group relative inline-flex items-center gap-2 px-6 py-1.5 
                 text-xl font-fixelDisplay rounded-full backdrop-blur-sm
                 transition-all duration-300 overflow-hidden"

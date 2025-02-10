@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
@@ -67,11 +68,15 @@ export default function Logo() {
         style={{ visibility: "visible", transform: "translateX(0)" }}
       >
         <div className="relative flex items-center justify-center">
-          <img
-            src="/LHLT.png"
-            alt="Background Image"
-            className="absolute inset-0 w-full h-full object-cover opacity-0 z-[-1]"
-          />
+          <div className="absolute inset-0 z-[-1]">
+            <Image
+              src="/LHLT.png"
+              alt="Background Image"
+              fill
+              className="object-cover opacity-0"
+              priority
+            />
+          </div>
           {/* Outer container matching navbar */}
           <div 
             className="relative z-10 px-2 py-1.5 rounded-full backdrop-blur-sm bg-white/20 transition-shadow duration-300"

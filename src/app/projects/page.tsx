@@ -1,7 +1,7 @@
-export default function ProjectPage({ params }: { params: { id: string } }) {
-    return (
-      <div>
-        {/* Your project page content */}
-      </div>
-    );
-  }
+export default function ProjectsPage() {
+  return (
+    <div>
+      {/* Your projects list content */}
+    </div>
+  );
+}
