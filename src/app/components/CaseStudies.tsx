@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 export default function CaseStudies() {
@@ -29,7 +28,7 @@ export default function CaseStudies() {
       src: "/4.jpg",
       description: "User experience redesign"
     },
-  ];
+  ] as const;
 
   return (
     <section id="projects" className="relative bg-white py-12 lg:py-24">
@@ -47,16 +46,18 @@ export default function CaseStudies() {
               ${index === projects.length - 1 ? 'lg:pr-0' : ''}`}
             >
               {/* Image Container with overflow-hidden */}
-              <div className="h-full w-full overflow-hidden">
-                {/* Image */}
-                <img
+              <div className="relative h-full w-full overflow-hidden">
+                <Image
                   src={project.src}
                   alt={project.title}
-                  className="w-full h-full object-cover 
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover 
                     saturate-60 transition-all duration-1000 ease-in-out 
                     group-hover:saturate-100
                     lg:group-hover:-translate-y-8 
                     filter lg:group-hover:brightness-100"
+                  priority={index < 2} // Prioritize loading first two images
                 />
               </div>
             </div>

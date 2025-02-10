@@ -19,7 +19,7 @@ export default function AboutSection() {
       icon: Palette,
       description: (
         <p className="relative">
-          UX is at the core of how I approach development. With a background in user-centered design, accessibility, and software like {' '}
+          UX is at the core of how I approach development. With a background in user-centered design, accessibility, and software like{" "}
           <span className="text-emerald-500">Figma</span>, I focus on making digital experiences intuitive and functional. Understanding what makes design work helps me bridge the gap between users and technology.
         </p>
       ),
@@ -35,10 +35,10 @@ export default function AboutSection() {
       icon: Code2,
       description: (
         <p className="relative">
-          I enjoy working with modern web frameworks like{' '}
-          <span className="text-blue-500">React</span>,{' '}
-          <span className="text-blue-500">Next.js</span>, and{' '}
-          <span className="text-blue-500">React Native</span>, building intuitive and scalable interfaces. Front-End development is where design and logic meet, and I'm particularly interested in performance optimization, accessibility, and creating seamless user experiences.
+          I enjoy working with modern web frameworks like{" "}
+          <span className="text-blue-500">React</span>,{" "}
+          <span className="text-blue-500">Next.js</span>, and{" "}
+          <span className="text-blue-500">React Native</span>, building intuitive and scalable interfaces. Front-End development is where design and logic meet, and I&apos;m particularly interested in performance optimization, accessibility, and creating seamless user experiences.
         </p>
       ),
       gradient: "from-blue-500/20 to-blue-500/5",
@@ -54,10 +54,10 @@ export default function AboutSection() {
       icon: Database,
       description: (
         <p className="relative">
-        While Front-End is my main focus, I'm interested in expanding my Full-Stack knowledge—especially when it comes to {' '}
-        <span className="text-indigo-500">APIs</span>,{' '}
-        <span className="text-indigo-500">databases</span>, and {' '}
-        performance-driven architectures. Learning more about the backend will help me build more holistic and efficient web applications.
+          While Front-End is my main focus, I&apos;m interested in expanding my Full-Stack knowledge&mdash;especially when it comes to{" "}
+          <span className="text-indigo-500">APIs</span>,{" "}
+          <span className="text-indigo-500">databases</span>, and{" "}
+          performance-driven architectures. Learning more about the backend will help me build more holistic and efficient web applications.
         </p>
       ),
       gradient: "from-indigo-500/20 to-indigo-500/5",
@@ -71,7 +71,7 @@ export default function AboutSection() {
   useEffect(() => {
     if (!sectionRef.current || !buttonRef.current) return;
 
-    cardsRef.current.forEach((card, index) => {
+    cardsRef.current.forEach((card) => {
       if (!card) return;
 
       gsap.fromTo(
@@ -133,18 +133,18 @@ export default function AboutSection() {
             </span>
           </h2>
           <p className="text-xl font-serif text-foreground/60 max-w-3xl mx-auto">
-            I've always been fascinated by the intersection of design and development.
-            Here's how I bring both worlds together.
+            I&apos;ve always been fascinated by the intersection of design and development.
+            Here&apos;s how I bring both worlds together.
           </p>
         </div>
 
         {/* Cards Container */}
         <div className="max-w-7xl mx-auto grid gap-8 
           grid-cols-1 lg:grid-cols-3">
-          {cards.map((card, index) => (
+          {cards.map((card, i) => (
             <div
               key={card.title}
-              ref={(el) => cardsRef.current[index] = el}
+              ref={(el) => cardsRef.current[i] = el}
               className="relative group"
             >
               {/* Card */}
@@ -167,7 +167,7 @@ export default function AboutSection() {
                 
                 {/* Content container */}
                 <div className="relative z-10">
-                  {/* Step indicator - Updated with card's color */}
+                  {/* Step indicator - Updated with card&apos;s color */}
                   <div className={`absolute top-[-16] right-[-14] text-sm font-mono ${card.iconColor}`}>
                     {card.step}
                   </div>
@@ -202,7 +202,7 @@ export default function AboutSection() {
               </div>
 
               {/* Connector line for timeline (visible on mobile) */}
-              {index < cards.length - 1 && (
+              {i < cards.length - 1 && (
                 <div className="lg:hidden h-8 w-px mx-auto my-0 bg-gradient-to-b from-white/20 to-transparent" />
               )}
             </div>
@@ -214,16 +214,30 @@ export default function AboutSection() {
           <div className="inline-block">
             <a
               href="/about"
-              className="group inline-flex items-center gap-2 px-6 py-1.5 
-                text-black font-fixelDisplay text-xl
-                rounded-full backdrop-blur-sm bg-white/20
-                transition-all duration-300"
-              style={{
-                boxShadow: `0 4px 8px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.1)`,
-              }}
+              className="group relative inline-flex items-center gap-2 px-6 py-1.5 
+                text-xl font-fixelDisplay rounded-full backdrop-blur-sm
+                transition-all duration-300 overflow-hidden"
             >
-              <span>About me</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              {/* Background gradient with animation */}
+              <div className="absolute inset-0 opacity-20 mix-blend-overlay">
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-blue-500/20 to-indigo-500/20 opacity-50 
+                  group-hover:scale-110 group-hover:opacity-100 transition-all duration-700 ease-out" />
+                <div className="absolute inset-0 bg-gradient-to-l from-emerald-500/20 via-blue-500/20 to-indigo-500/20 opacity-30 
+                  group-hover:scale-110 group-hover:opacity-80 transition-all duration-700 ease-out delay-100" />
+              </div>
+              
+              {/* White background for frosted effect */}
+              <div className="absolute inset-0 bg-white/20 backdrop-blur-sm" 
+                style={{
+                  boxShadow: `0 4px 8px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.1)`,
+                }}
+              />
+
+              {/* Content */}
+              <span className="relative z-10 bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 text-transparent bg-clip-text">
+                About me
+              </span>
+              <ArrowRight className="relative z-10 w-4 h-4 text-indigo-500 group-hover:translate-x-1 transition-transform duration-300" />
             </a>
           </div>
         </div>

@@ -55,7 +55,7 @@ export default function Hero() {
       window.removeEventListener('scroll', handleScroll);
       clearInterval(interval);
     };
-  }, []);
+  }, [timelineItems.length]); // Added timelineItems.length as dependency
 
   return (
     <section className="relative min-h-screen bg-background text-foreground overflow-hidden">
@@ -170,8 +170,6 @@ export default function Hero() {
           <Code2 className="w-24 h-24 text-indigo-500/20" />
         </div>
       </div>
-      {/* Section Transition */}
-      {/* <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-background/80 to-background z-30" /> */}
       
       {/* Decorative Wave Separator */}
       <div className="absolute -bottom-1 left-0 right-0 z-30">

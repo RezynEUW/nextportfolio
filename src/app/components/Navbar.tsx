@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Logo from "@components/Logo";
-import { gsap } from "gsap";
 import { User, Code2, Mail } from "lucide-react";
 import Spinner from "@components/Spinner";
 
@@ -19,7 +18,7 @@ export default function Navbar() {
     info: "about",
     work: "projects",
     contact: "contact",
-  };
+  } as const;
 
   const handleSmoothScroll = (id: string, linkType: "info" | "work" | "contact") => {
     setActiveLink(linkType);
@@ -58,7 +57,7 @@ export default function Navbar() {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false);
-      }, 150); // Adjust this value if needed
+      }, 150);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -69,22 +68,14 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScrollEnd);
       clearTimeout(scrollTimeout);
     };
-  }, [isScrolling]);
+  }, [isScrolling, sections]); // Added sections as dependency
 
-  // Get position for the indicator
   const getIndicatorPosition = () => {
-    let activeElement;
-    switch (activeLink) {
-      case "info":
-        activeElement = infoRef.current;
-        break;
-      case "work":
-        activeElement = workRef.current;
-        break;
-      case "contact":
-        activeElement = contactRef.current;
-        break;
-    }
+    const activeElement = {
+      info: infoRef.current,
+      work: workRef.current,
+      contact: contactRef.current,
+    }[activeLink];
 
     if (activeElement) {
       return {
@@ -119,7 +110,7 @@ export default function Navbar() {
               WebkitBackdropFilter: "blur(10px)",
               transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
             }}
-          ></div>
+          />
 
           <li
             ref={infoRef}
@@ -131,9 +122,7 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.info, "info");
               }}
-              className={`z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 ${
-                activeLink === "info" ? "text-black antialiased" : "text-black antialiased"
-              }`}
+              className="z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 text-black antialiased"
             >
               <User className="w-4 h-4" />
               <span className="text-xl">About</span>
@@ -150,9 +139,7 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.work, "work");
               }}
-              className={`z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 ${
-                activeLink === "work" ? "text-black antialiased" : "text-black antialiased"
-              }`}
+              className="z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 text-black antialiased"
             >
               <Code2 className="w-4 h-4" />
               <span className="text-xl">Stack</span>
@@ -169,9 +156,7 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.contact, "contact");
               }}
-              className={`z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 ${
-                activeLink === "contact" ? "text-black antialiased" : "text-black antialiased"
-              }`}
+              className="z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 text-black antialiased"
             >
               <Mail className="w-4 h-4" />
               <span className="text-xl">Email</span>
