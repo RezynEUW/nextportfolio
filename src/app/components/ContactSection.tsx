@@ -138,7 +138,7 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-semibold mb-2">Professional Network</h3>
-                    <p className="text-sm text-indigo-500 font-medium">Let's connect and grow together</p>
+                    <p className="text-sm text-indigo-500 font-medium">Let&apos;s connect and grow together</p>
                   </div>
                 </div>
                 <a
