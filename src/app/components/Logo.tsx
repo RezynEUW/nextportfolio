@@ -86,8 +86,8 @@ export default function Logo() {
           >
             {/* Inner container matching navbar items */}
             <div className="inline-flex items-center px-6 py-1.5 rounded-full text-black">
-              <span className="text-xl font-fixelDisplay">Lukas</span>
-              <span className="text-xl font-fixelDisplay whitespace-pre"> Hedström</span>
+              <span className={`text-xl font-display font-medium transition-colors duration-300 ${shadowOpacity === 0 ? 'text-emerald-700' : 'text-black'}`}>Lukas</span>
+              <span className={`text-xl font-display font-normal whitespace-pre transition-colors duration-300 ${shadowOpacity === 0 ? 'text-emerald-700' : 'text-black'}`}> Hedström</span>
             </div>
           </div>
         </div>

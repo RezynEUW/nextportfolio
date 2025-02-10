@@ -33,7 +33,7 @@ export default function Spinner() {
       style={{ pointerEvents: "none" }}
     >
       <svg
-        className="w-14 h-14 text-white"
+        className="w-10 h-10 text-white"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

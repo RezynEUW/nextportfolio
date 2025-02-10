@@ -157,7 +157,7 @@ export default function AboutSection() {
       id="about"
       className="min-h-screen bg-gradient-to-b from-background to-background/95 flex items-center pt-32"
     >
-      <div className="w-full py-32 px-6 lg:px-8">
+      <div className="w-full py-12 px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-7xl mx-auto mb-16 text-center">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Logo from "@components/Logo";
-import { User, Code2, Mail } from "lucide-react";
+import { User, Briefcase, Mail } from "lucide-react";
 import Spinner from "@components/Spinner";
 
 export default function Navbar() {
@@ -68,7 +68,7 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScrollEnd);
       clearTimeout(scrollTimeout);
     };
-  }, [isScrolling, sections]); // Added sections as dependency
+  }, [isScrolling, sections]);
 
   const getIndicatorPosition = () => {
     const activeElement = {
@@ -89,11 +89,10 @@ export default function Navbar() {
   return (
     <>
       <Logo />
-
       <nav
         className="fixed top-4 right-4 z-50 px-2 py-1.5 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 transition-shadow duration-300"
         style={{
-          boxShadow: `0 4px 8px rgba(0, 0, 0, ${shadowOpacity * 0.05}), inset 0 0 10px rgba(255, 255, 255, ${shadowOpacity * 0.1})`,
+          boxShadow: `0 4px 12px rgba(0, 0, 0, ${shadowOpacity * 0.15}), inset 0 0 12px rgba(255, 255, 255, ${shadowOpacity * 0.2})`,
         }}
       >
         <ul className="relative flex gap-5 font-fixelDisplay">
@@ -105,7 +104,7 @@ export default function Navbar() {
               height: '100%',
               background: "linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05))",
               border: "1px solid rgba(255, 255, 255, 0.3)",
-              boxShadow: `0 2px 4px rgba(0, 0, 0, ${shadowOpacity * 0.05}), inset 0 0 10px rgba(255, 255, 255, 0.05)`,
+              boxShadow: `0 0px 10px rgba(0, 0, 0, ${shadowOpacity * 0.1}), inset 0 0 12px rgba(255, 255, 255, 0.15)`,
               backdropFilter: "blur(10px)",
               WebkitBackdropFilter: "blur(10px)",
               transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
@@ -122,10 +121,10 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.info, "info");
               }}
-              className="z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 text-black antialiased"
+              className={`z-10 inline-flex items-center justify-center w-12 h-12 rounded-full transition-colors duration-300 hover:text-indigo-500 ${activeLink === "info" ? "text-indigo-500" : ""}`}
+              title="About"
             >
-              <User className="w-4 h-4" />
-              <span className="text-xl">About</span>
+              <User className={`w-6 h-6 transition-colors duration-800 ${activeLink === "info" ? "text-indigo-700" : "text-blue-500"}`} style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))' }} />
             </a>
           </li>
 
@@ -139,10 +138,10 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.work, "work");
               }}
-              className="z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 text-black antialiased"
+              className="z-10 inline-flex items-center justify-center w-12 h-12 rounded-full transition-colors duration-300 hover:text-indigo-500"
+              title="Stack"
             >
-              <Code2 className="w-4 h-4" />
-              <span className="text-xl">Stack</span>
+              <Briefcase className={`w-6 h-6 transition-colors duration-800 ${activeLink === "work" ? "text-indigo-700" : "text-blue-500"}`} />
             </a>
           </li>
 
@@ -156,10 +155,10 @@ export default function Navbar() {
                 e.preventDefault();
                 handleSmoothScroll(sections.contact, "contact");
               }}
-              className="z-10 inline-flex items-center gap-2 px-6 py-1.5 rounded-full transition-all duration-500 text-black antialiased"
+              className="z-10 inline-flex items-center justify-center w-12 h-12 rounded-full transition-colors duration-300 hover:text-indigo-500"
+              title="Email"
             >
-              <Mail className="w-4 h-4" />
-              <span className="text-xl">Email</span>
+              <Mail className={`w-6 h-6 transition-colors duration-800 ${activeLink === "contact" ? "text-indigo-700" : "text-blue-500"}`} />
             </a>
           </li>
         </ul>

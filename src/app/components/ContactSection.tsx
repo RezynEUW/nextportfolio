@@ -25,9 +25,8 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="w-full min-h-screen bg-background px-6 py-24">
+    <section id="contact" className="w-full min-h-screen bg-background px-6 py-20">
       <div className="max-w-5xl mx-auto">
-        {/* Header - reduced bottom margin from mb-24 to mb-16 */}
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 relative">
             <span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-transparent bg-clip-text 
@@ -39,32 +38,27 @@ export default function ContactSection() {
             Whether you have a project in mind or just want to chat about technology and design,
             I&apos;m always excited to connect with like-minded individuals.
           </p>
-          {/* Added margin-bottom to the badges container */}
           <div className="mt-8 mb-12 flex flex-wrap gap-4 justify-center">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-500 text-sm">
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-4 h-4" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
               Summer Internship 2025
             </span>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 text-blue-500 text-sm">
-              <GraduationCap className="w-4 h-4" />
+              <GraduationCap className="w-4 h-4" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
               Master Thesis Fall 2025
             </span>
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 text-indigo-500 text-sm">
-              <Briefcase className="w-4 h-4" />
+              <Briefcase className="w-4 h-4" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
               Full-time Position 2026
             </span>
           </div>
         </div>
 
-        {/* Cards Grid - increased gap between cards from space-y-6 to space-y-8 */}
         <div className="space-y-8">
-          {/* Rest of the component remains the same */}
-          {/* Message Card */}
           <div className="group rounded-3xl bg-gradient-to-b from-teal-500/10 to-blue-500/5 p-8 backdrop-blur-sm">
-            {/* Message card content... */}
             <div className="flex items-start gap-6">
               <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-teal-500 to-blue-500">
-                <MessageSquare className="w-6 h-6 text-white" />
+                <MessageSquare className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
@@ -76,7 +70,7 @@ export default function ContactSection() {
                     </p>
                   </div>
                   <button className="text-xl font-medium flex items-center gap-2 px-4 py-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-teal-500">
-                    <MessageSquare className="w-5 h-5" />
+                    <MessageSquare className="w-5 h-5" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                     <span>Open Form</span>
                   </button>
                 </div>
@@ -85,13 +79,11 @@ export default function ContactSection() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Quick Connect Card */}
             <div className="group rounded-3xl bg-gradient-to-b from-blue-500/10 to-blue-500/5 p-8 backdrop-blur-sm">
-              {/* Quick Connect card content... */}
               <div className="flex flex-col h-full">
                 <div className="flex items-start gap-6 mb-6">
                   <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-500">
-                    <Mail className="w-6 h-6 text-white" />
+                    <Mail className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-semibold mb-2">Quick Connect</h3>
@@ -103,7 +95,7 @@ export default function ContactSection() {
                   className="p-4 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors mb-6 w-full text-left"
                 >
                   <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-blue-500" />
+                    <Mail className="w-5 h-5 text-blue-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                     <p className="text-xl font-medium text-blue-500 break-all">
                       hello@lukashedstrom.com
                     </p>
@@ -114,27 +106,25 @@ export default function ContactSection() {
                     onClick={handleEmailCopy}
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors flex-1 justify-center"
                   >
-                    <Copy className="w-4 h-4 text-blue-500" />
+                    <Copy className="w-4 h-4 text-blue-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                     <span className="text-blue-500">{emailCopied ? 'Copied!' : 'Copy Email'}</span>
                   </button>
                   <a
                     href="mailto:hello@lukashedstrom.com"
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors flex-1 justify-center"
                   >
-                    <ExternalLink className="w-4 h-4 text-blue-500" />
+                    <ExternalLink className="w-4 h-4 text-blue-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                     <span className="text-blue-500">Open Email</span>
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Professional Network Card */}
             <div className="group rounded-3xl bg-gradient-to-b from-indigo-500/10 to-indigo-500/5 p-8 backdrop-blur-sm">
-              {/* Professional Network card content... */}
               <div className="flex flex-col h-full">
                 <div className="flex items-start gap-6 mb-6">
                   <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500">
-                    <Linkedin className="w-6 h-6 text-white" />
+                    <Linkedin className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
                   </div>
                   <div>
                     <h3 className="text-2xl font-semibold mb-2">Professional Network</h3>
@@ -148,7 +138,7 @@ export default function ContactSection() {
                   className="p-4 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors mb-6 w-full text-left"
                 >
                   <div className="flex items-center gap-3">
-                    <Linkedin className="w-5 h-5 text-indigo-500" />
+                    <Linkedin className="w-5 h-5 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                     <p className="text-xl font-medium text-indigo-500">
                       Visit Profile
                     </p>
@@ -160,7 +150,7 @@ export default function ContactSection() {
                     download
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 transition-colors flex-1 justify-center"
                   >
-                    <Download className="w-4 h-4 text-purple-500" />
+                    <Download className="w-4 h-4 text-purple-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                     <span className="text-purple-500">Resume</span>
                   </a>
                   <a 
@@ -168,7 +158,7 @@ export default function ContactSection() {
                     target="_blank"
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 transition-colors flex-1 justify-center"
                   >
-                    <Eye className="w-4 h-4 text-purple-500" />
+                    <Eye className="w-4 h-4 text-purple-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                     <span className="text-purple-500">Preview</span>
                   </a>
                 </div>
