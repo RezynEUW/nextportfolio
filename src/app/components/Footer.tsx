@@ -51,7 +51,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="min-h-[75vh] bg-gradient-to-b from-gray-900 to-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
+    <footer className="min-h-[80vh] bg-gradient-to-b from-gray-900 to-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
       {/* SVG Break-in Effect */}
       <div className="absolute top-[-8px] left-0 right-0 w-full">
         <svg
