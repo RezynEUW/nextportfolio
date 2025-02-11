@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import Logo from "@components/Logo";
 import { User, Briefcase, Mail } from "lucide-react";
 import Spinner from "@components/Spinner";
@@ -14,11 +14,11 @@ export default function Navbar() {
   const workRef = useRef<HTMLLIElement>(null);
   const contactRef = useRef<HTMLLIElement>(null);
 
-  const sections = {
+  const sections = useMemo(() => ({
     info: "about",
     work: "projects",
     contact: "contact",
-  } as const;
+  } as const), []); // Empty dependency array since these values are static
 
   const handleSmoothScroll = (id: string, linkType: "info" | "work" | "contact") => {
     setActiveLink(linkType);
@@ -68,7 +68,7 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScrollEnd);
       clearTimeout(scrollTimeout);
     };
-  }, [isScrolling, sections]);
+  }, [isScrolling, sections]); // sections is now memoized and won't cause unnecessary re-renders
 
   const getIndicatorPosition = () => {
     const activeElement = {

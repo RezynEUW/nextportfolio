@@ -61,44 +61,48 @@ export default function ContactSection() {
               </div>
               <div>
                 <h3 className="text-2xl font-semibold mb-2">Email</h3>
-                <p className="text-sm text-teal-500 font-medium">Direct communication channels</p>
+                <p className="text-sm text-teal-500 font-medium">Direct communication</p>
               </div>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={handleEmailCopy}
                 className="p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors flex-1 text-left"
               >
                 <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-teal-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                  <p className="text-xl font-medium text-teal-500">
+                  <Mail className="w-5 h-5 text-teal-600" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                  <p className="text-xl font-medium text-teal-600 truncate">
                     hello@lukashedstrom.com
                   </p>
                 </div>
               </button>
-              <button
-                onClick={handleEmailCopy}
-                className="p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left"
-              >
-                <div className="flex items-center gap-3">
-                  <Copy className="w-5 h-5 text-teal-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                  <p className="text-xl font-medium text-teal-500">
-                    Copy
-                  </p>
-                </div>
-              </button>
-              <a
-                href="mailto:hello@lukashedstrom.com"
-                className="p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left"
-              >
-                <div className="flex items-center gap-3">
-                  <ExternalLink className="w-5 h-5 text-teal-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                  <p className="text-xl font-medium text-teal-500">
-                    Open
-                  </p>
-                </div>
-              </a>
+              <div className="flex gap-2 sm:flex-shrink-0">
+                <button
+                  onClick={handleEmailCopy}
+                  className="p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left flex-1 sm:flex-initial"
+                  aria-label={emailCopied ? "Email copied!" : "Copy email"}
+                >
+                  <div className="flex items-center gap-3">
+                    <Copy className={`w-5 h-5 ${emailCopied ? 'text-teal-600' : 'text-teal-500'}`} 
+                          style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                    <p className={`text-xl font-medium ${emailCopied ? 'text-teal-600' : 'text-teal-500'}`}>
+                      {emailCopied ? 'Copied!' : 'Copy'}
+                    </p>
+                  </div>
+                </button>
+                <a
+                  href="mailto:hello@lukashedstrom.com"
+                  className="p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left flex-1 sm:flex-initial"
+                >
+                  <div className="flex items-center gap-3">
+                    <ExternalLink className="w-5 h-5 text-teal-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                    <p className="text-xl font-medium text-teal-500">
+                      Open
+                    </p>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
 
