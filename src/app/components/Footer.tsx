@@ -1,6 +1,11 @@
 "use client";
 
-import { Mail, Linkedin, ArrowUp } from "lucide-react";
+import { Mail, Linkedin, ArrowUp, Map, Clock } from "lucide-react";
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+
+// Register ScrollToPlugin
+gsap.registerPlugin(ScrollToPlugin);
 
 export default function Footer() {
   const techStack = [
@@ -12,12 +17,41 @@ export default function Footer() {
     "Lucide Icons"
   ];
 
+  const socialLinks = [
+    {
+      icon: Mail,
+      label: "hello@lukashedstrom.com",
+      href: "mailto:hello@lukashedstrom.com",
+      isExternal: false
+    },
+    {
+      icon: Linkedin,
+      label: "Lukas Hedström",
+      href: "https://linkedin.com/in/lukashedstrom",
+      isExternal: true
+    }
+  ];
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    const swedenTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Stockholm" }));
+    return swedenTime.toLocaleTimeString("en-US", { 
+      hour: "numeric", 
+      minute: "2-digit",
+      hour12: false 
+    });
+  };
+
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    gsap.to(window, { 
+      duration: 0.7, 
+      scrollTo: { y: 0 }, 
+      ease: "power3.inOut" 
+    });
   };
 
   return (
-    <footer className="h-[75vh] bg-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
+    <footer className="min-h-[75vh] bg-gradient-to-b from-gray-900 to-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
       {/* SVG Break-in Effect */}
       <div className="absolute top-[-8px] left-0 right-0 w-full">
         <svg
@@ -39,32 +73,40 @@ export default function Footer() {
         </svg>
       </div>
 
-      {/* Rest of the footer remains the same */}
-      <div className="relative w-full max-w-7xl mx-auto px-8 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-12">
           {/* Brand Column */}
-          <div className="space-y-4">
-            <div className="space-y-2">
+          <div className="space-y-6">
+            <div className="space-y-3">
               <h3 className="text-2xl font-display font-bold">
                 Lukas Hedström
                 <span className="block text-sm text-gray-400 font-normal mt-1">
                   [heːdˈstrøm] • Heath-Stream
                 </span>
               </h3>
-              <p className="text-gray-400 max-w-sm">
-                Stationed in Umeå, Sweden. 
-              </p>
+              <div className="flex flex-col gap-2 text-gray-400">
+                <div className="flex items-center gap-2">
+                  <Map className="w-4 h-4" />
+                  <span>Umeå, Sweden</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>Local time: {getCurrentTime()}</span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Technologies Used */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Built With</h4>
+            <h4 className="text-lg font-semibold">
+              Built With
+            </h4>
             <div className="flex flex-wrap gap-2">
               {techStack.map((tech) => (
                 <span 
                   key={tech}
-                  className="px-3 py-1 bg-white/5 rounded-full text-sm text-gray-300"
+                  className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded-full text-sm text-gray-300 transition-colors cursor-default"
                 >
                   {tech}
                 </span>
@@ -74,39 +116,39 @@ export default function Footer() {
 
           {/* Connect */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Connect</h4>
+            <h4 className="text-lg font-semibold">
+              Connect
+            </h4>
             <div className="flex flex-col gap-3">
-              <a href="mailto:hello@lukashedstrom.com" 
-                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                <Mail className="w-4 h-4" />
-                <span>hello@lukashedstrom.com</span>
-              </a>
-              <a href="https://linkedin.com" 
-                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
-                <Linkedin className="w-4 h-4" />
-                <span>LinkedIn</span>
-              </a>
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.isExternal ? "_blank" : undefined}
+                  rel={link.isExternal ? "noopener noreferrer" : undefined}
+                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
+                >
+                  <div className="p-2 bg-white/5 rounded-full group-hover:bg-white/10 transition-colors">
+                    <link.icon className="w-4 h-4" />
+                  </div>
+                  <span className="text-sm">{link.label}</span>
+                </a>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Back to Top Button with Tooltip */}
-      <div className="group absolute top-8 right-8">
-        <button
-          onClick={scrollToTop}
-          className="p-2 bg-white/10 rounded-full 
-            hover:bg-white/20 transition-colors"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="w-6 h-6" />
-        </button>
-        <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 
-          whitespace-nowrap px-2 py-1 rounded bg-white/10 text-sm
-          opacity-0 group-hover:opacity-100 transition-opacity">
-          Back to top
-        </span>
-      </div>
+      {/* Discrete Back to Top Banner */}
+      <button 
+        onClick={scrollToTop}
+        className="absolute bottom-0 left-0 right-0 bg-white/5 hover:bg-white/10 
+        py-2 px-4 flex items-center justify-center gap-2 text-gray-300 
+        hover:text-white transition-colors group"
+      >
+        <span className="text-sm">Back to Top</span>
+        <ArrowUp className="w-4 h-4" />
+      </button>
     </footer>
   );
 }
