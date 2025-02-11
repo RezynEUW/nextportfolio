@@ -1,4 +1,4 @@
-  "use client";
+"use client";
 
   import { Mail, Linkedin, ArrowUp, Map, Clock } from "lucide-react";
   import { gsap } from 'gsap';
@@ -9,7 +9,6 @@
   gsap.registerPlugin(ScrollToPlugin);
 
   export default function Footer() {
-    const [showMobileButton, setShowMobileButton] = useState(false);
     const [currentTime, setCurrentTime] = useState<string>('');
 
     const getCurrentTime = () => {
@@ -48,25 +47,7 @@
       return () => clearTimeout(initialTimeout);
     }, []);
 
-    useEffect(() => {
-      const handleScroll = () => {
-        const footer = document.querySelector('footer');
-        if (footer) {
-          const footerRect = footer.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-          const footerHeight = footerRect.height;
-          
-          // Show button when about 1/3 of the footer is visible
-          const showThreshold = windowHeight - (footerHeight / 3);
-          setShowMobileButton(footerRect.top < showThreshold);
-        }
-      };
-
-      window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Check initial position
-      
-      return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    // Removed the unnecessary scroll effect for showMobileButton
 
     const techStack = [
       "Next.js 15",
