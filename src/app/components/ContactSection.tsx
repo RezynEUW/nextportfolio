@@ -158,7 +158,7 @@ export default function ContactSection() {
                     <div className="flex items-center gap-2 sm:gap-3">
                       <Download className="w-4 sm:w-5 h-4 sm:h-5 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                       <p className="text-base sm:text-xl font-medium text-indigo-500">
-                        Download CV
+                        Download
                       </p>
                     </div>
                   </a>
@@ -171,7 +171,7 @@ export default function ContactSection() {
                       <div className="flex items-center gap-2 sm:gap-3">
                         <Eye className="w-4 sm:w-5 h-4 sm:h-5 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                         <p className="text-base sm:text-xl font-medium text-indigo-500">
-                          Preview CV
+                          Preview
                         </p>
                       </div>
                       <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />

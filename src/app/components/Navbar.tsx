@@ -18,7 +18,7 @@ export default function Navbar() {
     info: "about",
     work: "projects",
     contact: "contact",
-  } as const), []); // Empty dependency array since these values are static
+  } as const), []);
 
   const handleSmoothScroll = (id: string, linkType: "info" | "work" | "contact") => {
     setActiveLink(linkType);
@@ -68,7 +68,7 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScrollEnd);
       clearTimeout(scrollTimeout);
     };
-  }, [isScrolling, sections]); // sections is now memoized and won't cause unnecessary re-renders
+  }, [isScrolling, sections]);
 
   const getIndicatorPosition = () => {
     const activeElement = {
@@ -90,7 +90,8 @@ export default function Navbar() {
     <>
       <Logo />
       <nav
-        className="fixed top-4 right-4 z-50 px-2 py-1.5 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 transition-shadow duration-300"
+        className="fixed top-4 right-4 z-50 h-auto px-2 py-1.5 flex items-center justify-center rounded-full backdrop-blur-sm bg-white/20 transition-shadow duration-300
+        max-sm:fixed max-sm:bottom-4 max-sm:top-auto max-sm:right-auto max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:h-fit"
         style={{
           boxShadow: `0 4px 12px rgba(0, 0, 0, ${shadowOpacity * 0.15}), inset 0 0 12px rgba(255, 255, 255, ${shadowOpacity * 0.2})`,
         }}

@@ -96,7 +96,7 @@ export default function Logo() {
       {/* Inverse Logo (Appears after Hero) */}
       <div
         ref={logoRef}
-        className="fixed top-4 left-4 z-50 opacity-0 mix-blend-difference"
+        className="fixed top-5 left-5 z-50 opacity-0 mix-blend-difference"
         style={{ visibility: "hidden", transform: "translateX(-50px)" }}
       >
         <Link href="/">

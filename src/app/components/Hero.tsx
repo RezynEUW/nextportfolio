@@ -58,7 +58,7 @@ export default function Hero() {
   }, [timelineItems.length]);
 
   return (
-    <section className="relative min-h-screen bg-background text-foreground overflow-hidden flex flex-col justify-center">
+    <section className="relative min-h-screen bg-background text-foreground overflow-hidden">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
@@ -79,9 +79,9 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_75%,rgba(99,102,241,0.15),transparent_50%)]" />
       </div>
 
-      <div className="relative z-20 w-full px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
-        {/* Main Content */}
-        <div className="max-w-8xl mx-auto text-center">
+      {/* Main Content Container with minimum top padding */}
+      <div className="relative z-20 w-full min-h-screen flex flex-col justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto text-center flex-1 flex flex-col justify-center space-y-8 sm:space-y-12">
           {/* Title Section */}
           <div className="mb-4 sm:mb-6">
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">
@@ -127,29 +127,29 @@ export default function Hero() {
               }}
             />
           </div>
-        </div>
 
-        {/* Timeline Pills */}
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center">
-          {timelineItems.map((item, index) => (
-            <div
-              key={item.title}
-              className={`transition-all duration-500 w-full sm:w-auto ${
-                index === activeIndex ? 'opacity-100 scale-100' : 'opacity-70 scale-95'
-              }`}
-            >
-              <div className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-2 w-full sm:w-auto 
-                bg-gradient-to-r ${item.gradient} rounded-full backdrop-blur-sm border ${item.border}`}>
-                {index === 0 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-500" />}
-                {index === 1 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />}
-                {index === 2 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-indigo-500" />}
-                <span className={`text-xs sm:text-sm font-medium bg-gradient-to-r ${item.textGradient} 
-                  text-transparent bg-clip-text whitespace-nowrap`}>
-                  {item.title} {item.date}
-                </span>
+          {/* Timeline Pills */}
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center">
+            {timelineItems.map((item, index) => (
+              <div
+                key={item.title}
+                className={`transition-all duration-500 w-full sm:w-auto ${
+                  index === activeIndex ? 'opacity-100 scale-100' : 'opacity-70 scale-95'
+                }`}
+              >
+                <div className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-2 w-full sm:w-auto 
+                  bg-gradient-to-r ${item.gradient} rounded-full backdrop-blur-sm border ${item.border}`}>
+                  {index === 0 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-500" />}
+                  {index === 1 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />}
+                  {index === 2 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-indigo-500" />}
+                  <span className={`text-xs sm:text-sm font-medium bg-gradient-to-r ${item.textGradient} 
+                    text-transparent bg-clip-text whitespace-nowrap`}>
+                    {item.title} {item.date}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
