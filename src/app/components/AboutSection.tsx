@@ -101,50 +101,53 @@ export default function AboutSection() {
   useEffect(() => {
     if (!sectionRef.current || !buttonRef.current) return;
 
-    cardsRef.current.forEach((card) => {
-      if (!card) return;
+    // Only apply animations on larger screens
+    if (window.innerWidth >= 640) {
+      cardsRef.current.forEach((card) => {
+        if (!card) return;
 
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            y: 50,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top bottom-=100",
+              end: "bottom center",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      });
+
+      // Button animation
       gsap.fromTo(
-        card,
+        buttonRef.current,
         {
           opacity: 0,
-          y: 50,
+          y: 20,
         },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: "power3.out",
+          duration: 0.6,
+          ease: "power2.out",
           scrollTrigger: {
-            trigger: card,
-            start: "top bottom-=100",
+            trigger: buttonRef.current,
+            start: "top 80%",
             end: "bottom center",
             toggleActions: "play none none reverse",
           },
         }
       );
-    });
-
-    // Button animation
-    gsap.fromTo(
-      buttonRef.current,
-      {
-        opacity: 0,
-        y: 20,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: buttonRef.current,
-          start: "top 80%",
-          end: "bottom center",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
+    }
   }, []);
 
   const setCardRef = (el: HTMLDivElement | null, index: number) => {
