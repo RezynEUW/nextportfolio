@@ -187,8 +187,8 @@ export default function AboutSection() {
                   border ${card.borderColor}
                   overflow-hidden
                   hover:border-opacity-50 hover:translate-y-[-1px] hover:scale-[1.00]
-                  hover:shadow-2xl hover:shadow-${card.iconColor}/5
-                  transition-all duration-500 ease-out
+                  hover:shadow-lg hover:shadow-${card.iconColor}/5
+                  transition-all duration-1000 ease-out
                   ${card.featured ? 'border-opacity-50' : 'border-opacity-30'}`}
               >
                 {/* Background gradient with animation */}

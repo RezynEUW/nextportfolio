@@ -6,7 +6,6 @@ import {
   Copy, 
   Download, 
   Eye, 
-  MessageSquare, 
   ExternalLink,
   Sparkles,
   GraduationCap,
@@ -56,25 +55,50 @@ export default function ContactSection() {
 
         <div className="space-y-8">
           <div className="group rounded-3xl bg-gradient-to-b from-teal-500/10 to-blue-500/5 p-8 backdrop-blur-sm">
-            <div className="flex items-start gap-6">
+            <div className="flex items-start gap-6 mb-6">
               <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-teal-500 to-blue-500">
-                <MessageSquare className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
+                <Mail className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
               </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-2xl font-semibold mb-2">Send a Message</h3>
-                    <p className="text-sm text-teal-500 font-medium mb-4">Quick and easy way to reach out</p>
-                    <p className="text-foreground/60">
-                      Want to discuss a project or just say hello? Drop me a line through the contact form.
-                    </p>
-                  </div>
-                  <button className="text-xl font-medium flex items-center gap-2 px-4 py-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-teal-500">
-                    <MessageSquare className="w-5 h-5" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                    <span>Open Form</span>
-                  </button>
+              <div>
+                <h3 className="text-2xl font-semibold mb-2">Email</h3>
+                <p className="text-sm text-teal-500 font-medium">Direct communication channels</p>
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={handleEmailCopy}
+                className="p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors flex-1 text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-teal-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                  <p className="text-xl font-medium text-teal-500">
+                    hello@lukashedstrom.com
+                  </p>
                 </div>
-              </div>
+              </button>
+              <button
+                onClick={handleEmailCopy}
+                className="p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <Copy className="w-5 h-5 text-teal-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                  <p className="text-xl font-medium text-teal-500">
+                    Copy
+                  </p>
+                </div>
+              </button>
+              <a
+                href="mailto:hello@lukashedstrom.com"
+                className="p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left"
+              >
+                <div className="flex items-center gap-3">
+                  <ExternalLink className="w-5 h-5 text-teal-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                  <p className="text-xl font-medium text-teal-500">
+                    Open
+                  </p>
+                </div>
+              </a>
             </div>
           </div>
 
@@ -83,40 +107,30 @@ export default function ContactSection() {
               <div className="flex flex-col h-full">
                 <div className="flex items-start gap-6 mb-6">
                   <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-500">
-                    <Mail className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
+                    <Linkedin className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-semibold mb-2">Quick Connect</h3>
-                    <p className="text-sm text-blue-500 font-medium">Direct email communication</p>
+                    <h3 className="text-2xl font-semibold mb-2">LinkedIn</h3>
+                    <p className="text-sm text-blue-500 font-medium">Let&apos;s connect and grow together</p>
                   </div>
                 </div>
-                <button
-                  onClick={handleEmailCopy}
-                  className="p-4 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors mb-6 w-full text-left"
+                <a
+                  href="https://linkedin.com/in/lukashedstrom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors mb-2 w-full text-left"
                 >
                   <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-blue-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                    <p className="text-xl font-medium text-blue-500 break-all">
-                      hello@lukashedstrom.com
-                    </p>
+                    <Linkedin className="w-5 h-5 text-blue-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                    <div>
+                      <p className="text-xl font-medium text-blue-500 flex items-center gap-2">
+                        Visit Profile
+                        <span className="text-blue-400/70 font-light">- Lukas Hedström</span>
+                        <ExternalLink className="w-4 h-4" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                      </p>
+                    </div>
                   </div>
-                </button>
-                <div className="flex gap-4 mt-auto">
-                  <button
-                    onClick={handleEmailCopy}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors flex-1 justify-center"
-                  >
-                    <Copy className="w-4 h-4 text-blue-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                    <span className="text-blue-500">{emailCopied ? 'Copied!' : 'Copy Email'}</span>
-                  </button>
-                  <a
-                    href="mailto:hello@lukashedstrom.com"
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors flex-1 justify-center"
-                  >
-                    <ExternalLink className="w-4 h-4 text-blue-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                    <span className="text-blue-500">Open Email</span>
-                  </a>
-                </div>
+                </a>
               </div>
             </div>
 
@@ -124,42 +138,40 @@ export default function ContactSection() {
               <div className="flex flex-col h-full">
                 <div className="flex items-start gap-6 mb-6">
                   <div className="flex-shrink-0 p-4 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500">
-                    <Linkedin className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
+                    <Download className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-semibold mb-2">Professional Network</h3>
-                    <p className="text-sm text-indigo-500 font-medium">Let&apos;s connect and grow together</p>
+                    <h3 className="text-2xl font-semibold mb-2">Resume</h3>
+                    <p className="text-sm text-indigo-500 font-medium">Download or preview my CV</p>
                   </div>
                 </div>
-                <a
-                  href="https://linkedin.com/in/lukashedstrom"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-4 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors mb-6 w-full text-left"
-                >
-                  <div className="flex items-center gap-3">
-                    <Linkedin className="w-5 h-5 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                    <p className="text-xl font-medium text-indigo-500">
-                      Visit Profile
-                    </p>
-                  </div>
-                </a>
-                <div className="flex gap-4">
-                  <a 
+                <div className="flex gap-2">
+                  <a
                     href="/cv.pdf" 
                     download
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 transition-colors flex-1 justify-center"
+                    className="p-4 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors flex-1 text-left"
                   >
-                    <Download className="w-4 h-4 text-purple-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                    <span className="text-purple-500">Resume</span>
+                    <div className="flex items-center gap-3">
+                      <Download className="w-5 h-5 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                      <p className="text-xl font-medium text-indigo-500">
+                        Download CV
+                      </p>
+                    </div>
                   </a>
                   <a 
                     href="/cv.pdf" 
                     target="_blank"
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 transition-colors flex-1 justify-center"
+                    className="p-4 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors flex-1 text-left"
                   >
-                    <Eye className="w-4 h-4 text-purple-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
-                    <span className="text-purple-500">Preview</span>
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <Eye className="w-5 h-5 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                        <p className="text-xl font-medium text-indigo-500">
+                          Preview CV
+                        </p>
+                      </div>
+                      <ExternalLink className="w-4 h-4 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                    </div>
                   </a>
                 </div>
               </div>

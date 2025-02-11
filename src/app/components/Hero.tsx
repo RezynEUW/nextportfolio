@@ -48,7 +48,7 @@ export default function Hero() {
 
     const interval = setInterval(() => {
       setActiveIndex((current) => (current + 1) % timelineItems.length);
-    }, 3000);
+    }, 9000);
 
     window.addEventListener('scroll', handleScroll);
     return () => {
