@@ -2,60 +2,24 @@
 
 import Image from "next/image";
 import { 
-  Sparkles, 
   Code2, 
-  Palette,
-  GraduationCap,
-  Briefcase
+  Palette
 } from "lucide-react";
 import { useState, useEffect } from 'react';
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const timelineItems = [
-    {
-      icon: Sparkles,
-      title: "Summer Internship",
-      date: "2025",
-      gradient: "from-emerald-500/20 to-blue-500/20",
-      textGradient: "from-emerald-500 to-blue-500",
-      border: "border-emerald-500/20"
-    },
-    {
-      icon: GraduationCap,
-      title: "Master Thesis",
-      date: "Fall 2025",
-      gradient: "from-blue-500/20 to-indigo-500/20",
-      textGradient: "from-blue-500 to-indigo-500",
-      border: "border-blue-500/20"
-    },
-    {
-      icon: Briefcase,
-      title: "Full-time Position",
-      date: "2026",
-      gradient: "from-indigo-500/20 to-purple-500/20",
-      textGradient: "from-indigo-500 to-purple-500",
-      border: "border-indigo-500/20"
-    }
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % timelineItems.length);
-    }, 9000);
-
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(interval);
     };
-  }, [timelineItems.length]);
+  }, []);
 
   return (
     <section className="relative min-h-screen bg-background text-foreground overflow-hidden">
@@ -127,29 +91,6 @@ export default function Hero() {
               }}
             />
           </div>
-
-          {/* Timeline Pills */}
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center">
-            {timelineItems.map((item, index) => (
-              <div
-                key={item.title}
-                className={`transition-all duration-500 w-full sm:w-auto ${
-                  index === activeIndex ? 'opacity-100 scale-100' : 'opacity-70 scale-95'
-                }`}
-              >
-                <div className={`inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-2 w-full sm:w-auto 
-                  bg-gradient-to-r ${item.gradient} rounded-full backdrop-blur-sm border ${item.border}`}>
-                  {index === 0 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-500" />}
-                  {index === 1 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" />}
-                  {index === 2 && <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-indigo-500" />}
-                  <span className={`text-xs sm:text-sm font-medium bg-gradient-to-r ${item.textGradient} 
-                    text-transparent bg-clip-text whitespace-nowrap`}>
-                    {item.title} {item.date}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -174,14 +115,14 @@ export default function Hero() {
       {/* Decorative Wave Separator */}
       <div className="absolute -bottom-1 left-0 right-0 z-30">
         <svg 
-          viewBox="0 0 1440 74" 
+          viewBox="0 0 1440 140" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
           className="w-full drop-shadow-2xl filter"
           preserveAspectRatio="none"
         >
           <path 
-            d="M0 24C240 74 480 74 720 49C960 24 1200 24 1440 49V74H0V24Z" 
+            d="M0 40C240 120 480 120 720 80C960 40 1200 40 1440 80V140H0V40Z" 
             fill="currentColor" 
             className="text-background filter drop-shadow-2xl"
             style={{

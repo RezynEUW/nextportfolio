@@ -3,11 +3,30 @@
 import { Mail, Linkedin, ArrowUp, Map, Clock } from "lucide-react";
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { useState, useEffect } from 'react';
 
 // Register ScrollToPlugin
 gsap.registerPlugin(ScrollToPlugin);
 
 export default function Footer() {
+  const [showMobileButton, setShowMobileButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const footer = document.querySelector('footer');
+      if (footer) {
+        const footerTop = footer.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        setShowMobileButton(footerTop < windowHeight);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const techStack = [
     "Next.js 15",
     "React",
@@ -51,7 +70,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="min-h-[80vh] bg-gradient-to-b from-gray-900 to-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
+    <footer className="min-h-[85vh] bg-gradient-to-b from-gray-900 to-gray-800 text-white relative flex flex-col justify-end overflow-hidden">
       {/* SVG Break-in Effect */}
       <div className="absolute top-[-8px] left-0 right-0 w-full">
         <svg
@@ -139,15 +158,28 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Discrete Back to Top Banner */}
+      {/* Back to Top Button - Desktop */}
       <button 
         onClick={scrollToTop}
         className="absolute bottom-0 left-0 right-0 bg-white/5 hover:bg-white/10 
         py-2 px-4 flex items-center justify-center gap-2 text-gray-300 
-        hover:text-white transition-colors group"
+        hover:text-white transition-colors group max-sm:hidden"
       >
         <span className="text-sm">Back to Top</span>
         <ArrowUp className="w-4 h-4" />
+      </button>
+
+      {/* Back to Top Button - Mobile */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-24 right-4 hidden items-center justify-center 
+        w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-sm text-gray-300 
+        hover:text-white shadow-lg transition-all z-50
+        hover:bg-gray-700/80 active:scale-95 max-sm:flex
+        ${showMobileButton ? 'max-sm:opacity-100 max-sm:visible' : 'max-sm:opacity-0 max-sm:invisible'}`}
+        aria-label="Back to top"
+      >
+        <ArrowUp className="w-5 h-5" />
       </button>
     </footer>
   );
