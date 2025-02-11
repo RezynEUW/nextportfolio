@@ -31,7 +31,7 @@ export default function CaseStudies() {
   ] as const;
 
   return (
-    <section id="projects" className="relative bg-white py-12 lg:py-24">
+    <section id="projects" className="relative bg-background py-12 lg:py-24">
       {/* Responsive Grid Container */}
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:px-2 gap-y-6 lg:gap-y-0">
         {projects.map((project, index) => (
@@ -41,7 +41,7 @@ export default function CaseStudies() {
               h-[60vh] sm:h-[50vh] lg:h-[85vh]"
           >
             {/* Frame with padding */}
-            <div className={`h-full w-full py-3 px-1.5 lg:py-8 lg:px-1.5 bg-white box-border
+            <div className={`h-full w-full py-3 px-1.5 lg:py-8 lg:px-1.5 bg-background box-border
               ${index === 0 ? 'lg:pl-0' : ''} 
               ${index === projects.length - 1 ? 'lg:pr-0' : ''}`}
             >
@@ -64,7 +64,7 @@ export default function CaseStudies() {
 
             {/* Title Overlay - Always visible on mobile/tablet, hover on desktop */}
             <div
-              className="absolute bottom-0 left-0 w-full bg-white text-black 
+              className="absolute bottom-0 left-0 w-full bg-background text-black 
                 lg:transform lg:translate-y-full lg:group-hover:translate-y-0 
                 transition-all duration-1000 z-10
                 sm:translate-y-0"

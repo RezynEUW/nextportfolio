@@ -64,10 +64,10 @@ export default function Logo() {
       {/* Hero Page Branding */}
       <div
         ref={brandingRef}
-        className="fixed top-4 left-4 z-50 opacity-1"
+        className="fixed top-4 left-4 max-sm:top-0 max-sm:left-0 max-sm:right-0 max-sm:w-screen z-50 opacity-1"
         style={{ visibility: "visible", transform: "translateX(0)" }}
       >
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center max-sm:w-full">
           <div className="absolute inset-0 z-[-1]">
             <Image
               src="/LHLT.png"
@@ -79,13 +79,13 @@ export default function Logo() {
           </div>
           {/* Outer container matching navbar */}
           <div 
-            className="relative z-10 px-2 py-1.5 rounded-full backdrop-blur-sm bg-white/20 transition-shadow duration-300"
+            className="relative z-10 px-2 py-1.5 rounded-full max-sm:rounded-none max-sm:w-full backdrop-blur-sm bg-white/20 transition-shadow duration-300"
             style={{
               boxShadow: `0 4px 8px rgba(0, 0, 0, ${shadowOpacity * 0.05}), inset 0 0 10px rgba(255, 255, 255, ${shadowOpacity * 0.1})`,
             }}
           >
             {/* Inner container matching navbar items */}
-            <div className="inline-flex items-center px-6 py-1.5 rounded-full text-black">
+            <div className="inline-flex items-center px-6 py-1.5 rounded-full text-black max-sm:w-full max-sm:justify-center">
               <span className={`text-xl font-display font-medium transition-colors duration-300 ${shadowOpacity === 0 ? 'text-emerald-700' : 'text-black'}`}>Lukas</span>
               <span className={`text-xl font-display font-normal whitespace-pre transition-colors duration-300 ${shadowOpacity === 0 ? 'text-emerald-700' : 'text-black'}`}> Hedström</span>
             </div>
@@ -101,7 +101,7 @@ export default function Logo() {
       >
         <Link href="/">
           <svg
-            className="w-20 h-auto"  // Reduced from w-24 to w-20
+            className="w-20 h-auto"
             viewBox="0 0 650 390"
             fill="white"
             xmlns="http://www.w3.org/2000/svg"

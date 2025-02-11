@@ -38,15 +38,15 @@ export default function ContactSection() {
             I&apos;m always excited to connect with like-minded individuals.
           </p>
           <div className="mt-6 sm:mt-8 mb-8 sm:mb-12 flex flex-wrap gap-2 sm:gap-4 justify-center">
-            <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-emerald-500/10 text-emerald-500 text-xs sm:text-sm">
+            <span className="inline-flex items-center gap-2 px-3 rounded-full sm:px-4 py-1 sm:py-2 bg-emerald-500/10 text-emerald-500 text-xs sm:text-sm">
               <Sparkles className="w-3 sm:w-4 h-3 sm:h-4" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
               Summer Internship 2025
             </span>
-            <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-blue-500/10 text-blue-500 text-xs sm:text-sm">
+            <span className="inline-flex items-center gap-2 px-3 rounded-full sm:px-4 py-1 sm:py-2 bg-blue-500/10 text-blue-500 text-xs sm:text-sm">
               <GraduationCap className="w-3 sm:w-4 h-3 sm:h-4" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
               Master Thesis Fall 2025
             </span>
-            <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-2 rounded-full bg-indigo-500/10 text-indigo-500 text-xs sm:text-sm">
+            <span className="inline-flex items-center gap-2 px-3 rounded-full sm:px-4 py-1 sm:py-2 bg-indigo-500/10 text-indigo-500 text-xs sm:text-sm">
               <Briefcase className="w-3 sm:w-4 h-3 sm:h-4" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
               Full-time Position 2026
             </span>
@@ -54,9 +54,9 @@ export default function ContactSection() {
         </div>
 
         <div className="space-y-6 sm:space-y-8">
-          <div className="group rounded-3xl bg-gradient-to-b from-teal-500/10 to-blue-500/5 p-4 sm:p-8 backdrop-blur-sm">
+          <div className="group bg-gradient-to-b from-teal-500/10 to-blue-500/5 p-4 sm:p-8 backdrop-blur-sm">
             <div className="flex items-start gap-4 sm:gap-6 mb-4 sm:mb-6">
-              <div className="flex-shrink-0 p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-teal-500 to-blue-500">
+              <div className="flex-shrink-0 p-3 sm:p-4 bg-gradient-to-br from-teal-500 to-blue-500">
                 <Mail className="w-4 sm:w-6 h-4 sm:h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
               </div>
               <div>
@@ -68,7 +68,7 @@ export default function ContactSection() {
             <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={handleEmailCopy}
-                className="p-3 sm:p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors flex-1 text-left"
+                className="p-3 rounded-full  sm:p-4 bg-teal-500/10 hover:bg-teal-500/20 transition-colors flex-1 text-left"
               >
                 <div className="flex items-center gap-2 sm:gap-3">
                   <Mail className="w-4 sm:w-5 h-4 sm:h-5 text-teal-600" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
@@ -77,10 +77,10 @@ export default function ContactSection() {
                   </p>
                 </div>
               </button>
-              <div className="flex gap-2 sm:flex-shrink-0">
+              <div className="flex  gap-2 sm:flex-shrink-0">
                 <button
                   onClick={handleEmailCopy}
-                  className="p-3 sm:p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left flex-1 sm:flex-initial"
+                  className="p-3 rounded-full  sm:p-4 bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left flex-1 sm:flex-initial"
                   aria-label={emailCopied ? "Email copied!" : "Copy email"}
                 >
                   <div className="flex items-center gap-2 sm:gap-3">
@@ -93,7 +93,7 @@ export default function ContactSection() {
                 </button>
                 <a
                   href="mailto:hello@lukashedstrom.com"
-                  className="p-3 sm:p-4 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left flex-1 sm:flex-initial"
+                  className="p-3 rounded-full  sm:p-4 bg-teal-500/10 hover:bg-teal-500/20 transition-colors text-left flex-1 sm:flex-initial"
                 >
                   <div className="flex items-center gap-2 sm:gap-3">
                     <ExternalLink className="w-4 sm:w-5 h-4 sm:h-5 text-teal-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
@@ -107,10 +107,10 @@ export default function ContactSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <div className="group rounded-3xl bg-gradient-to-b from-blue-500/10 to-blue-500/5 p-4 sm:p-8 backdrop-blur-sm">
+            <div className="group bg-gradient-to-b from-blue-500/10 to-blue-500/5 p-4 sm:p-8 backdrop-blur-sm">
               <div className="flex flex-col h-full">
                 <div className="flex items-start gap-4 sm:gap-6 mb-4 sm:mb-6">
-                  <div className="flex-shrink-0 p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-500">
+                  <div className="flex-shrink-0 p-3 sm:p-4 bg-gradient-to-br from-blue-500 to-indigo-500">
                     <Linkedin className="w-4 sm:w-6 h-4 sm:h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
                   </div>
                   <div>
@@ -122,12 +122,12 @@ export default function ContactSection() {
                   href="https://linkedin.com/in/lukashedstrom"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 sm:p-4 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 transition-colors mb-2 w-full text-left"
+                  className="p-3 sm:p-4 rounded-full  bg-blue-500/10 hover:bg-blue-500/20 transition-colors mb-2 w-full text-left"
                 >
-                  <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex  items-center gap-2 sm:gap-3">
                     <Linkedin className="w-4 sm:w-5 h-4 sm:h-5 text-blue-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                     <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-                      <p className="text-base sm:text-xl font-medium text-blue-500 flex items-center gap-1 sm:gap-2">
+                      <p className="text-base  sm:text-xl font-medium text-blue-500 flex items-center gap-1 sm:gap-2">
                         Visit Profile
                         <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                       </p>
@@ -138,10 +138,10 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="group rounded-3xl bg-gradient-to-b from-indigo-500/10 to-indigo-500/5 p-4 sm:p-8 backdrop-blur-sm">
+            <div className="group bg-gradient-to-b from-indigo-500/10 to-indigo-500/5 p-4 sm:p-8 backdrop-blur-sm">
               <div className="flex flex-col h-full">
                 <div className="flex items-start gap-4 sm:gap-6 mb-4 sm:mb-6">
-                  <div className="flex-shrink-0 p-3 sm:p-4 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500">
+                  <div className="flex-shrink-0 p-3 sm:p-4 bg-gradient-to-br from-indigo-500 to-purple-500">
                     <Download className="w-4 sm:w-6 h-4 sm:h-6 text-white" style={{ filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.4))' }} />
                   </div>
                   <div>
@@ -153,10 +153,10 @@ export default function ContactSection() {
                   <a
                     href="/cv.pdf" 
                     download
-                    className="p-3 sm:p-4 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors flex-1 text-left"
+                    className="p-3 rounded-full sm:p-4 bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors flex-1 text-left"
                   >
                     <div className="flex items-center gap-2 sm:gap-3">
-                      <Download className="w-4 sm:w-5 h-4 sm:h-5 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
+                      <Download className="w-4  sm:w-5 h-4 sm:h-5 text-indigo-500" style={{ filter: 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))' }} />
                       <p className="text-base sm:text-xl font-medium text-indigo-500">
                         Download
                       </p>
@@ -165,7 +165,7 @@ export default function ContactSection() {
                   <a 
                     href="/cv.pdf" 
                     target="_blank"
-                    className="p-3 sm:p-4 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors flex-1 text-left"
+                    className="p-3 rounded-full  sm:p-4 bg-indigo-500/10 hover:bg-indigo-500/20 transition-colors flex-1 text-left"
                   >
                     <div className="flex items-center justify-between gap-2 sm:gap-3">
                       <div className="flex items-center gap-2 sm:gap-3">

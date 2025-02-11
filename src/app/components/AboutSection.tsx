@@ -158,7 +158,7 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="min-h-screen bg-gradient-to-b from-background to-background/95 flex items-center pt-32"
+      className="min-h-screen bg-gradient-to-b from-background to-background/95 flex items-center pt-32 relative"
     >
       <div className="w-full py-12 px-6 lg:px-8">
         {/* Section Header */}
@@ -186,7 +186,7 @@ export default function AboutSection() {
             >
               {/* Card */}
               <div
-                className={`relative h-full p-8 rounded-2xl backdrop-blur-sm 
+                className={`relative h-full p-8 backdrop-blur-sm 
                   border ${card.borderColor}
                   overflow-hidden
                   hover:border-opacity-50 hover:translate-y-[-1px] hover:scale-[1.00]
@@ -212,7 +212,7 @@ export default function AboutSection() {
                   {/* Title with Icon */}
                   <div className="mb-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className={`p-2 rounded-xl bg-white/5 ${card.iconColor} group-hover:scale-110 transition-transform duration-500`}>
+                      <div className={`p-2 bg-white/5 ${card.iconColor} group-hover:scale-110 transition-transform duration-500`}>
                         <card.icon className="w-9 h-9" />
                       </div>
                       <div>
@@ -254,7 +254,10 @@ export default function AboutSection() {
               onClick={handleAboutClick}
               className="group relative inline-flex items-center gap-2 px-6 py-1.5 
                 text-xl font-fixelDisplay rounded-full backdrop-blur-sm
-                transition-all duration-300 overflow-hidden"
+                transition-all duration-300 overflow-hidden
+                select-none touch-manipulation
+                active:opacity-90
+                [-webkit-tap-highlight-color:transparent]"
             >
               {/* Background gradient with animation */}
               <div className="absolute inset-0 opacity-20 mix-blend-overlay">
@@ -280,6 +283,8 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
+
+
     </section>
   );
 }

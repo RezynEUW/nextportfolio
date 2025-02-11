@@ -29,7 +29,7 @@ export default function Spinner() {
   return (
     <div
       ref={spinnerRef}
-      className="fixed bottom-5 right-5 z-50 mix-blend-difference"
+      className="fixed bottom-7 left-5 sm:top-auto sm:bottom-5 z-50 mix-blend-difference"
       style={{ pointerEvents: "none" }}
     >
       <svg
