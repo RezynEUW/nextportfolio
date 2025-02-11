@@ -101,9 +101,7 @@ export default function Logo() {
       >
         <Link href="/">
           <svg
-            className="w-24 h-auto"
-            width="520"
-            height="312"
+            className="w-20 h-auto"  // Reduced from w-24 to w-20
             viewBox="0 0 650 390"
             fill="white"
             xmlns="http://www.w3.org/2000/svg"
