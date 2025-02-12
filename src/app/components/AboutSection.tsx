@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Palette, Code2, Database, ArrowRight, LucideIcon } from "lucide-react";
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,23 +81,6 @@ export default function AboutSection() {
       step: "03"
     }
   ];
-
-  const handleAboutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      const windowHeight = window.innerHeight;
-      const aboutHeight = aboutSection.offsetHeight;
-      // Calculate offset to center the section
-      const offset = (windowHeight - aboutHeight) / 2;
-      const targetPosition = aboutSection.offsetTop - Math.max(0, offset);
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   useEffect(() => {
     if (!sectionRef.current || !buttonRef.current) return;
@@ -249,9 +233,8 @@ export default function AboutSection() {
         {/* Button Section */}
         <div className="mt-16 text-center" ref={buttonRef}>
           <div className="inline-block">
-            <a
+            <Link
               href="/about"
-              onClick={handleAboutClick}
               className="group relative inline-flex items-center gap-2 px-6 py-1.5 
                 text-xl font-fixelDisplay rounded-full backdrop-blur-sm
                 transition-all duration-300 overflow-hidden
@@ -279,12 +262,10 @@ export default function AboutSection() {
                 About me
               </span>
               <ArrowRight className="relative z-10 w-4 h-4 text-indigo-500 group-hover:translate-x-1 transition-transform duration-300" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
-
-
     </section>
   );
 }
