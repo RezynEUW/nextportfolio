@@ -106,7 +106,6 @@ export default function Page() {
   const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    // Only run animations on larger screens
     if (window.innerWidth >= 640) {
       sectionsRef.current.forEach((section) => {
         if (!section) return;
@@ -133,7 +132,6 @@ export default function Page() {
       });
     }
 
-    // Cleanup function
     return () => {
       if (typeof window !== 'undefined') {
         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -155,8 +153,11 @@ export default function Page() {
               About Me
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-foreground/60 max-w-2xl mx-auto">
-          Crafting digital experiences where creative vision meets technical precision, driven by a passion for game design, photography, and web solutions.
+          <p className="text-lg sm:text-xl text-foreground/60 max-w-2xl mx-auto mb-4">
+            Crafting digital experiences where creative vision meets technical precision, driven by a passion for game design, photography, and web solutions.
+          </p>
+          <p className="text-sm text-foreground/40 max-w-2xl mx-auto italic">
+            All images featured are from my personal photography collection
           </p>
         </div>
       </div>
@@ -173,8 +174,19 @@ export default function Page() {
               {/* Text Content */}
               <div className="flex-1 space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className={`p-3 aspect-square bg-gradient-to-br ${section.gradient} flex items-center justify-center`}>
-                    <section.icon className="w-6 h-6 text-white" />
+                  <div 
+                    className={`p-3 aspect-square bg-gradient-to-br ${section.gradient} flex items-center justify-center rounded-lg relative`}
+                    style={{
+                      boxShadow: `0 0 20px rgba(${section.gradient.includes('emerald') ? '16, 185, 129' : 
+                                                section.gradient.includes('rose') ? '244, 63, 94' : 
+                                                section.gradient.includes('orange') ? '249, 115, 22' :
+                                                section.gradient.includes('teal') ? '20, 184, 166' :
+                                                section.gradient.includes('cyan') ? '6, 182, 212' :
+                                                section.gradient.includes('blue') ? '59, 130, 246' :
+                                                '99, 102, 241'}, 0.2)`
+                    }}
+                  >
+                    <section.icon className="w-6 h-6 text-white" style={{ filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))' }} />
                   </div>
                   <div>
                     <h2 className="text-3xl font-bold mb-2">{section.title}</h2>
