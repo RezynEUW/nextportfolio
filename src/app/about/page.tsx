@@ -27,7 +27,7 @@ const sections: Section[] = [
     title: "The Beginning",
     subtitle: "A bit about me",
     icon: HeartHandshake,
-    content: "Born and raised in Sweden, I discovered my passion for technology and design at an early age. From customizing MySpace layouts to building my first websites, I've always been drawn to the creative possibilities of the digital world. My background in both design and development gives me a unique perspective on creating user experiences that are both beautiful and functional.",
+    content: "Born in Varberg on Sweden's west coast, I discovered my passion for creativity early through Lego builds and countless hours at the computer. This evolved into a love for photography and digital design. Now, combining technical knowledge with creative vision, I craft digital experiences that seamlessly blend beauty with function.",
     imageSrc: "/images/1.jpg",
     imageAlt: "Personal journey illustration",
     gradient: "from-rose-500 to-orange-500",
@@ -38,7 +38,7 @@ const sections: Section[] = [
     title: "The Background",
     subtitle: "Education & Experience",
     icon: GraduationCap,
-    content: "Currently pursuing my Master's in Computer Science, I combine academic rigor with practical experience. Through internships and personal projects, I've had the opportunity to work with diverse teams and technologies. Each experience has shaped my understanding of what makes great software and how to build it.",
+    content: "At Umeå University, I'm pursuing my M.Sc. in Interaction Technology & Design, blending academic theory with hands-on practice. Through collaborative coursework and personal projects, I've developed both teamwork skills and individual craftsmanship, shaping my approach to building thoughtful, user-centered solutions. I'm very socially driven, which makes me often considered cheerful and chatty by my peers.",
     imageSrc: "/images/2.jpg",
     imageAlt: "Education background",
     gradient: "from-orange-500 to-amber-500",
@@ -49,7 +49,7 @@ const sections: Section[] = [
     title: "The Journey",
     subtitle: "Where it all began",
     icon: Rocket,
-    content: "My journey into web development started with a simple curiosity about how websites work. What began as tinkering with HTML and CSS evolved into a deep passion for creating seamless digital experiences. Through years of learning and hands-on projects, I've developed a keen eye for both aesthetic appeal and technical functionality.",
+    content: "My journey into development grew from curiosity about both web and game creation. What started with HTML and CSS evolved alongside interests in game modification and development. Through years of hands-on projects, I've cultivated an approach that balances technical functionality with compelling design.",
     imageSrc: "/images/3.jpg",
     imageAlt: "Journey illustration",
     gradient: "from-emerald-500 to-teal-500",
@@ -60,7 +60,7 @@ const sections: Section[] = [
     title: "The Approach",
     subtitle: "How I work",
     icon: Coffee,
-    content: "I believe in the power of iterative development and continuous learning. Every project starts with thorough research and planning, followed by rapid prototyping and refinement. I focus on creating scalable, maintainable solutions that not only look great but perform excellently across all devices.",
+    content: "I believe in the power of iterative development and continuous learning. Every project starts with research and planning, followed by rapid prototyping and refinement. I focus on creating scalable, maintainable solutions that not only look great but perform excellently across all devices. Even if I sometimes end up in the deep end, it works out!",
     imageSrc: "/images/7.jpg",
     imageAlt: "Work process illustration",
     gradient: "from-teal-500 to-cyan-500",
@@ -71,7 +71,7 @@ const sections: Section[] = [
     title: "The Learning",
     subtitle: "Never stop growing",
     icon: BookOpen,
-    content: "Beyond coding, I'm passionate about continuous learning and personal growth. I actively participate in tech communities, contribute to open-source projects, and stay updated with the latest industry trends. I believe that the best developers are those who never stop being students of their craft.",
+    content: "Beyond coding, I'm passionate about continuous learning and personal growth. I actively participate in tech communities, contribute to modding projects, and stay updated with the latest industry trends especially regarding AI. I believe that the best developers are those who never stop being students of their craft, and keeping up with the times is essential. I truly believe in learn by doing, and seeing!",
     imageSrc: "/images/4.jpg",
     imageAlt: "Learning journey",
     gradient: "from-cyan-500 to-blue-500",
@@ -82,7 +82,7 @@ const sections: Section[] = [
     title: "The Stack",
     subtitle: "Tools of choice",
     icon: Code2,
-    content: "My technical toolkit is built around modern web technologies. I specialize in React and Next.js for frontend development, enhanced by Tailwind CSS for styling. I'm experienced with various state management solutions and building responsive, accessible interfaces that deliver exceptional user experiences.",
+    content: "My technical toolkit is built around modern web technologies. I currently specialize in React and Next.js for frontend development, enhanced by Tailwind CSS for styling. I'm experienced with various state management solutions and building responsive, accessible interfaces that deliver sustainable user experiences.",
     imageSrc: "/images/6.jpg",
     imageAlt: "Technology stack illustration",
     gradient: "from-blue-500 to-indigo-500",
@@ -93,7 +93,7 @@ const sections: Section[] = [
     title: "The Vision",
     subtitle: "Looking forward",
     icon: Globe,
-    content: "Looking ahead, I'm excited about the evolving landscape of web development. I'm particularly interested in exploring the intersection of design and functionality, creating interfaces that are not just beautiful but intuitive and accessible to all users. I'm always eager to learn new technologies and methodologies that can enhance the user experience.",
+    content: "Looking ahead, I'm excited about the evolving landscape of web development. I'm particularly interested in exploring the intersection of design and functionality, creating interfaces that are not just beautiful but intuitive and accessible to all users. I'm always eager to learn new technologies and methodologies that can enhance the user experience, so feel free to give suggestions to broaden my skill set!",
     imageSrc: "/images/5.jpg",
     imageAlt: "Future vision illustration",
     gradient: "from-indigo-500 to-violet-500",
@@ -149,14 +149,14 @@ export default function Page() {
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="pt-32 pb-16 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl py-20 mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6">
             <span className="bg-gradient-to-r from-emerald-500 to-indigo-500 text-transparent bg-clip-text relative z-10 drop-shadow-[0_2px_10px_rgba(99,102,241,0.2)]">
               About Me
             </span>
           </h1>
           <p className="text-lg sm:text-xl text-foreground/60 max-w-2xl mx-auto">
-            Exploring the intersection of design and development to create meaningful digital experiences.
+          Crafting digital experiences where creative vision meets technical precision, driven by a passion for game design, photography, and web solutions.
           </p>
         </div>
       </div>

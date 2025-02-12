@@ -154,8 +154,8 @@ export default function AboutSection() {
             </span>
           </h2>
           <p className="text-xl font-serif text-foreground/60 max-w-3xl mx-auto">
-            I&apos;ve always been fascinated by the intersection of design and development.
-            Here&apos;s how I bring both worlds together.
+            I&apos;m currently finishing a Master of Science degree in Interaction Technology & Design.
+            I&apos;ve always been fascinated by the intersection of design and development, and here&apos;s how I bring both worlds together.
           </p>
         </div>
 
