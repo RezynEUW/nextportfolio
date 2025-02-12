@@ -193,7 +193,7 @@ export default function Page() {
 
               {/* Image */}
               <div className="flex-1">
-                <div className="relative group rounded-lg overflow-hidden">
+                <div className="relative group overflow-hidden">
                   <div className="relative aspect-w-4 aspect-h-3">
                     <Image
                       src={section.imageSrc}
