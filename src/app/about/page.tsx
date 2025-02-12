@@ -175,7 +175,7 @@ export default function Page() {
               <div className="flex-1 space-y-6">
                 <div className="flex items-start gap-4">
                   <div 
-                    className={`p-3 aspect-square bg-gradient-to-br ${section.gradient} flex items-center justify-center rounded-lg relative`}
+                    className={`p-3 aspect-square bg-gradient-to-br ${section.gradient} flex items-center justify-center relative`}
                     style={{
                       boxShadow: `0 0 20px rgba(${section.gradient.includes('emerald') ? '16, 185, 129' : 
                                                 section.gradient.includes('rose') ? '244, 63, 94' : 
