@@ -3,7 +3,8 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Code2, Palette, Rocket, Coffee, GraduationCap, HeartHandshake, BookOpen, Globe, LucideIcon } from 'lucide-react';
+import { Code2, Rocket, Coffee, GraduationCap, HeartHandshake, BookOpen, Globe, LucideIcon } from 'lucide-react';
+import Image from 'next/image';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -27,7 +28,7 @@ const sections: Section[] = [
     subtitle: "A bit about me",
     icon: HeartHandshake,
     content: "Born and raised in Sweden, I discovered my passion for technology and design at an early age. From customizing MySpace layouts to building my first websites, I've always been drawn to the creative possibilities of the digital world. My background in both design and development gives me a unique perspective on creating user experiences that are both beautiful and functional.",
-    imageSrc: "https://picsum.photos/seed/aboutme/800/600",
+    imageSrc: "/images/1.jpg",
     imageAlt: "Personal journey illustration",
     gradient: "from-rose-500 to-orange-500",
     iconColor: "text-rose-500",
@@ -38,7 +39,7 @@ const sections: Section[] = [
     subtitle: "Education & Experience",
     icon: GraduationCap,
     content: "Currently pursuing my Master's in Computer Science, I combine academic rigor with practical experience. Through internships and personal projects, I've had the opportunity to work with diverse teams and technologies. Each experience has shaped my understanding of what makes great software and how to build it.",
-    imageSrc: "https://picsum.photos/seed/education/800/600",
+    imageSrc: "/images/2.jpg",
     imageAlt: "Education background",
     gradient: "from-orange-500 to-amber-500",
     iconColor: "text-orange-500",
@@ -49,7 +50,7 @@ const sections: Section[] = [
     subtitle: "Where it all began",
     icon: Rocket,
     content: "My journey into web development started with a simple curiosity about how websites work. What began as tinkering with HTML and CSS evolved into a deep passion for creating seamless digital experiences. Through years of learning and hands-on projects, I've developed a keen eye for both aesthetic appeal and technical functionality.",
-    imageSrc: "https://picsum.photos/seed/journey/800/600",
+    imageSrc: "/images/3.jpg",
     imageAlt: "Journey illustration",
     gradient: "from-emerald-500 to-teal-500",
     iconColor: "text-emerald-500",
@@ -60,7 +61,7 @@ const sections: Section[] = [
     subtitle: "How I work",
     icon: Coffee,
     content: "I believe in the power of iterative development and continuous learning. Every project starts with thorough research and planning, followed by rapid prototyping and refinement. I focus on creating scalable, maintainable solutions that not only look great but perform excellently across all devices.",
-    imageSrc: "https://picsum.photos/seed/approach/800/600",
+    imageSrc: "/images/7.jpg",
     imageAlt: "Work process illustration",
     gradient: "from-teal-500 to-cyan-500",
     iconColor: "text-teal-500",
@@ -71,7 +72,7 @@ const sections: Section[] = [
     subtitle: "Never stop growing",
     icon: BookOpen,
     content: "Beyond coding, I'm passionate about continuous learning and personal growth. I actively participate in tech communities, contribute to open-source projects, and stay updated with the latest industry trends. I believe that the best developers are those who never stop being students of their craft.",
-    imageSrc: "https://picsum.photos/seed/learning/800/600",
+    imageSrc: "/images/4.jpg",
     imageAlt: "Learning journey",
     gradient: "from-cyan-500 to-blue-500",
     iconColor: "text-cyan-500",
@@ -82,7 +83,7 @@ const sections: Section[] = [
     subtitle: "Tools of choice",
     icon: Code2,
     content: "My technical toolkit is built around modern web technologies. I specialize in React and Next.js for frontend development, enhanced by Tailwind CSS for styling. I'm experienced with various state management solutions and building responsive, accessible interfaces that deliver exceptional user experiences.",
-    imageSrc: "https://picsum.photos/seed/stack/800/600",
+    imageSrc: "/images/6.jpg",
     imageAlt: "Technology stack illustration",
     gradient: "from-blue-500 to-indigo-500",
     iconColor: "text-blue-500",
@@ -93,7 +94,7 @@ const sections: Section[] = [
     subtitle: "Looking forward",
     icon: Globe,
     content: "Looking ahead, I'm excited about the evolving landscape of web development. I'm particularly interested in exploring the intersection of design and functionality, creating interfaces that are not just beautiful but intuitive and accessible to all users. I'm always eager to learn new technologies and methodologies that can enhance the user experience.",
-    imageSrc: "https://picsum.photos/seed/vision/800/600",
+    imageSrc: "/images/5.jpg",
     imageAlt: "Future vision illustration",
     gradient: "from-indigo-500 to-violet-500",
     iconColor: "text-indigo-500",
@@ -192,13 +193,15 @@ export default function Page() {
 
               {/* Image */}
               <div className="flex-1">
-                <div className="relative group">
-                  <div className="relative overflow-hidden">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${section.gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-500`} />
-                    <img
+                <div className="relative group rounded-lg overflow-hidden">
+                  <div className="relative aspect-w-4 aspect-h-3">
+                    <Image
                       src={section.imageSrc}
                       alt={section.imageAlt}
-                      className="w-full h-auto transform group-hover:scale-105 transition-transform duration-500"
+                      width={800}
+                      height={600}
+                      className="object-cover w-full h-full transform group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                      priority={index === 0}
                     />
                   </div>
                 </div>
