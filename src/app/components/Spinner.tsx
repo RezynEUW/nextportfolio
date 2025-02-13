@@ -8,56 +8,42 @@ import { useTheme } from "next-themes";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Spinner() {
-  // Create a ref for the spinner element to apply GSAP animation
   const spinnerRef = useRef<HTMLDivElement>(null);
-  
-  // Destructure theme and setTheme from useTheme hook
   const { theme, setTheme } = useTheme();
-  
-  // State to manage component mounting (prevents hydration issues)
   const [mounted, setMounted] = useState(false);
-  
-  // State to track light/dark mode (synchronized with actual theme)
-  const [, setIsLight] = useState(theme === 'light');
 
-  // Handle initial mount
   useEffect(() => {
     setMounted(true);
-    // Ensure isLight state matches the current theme
-    setIsLight(theme === 'light');
-  }, [theme]);
 
-  // Animation setup for scroll-triggered rotation
-  useEffect(() => {
-    const spinnerElement = spinnerRef.current;
+    // Ensure GSAP and ScrollTrigger are loaded
+    if (typeof window !== 'undefined') {
+      const spinnerElement = spinnerRef.current;
 
-    if (spinnerElement) {
-      gsap.to(spinnerElement, {
-        rotation: -360,
-        ease: "none",
-        scrollTrigger: {
-          trigger: document.body,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true,
-        },
-      });
+      if (spinnerElement) {
+        const rotationAnimation = gsap.to(spinnerElement, {
+          rotation: -360,
+          ease: "none",
+          duration: 1,
+          scrollTrigger: {
+            trigger: document.documentElement, // Use entire document
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1, // Smooth scrubbing
+          }
+        });
+
+        // Optional: Log to verify animation is created
+        console.log('Rotation Animation Created', rotationAnimation);
+      }
     }
   }, []);
 
-  // Toggle theme function
   const toggleTheme = () => {
-    // Determine new theme based on current theme
     const newTheme = theme === 'light' ? 'dark' : 'light';
-    
-    // Update theme using setTheme from next-themes
     setTheme(newTheme);
-    
-    // Log theme change for debugging
     console.log('Theme toggled:', newTheme);
   };
 
-  // Prevent rendering before client-side mounting
   if (!mounted) return null;
 
   return (
