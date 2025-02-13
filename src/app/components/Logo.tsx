@@ -4,11 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { useTheme } from 'next-themes';
 
 export default function Logo() {
   const logoRef = useRef<HTMLDivElement>(null);
   const brandingRef = useRef<HTMLDivElement>(null);
   const [shadowOpacity, setShadowOpacity] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const heroSection = document.querySelector("section");
@@ -59,6 +66,8 @@ export default function Logo() {
     };
   }, []);
 
+  const isDark = mounted && resolvedTheme === 'dark';
+
   return (
     <>
       {/* Hero Page Branding */}
@@ -79,15 +88,29 @@ export default function Logo() {
           </div>
           {/* Outer container matching navbar */}
           <div 
-            className="relative z-10 px-2 py-1.5 rounded-full max-sm:rounded-none max-sm:w-full backdrop-blur-sm bg-white/20 transition-shadow duration-300"
+            className={`relative z-10 px-2 py-1.5 rounded-full max-sm:rounded-none max-sm:w-full backdrop-blur-sm transition-all duration-300 ${
+              isDark 
+                ? 'bg-white/10 hover:bg-white/15' 
+                : 'bg-white/20 hover:bg-white/25'
+            }`}
             style={{
-              boxShadow: `0 4px 8px rgba(0, 0, 0, ${shadowOpacity * 0.05}), inset 0 0 10px rgba(255, 255, 255, ${shadowOpacity * 0.1})`,
+              boxShadow: isDark
+                ? `0 4px 8px rgba(0, 0, 0, ${shadowOpacity * 0.15}), inset 0 0 10px rgba(255, 255, 255, ${shadowOpacity * 0.05})`
+                : `0 4px 8px rgba(0, 0, 0, ${shadowOpacity * 0.05}), inset 0 0 10px rgba(255, 255, 255, ${shadowOpacity * 0.1})`,
             }}
           >
             {/* Inner container matching navbar items */}
-            <div className="inline-flex items-center px-6 py-1.5 rounded-full text-black max-sm:w-full max-sm:justify-center">
-              <span className={`text-xl font-display font-medium transition-colors duration-300 ${shadowOpacity === 0 ? 'text-emerald-700' : 'text-black'}`}>Lukas</span>
-              <span className={`text-xl font-display font-normal whitespace-pre transition-colors duration-300 ${shadowOpacity === 0 ? 'text-emerald-700' : 'text-black'}`}> Hedström</span>
+            <div className="inline-flex items-center px-6 py-1.5 rounded-full max-sm:w-full max-sm:justify-center">
+              <span className={`text-xl font-display font-medium transition-colors duration-300 ${
+                isDark
+                  ? shadowOpacity === 0 ? 'text-emerald-400' : 'text-white'
+                  : shadowOpacity === 0 ? 'text-emerald-700' : 'text-black'
+              }`}>Lukas</span>
+              <span className={`text-xl font-display font-normal whitespace-pre transition-colors duration-300 ${
+                isDark
+                  ? shadowOpacity === 0 ? 'text-emerald-400' : 'text-white'
+                  : shadowOpacity === 0 ? 'text-emerald-700' : 'text-black'
+              }`}> Hedström</span>
             </div>
           </div>
         </div>

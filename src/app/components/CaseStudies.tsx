@@ -1,8 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import { useTheme } from 'next-themes';
+import { useState, useEffect } from 'react';
 
 export default function CaseStudies() {
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const projects = [
     { 
       id: 1, 
@@ -30,6 +39,8 @@ export default function CaseStudies() {
     },
   ] as const;
 
+  const isDark = mounted && resolvedTheme === 'dark';
+
   return (
     <section id="projects" className="relative bg-background py-12 lg:py-24">
       {/* Responsive Grid Container */}
@@ -52,31 +63,37 @@ export default function CaseStudies() {
                   alt={project.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover 
+                  className={`object-cover 
                     saturate-60 transition-all duration-1000 ease-in-out 
                     group-hover:saturate-100
                     lg:group-hover:-translate-y-8 
-                    filter lg:group-hover:brightness-100"
-                  priority={index < 2} // Prioritize loading first two images
+                    filter lg:group-hover:brightness-100 ${
+                      isDark ? 'brightness-75 hover:brightness-90' : ''
+                    }`}
+                  priority={index < 2}
                 />
               </div>
             </div>
 
             {/* Title Overlay - Always visible on mobile/tablet, hover on desktop */}
             <div
-              className="absolute bottom-0 left-0 w-full bg-background text-black 
+              className={`absolute bottom-0 left-0 w-full bg-background
                 lg:transform lg:translate-y-full lg:group-hover:translate-y-0 
                 transition-all duration-1000 z-10
-                sm:translate-y-0"
+                sm:translate-y-0 ${
+                  isDark ? 'backdrop-blur-md bg-background/90' : ''
+                }`}
             >
               <div className="px-3 py-3 sm:px-4 sm:py-4 lg:px-8 lg:py-6">
-                <h3 className="text-xl sm:text-2xl lg:text-5xl font-black font-fixelDisplay mb-1 lg:mb-2">
+                <h3 className={`text-xl sm:text-2xl lg:text-5xl font-black font-fixelDisplay mb-1 lg:mb-2 
+                  ${isDark ? 'text-foreground' : 'text-black'}`}>
                   {project.title}
                 </h3>
-                <p className="text-sm sm:text-base lg:text-lg text-gray-600 font-fixelDisplay 
+                <p className={`text-sm sm:text-base lg:text-lg font-fixelDisplay 
                   lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 delay-300
-                  opacity-100"
-                >
+                  opacity-100 ${
+                    isDark ? 'text-foreground/70' : 'text-gray-600'
+                  }`}>
                   {project.description}
                 </p>
               </div>

@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Palette, Code2, Database, ArrowRight, LucideIcon } from "lucide-react";
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -125,7 +126,7 @@ export default function AboutSection() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: buttonRef.current,
-            start: "top 80%",
+            start: "top 90%",
             end: "bottom center",
             toggleActions: "play none none reverse",
           },
@@ -160,8 +161,7 @@ export default function AboutSection() {
         </div>
 
         {/* Cards Container */}
-        <div className="max-w-7xl mx-auto grid gap-8 
-          grid-cols-1 lg:grid-cols-3">
+        <div className="max-w-7xl mx-auto grid gap-8 grid-cols-1 lg:grid-cols-3">
           {cards.map((card, i) => (
             <div
               key={card.title}
@@ -196,8 +196,9 @@ export default function AboutSection() {
                   {/* Title with Icon */}
                   <div className="mb-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className={`p-2 bg-white/5 ${card.iconColor} group-hover:scale-110 transition-transform duration-500`}>
-                        <card.icon className="w-9 h-9" />
+                      <div className={`relative rounded-full p-2 ${card.iconColor} group-hover:scale-110 transition-transform duration-500`}>
+                        <div className="absolute inset-0 bg-white/5 rounded-full backdrop-blur-sm" />
+                        <card.icon className="w-9 h-9 relative z-10" />
                       </div>
                       <div>
                         <h3 className="text-2xl font-sans font-semibold">
@@ -235,33 +236,27 @@ export default function AboutSection() {
           <div className="inline-block">
             <Link
               href="/about"
-              className="group relative inline-flex items-center gap-2 px-6 py-1.5 
-                text-xl font-fixelDisplay rounded-full backdrop-blur-sm
+              className="group relative inline-flex items-center gap-2 px-6 py-2.5 
+                text-xl font-fixelDisplay rounded-full
                 transition-all duration-300 overflow-hidden
                 select-none touch-manipulation
                 active:opacity-90
-                [-webkit-tap-highlight-color:transparent]"
+                [-webkit-tap-highlight-color:transparent]
+                hover:scale-[1.02]"
             >
-              {/* Background gradient with animation */}
-              <div className="absolute inset-0 opacity-20 mix-blend-overlay">
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-blue-500/20 to-indigo-500/20 opacity-50 
-                  group-hover:scale-110 group-hover:opacity-100 transition-all duration-700 ease-out" />
-                <div className="absolute inset-0 bg-gradient-to-l from-emerald-500/20 via-blue-500/20 to-indigo-500/20 opacity-30 
-                  group-hover:scale-110 group-hover:opacity-80 transition-all duration-700 ease-out delay-100" />
-              </div>
+              {/* Background with frosted effect */}
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
               
-              {/* White background for frosted effect */}
-              <div className="absolute inset-0 bg-white/20 backdrop-blur-sm" 
-                style={{
-                  boxShadow: `0 4px 8px rgba(0, 0, 0, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.1)`,
-                }}
-              />
-
+              {/* Animated border gradient */}
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-blue-500/20 to-indigo-500/20 opacity-0 
+                group-hover:opacity-100 transition-all duration-700" />
+              
               {/* Content */}
-              <span className="relative z-10 bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 text-transparent bg-clip-text">
-                About me
+              <span className="relative z-10 bg-gradient-to-r from-emerald-500 via-blue-500 to-indigo-500 text-transparent bg-clip-text 
+                font-medium">
+                View More
               </span>
-              <ArrowRight className="relative z-10 w-4 h-4 text-indigo-500 group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowRight className="relative z-10 w-5 h-5 text-indigo-500 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
         </div>

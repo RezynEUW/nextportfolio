@@ -8,8 +8,6 @@
 :root {
   --background: #fbfbfe; /* Light background */
   --foreground: #050315; /* Light text */
-  --accent: #2f27ce; /* Accent color */
-  --secondary: #ff4081; /* Optional secondary color */
   --frosted-tint: rgba(47, 39, 206, 0.10); /* Frosted accent tint */
 }
 
@@ -17,8 +15,6 @@
 [data-theme="dark"], .dark {
   --background: #050315; /* Dark background */
   --foreground: #fbfbfe; /* Dark text */
-  --accent: #2f27ce; /* Accent color */
-  --secondary: #0070f3; /* Optional secondary color */
   --frosted-tint: rgba(47, 39, 206, 0.25); /* Frosted accent tint (darker) */
 }
 

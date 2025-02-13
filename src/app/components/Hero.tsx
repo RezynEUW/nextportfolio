@@ -6,11 +6,15 @@ import {
   Palette
 } from "lucide-react";
 import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
@@ -21,6 +25,9 @@ export default function Hero() {
     };
   }, []);
 
+  // Ensure consistent initial render
+  const isDark = mounted && resolvedTheme === 'dark';
+
   return (
     <section className="relative min-h-screen bg-background text-foreground overflow-hidden">
       {/* Background Video */}
@@ -30,7 +37,7 @@ export default function Hero() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-50"
+          className={`w-full h-full object-cover ${isDark ? 'opacity-40' : 'opacity-50'}`}
         >
           <source src="/2xlow.mp4" type="video/mp4" />
         </video>
@@ -38,7 +45,19 @@ export default function Hero() {
 
       {/* Background Elements */}
       <div className="absolute inset-0 z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background/50" />
+        {/* Main gradient overlay */}
+        <div className={`absolute inset-0 bg-gradient-to-b ${
+          isDark 
+            ? 'from-gray-950/70 via-gray-950/65 to-gray-950/60' 
+            : 'from-background/70 via-background/60 to-background/50'
+        }`} />
+        {/* Extra bottom gradient */}
+        <div className={`absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t ${
+          isDark 
+            ? 'from-background via-background/80 to-transparent' 
+            : 'from-background/80 via-background/40 to-transparent'
+        }`} />
+        {/* Accent color gradients */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(0,184,110,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_75%,rgba(99,102,241,0.15),transparent_50%)]" />
       </div>
@@ -78,14 +97,16 @@ export default function Hero() {
             />
             
             {/* Orbital Rings */}
-            <div className="absolute inset-0 -m-6 sm:-m-8 rounded-full border border-emerald-500/20 
-              animate-[spin_8s_linear_infinite]" 
+            <div className={`absolute inset-0 -m-6 sm:-m-8 rounded-full border ${
+              isDark ? 'border-emerald-500/30' : 'border-emerald-500/20'
+            } animate-[spin_8s_linear_infinite]`} 
               style={{
                 transform: `rotate(${scrollY * 0.2}deg)`,
               }}
             />
-            <div className="absolute inset-0 -m-12 sm:-m-16 rounded-full border border-indigo-500/20 
-              animate-[spin_12s_linear_infinite_reverse]"
+            <div className={`absolute inset-0 -m-12 sm:-m-16 rounded-full border ${
+              isDark ? 'border-indigo-500/30' : 'border-indigo-500/20'
+            } animate-[spin_12s_linear_infinite_reverse]`}
               style={{
                 transform: `rotate(${-scrollY * 0.1}deg)`,
               }}
@@ -101,7 +122,9 @@ export default function Hero() {
           transform: `translate(-50%, ${scrollY * -0.2}px) rotate(-5deg)`,
         }}
       >
-        <Palette className="w-16 sm:w-24 h-16 sm:h-24 text-emerald-500/20" />
+        <Palette className={`w-16 sm:w-24 h-16 sm:h-24 ${
+          isDark ? 'text-emerald-500/30' : 'text-emerald-500/20'
+        }`} />
       </div>
       <div 
         className="hidden sm:block absolute right-1/4 bottom-1/4"
@@ -109,7 +132,9 @@ export default function Hero() {
           transform: `translate(50%, ${scrollY * 0.2}px) rotate(5deg)`,
         }}
       >
-        <Code2 className="w-16 sm:w-24 h-16 sm:h-24 text-indigo-500/20" />
+        <Code2 className={`w-16 sm:w-24 h-16 sm:h-24 ${
+          isDark ? 'text-indigo-500/30' : 'text-indigo-500/20'
+        }`} />
       </div>
       
       {/* Decorative Wave Separator */}
@@ -123,10 +148,9 @@ export default function Hero() {
         >
           <path 
             d="M0 40C240 120 480 120 720 80C960 40 1200 40 1440 80V140H0V40Z" 
-            fill="currentColor" 
-            className="text-background filter drop-shadow-2xl"
+            fill="var(--background)"
             style={{
-              filter: 'drop-shadow(0 25px 25px rgb(0 0 0 / 0.25))'
+              filter: 'drop-shadow(0 25px 25px rgb(0 0 0 / 0.15))'
             }}
           />
         </svg>
