@@ -8,17 +8,26 @@ import { useTheme } from "next-themes";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Spinner() {
+  // Create a ref for the spinner element to apply GSAP animation
   const spinnerRef = useRef<HTMLDivElement>(null);
+  
+  // Destructure theme and setTheme from useTheme hook
   const { theme, setTheme } = useTheme();
+  
+  // State to manage component mounting (prevents hydration issues)
   const [mounted, setMounted] = useState(false);
-  const [isLight, setIsLight] = useState(true);
+  
+  // State to track light/dark mode (synchronized with actual theme)
+  const [, setIsLight] = useState(theme === 'light');
 
   // Handle initial mount
   useEffect(() => {
     setMounted(true);
-  }, []);
+    // Ensure isLight state matches the current theme
+    setIsLight(theme === 'light');
+  }, [theme]);
 
-  // Animation setup
+  // Animation setup for scroll-triggered rotation
   useEffect(() => {
     const spinnerElement = spinnerRef.current;
 
@@ -36,13 +45,19 @@ export default function Spinner() {
     }
   }, []);
 
+  // Toggle theme function
   const toggleTheme = () => {
-    setIsLight(!isLight);
-    setTheme(isLight ? 'dark' : 'light');
-    console.log('Theme toggled:', isLight ? 'dark' : 'light'); // Debug log
+    // Determine new theme based on current theme
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    
+    // Update theme using setTheme from next-themes
+    setTheme(newTheme);
+    
+    // Log theme change for debugging
+    console.log('Theme toggled:', newTheme);
   };
 
-  // Don't render anything until mounted
+  // Prevent rendering before client-side mounting
   if (!mounted) return null;
 
   return (
@@ -58,7 +73,7 @@ export default function Spinner() {
         stroke="currentColor"
         strokeWidth="1.5"
       >
-        {!isLight ? (
+        {theme !== 'light' ? (
           <>
             <circle cx="12" cy="12" r="4"/>
             <path d="M12 2v2"/>

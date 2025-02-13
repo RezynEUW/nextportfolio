@@ -5,7 +5,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Palette, Code2, Database, ArrowRight, LucideIcon } from "lucide-react";
 import Link from 'next/link';
-import { useTheme } from 'next-themes';
 
 gsap.registerPlugin(ScrollTrigger);
 
