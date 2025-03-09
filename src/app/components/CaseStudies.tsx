@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useTheme } from 'next-themes';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ExternalLink, Github } from 'lucide-react';
@@ -211,10 +211,8 @@ export default function CaseStudies() {
 
   const isDark = mounted && resolvedTheme === 'dark';
 
-  // Determine device type based on window width - using these variables
+  // Determine device type based on window width
   const isDesktop = windowWidth >= 1024;
-  const isTablet = windowWidth >= 640 && windowWidth < 1024;
-  const isMobile = windowWidth < 640;
 
   const handleProjectClick = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -311,6 +309,7 @@ export default function CaseStudies() {
             const additionalSpace = 40; // Add some extra space to ensure no scrolling
             
             // Reset to original card height
+            const cardRect = card.getBoundingClientRect();
             gsap.set(overlay, { height: cardRect.height });
             
             // Expand both the card and the container to fit content
@@ -325,8 +324,9 @@ export default function CaseStudies() {
             });
             
             // Also expand the parent container to accommodate the expanded card
-            if (containerRef.current) {
+            if (containerRef.current && gridRef.current) {
               // Get the bottom position of the expanded content
+              const gridRect = gridRef.current.getBoundingClientRect();
               const expandedBottom = cardRect.top + contentHeight + additionalSpace;
               const currentContainerBottom = containerRef.current.getBoundingClientRect().bottom;
               
