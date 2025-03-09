@@ -141,7 +141,7 @@ export default function CaseStudies() {
     { 
       id: 1, 
       title: "Pokedle.day", 
-      src: "/1.jpg",
+      src: "/images/project1v3.png",
       description: "Daily Pokémon guessing game",
       fullDescription: "A daily Pokémon guessing game inspired by Wordle, built with Next.js 15 and TypeScript. Features include a comprehensive comparison system for multiple Pokémon attributes, progressive hint system, autocomplete search, and streak tracking with game statistics.",
       technologies: ["Next.js", "TypeScript", "PostgreSQL", "CSS", "Neon DB"],
@@ -201,7 +201,7 @@ export default function CaseStudies() {
     { 
       id: 4, 
       title: "Halls of Despair", 
-      src: "/4.jpg",
+      src: "/images/project4.png",
       description: "PS1-style horror game",
       fullDescription: "A PS1/PSX-style survival horror game developed from scratch using Godot 4. All textures, models, and rigging were created in Blender, Krita, and Laigter. The game features AI pathfinding, third-person character control, low-poly aesthetics, and atmospheric lighting in a dungeon environment.",
       technologies: ["Godot 4", "Blender", "Krita", "Laigter", "GDScript"],
