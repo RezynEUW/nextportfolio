@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useTheme } from 'next-themes';
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { X, ExternalLink, Github } from 'lucide-react';
+// Import X only if you're using it, otherwise remove it from the import
+import { ExternalLink, Github } from 'lucide-react';
 
 // Define project type for type-safety
 interface Project {
@@ -36,6 +37,79 @@ export default function CaseStudies() {
     projectElements[index] = element;
   };
 
+  // Define handleCloseExpanded at the top level to fix dependency array issue
+  const handleCloseExpanded = () => {
+    if (selectedProject === null || !overlayRef.current || !gridRef.current) return;
+
+    const index = projects.findIndex(p => p.id === selectedProject);
+    if (index === -1) return;
+
+    const card = projectElements[index];
+    if (!card) return;
+
+    const cardRect = card.getBoundingClientRect();
+    const gridRect = gridRef.current.getBoundingClientRect();
+
+    if (isDesktop) {
+      // Reset image saturation
+      const overlayImage = overlayRef.current.querySelector('.overlay-image') as HTMLElement;
+      if (overlayImage) {
+        gsap.to(overlayImage, {
+          filter: 'saturate(0.6)',
+          duration: 0.6,
+          ease: "power2.in"
+        });
+      }
+
+      // Set overflow to hidden to prevent content overflow during animation
+      gsap.set(overlayRef.current, { overflow: 'hidden' });
+
+      // First animate height back to card height
+      gsap.to(overlayRef.current, {
+        height: cardRect.height,
+        duration: 0.2,
+        ease: "power3.inOut",
+        onComplete: () => {
+          // Then animate back to card position
+          gsap.to(overlayRef.current, {
+            x: cardRect.left - gridRect.left,
+            y: cardRect.top - gridRect.top,
+            width: cardRect.width,
+            opacity: 0,
+            duration: 0.3,
+            ease: "power3.inOut",
+            onComplete: () => {
+              setSelectedProject(null);
+              if (overlayRef.current) {
+                overlayRef.current.style.display = 'none';
+              }
+            }
+          });
+        }
+      });
+    } else {
+      // For mobile and tablet, just fade out
+      gsap.to(overlayRef.current, {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power3.inOut",
+        onComplete: () => {
+          setSelectedProject(null);
+          if (overlayRef.current) {
+            overlayRef.current.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    // Restore opacity of ALL cards
+    projectElements.forEach(element => {
+      if (element) {
+        gsap.to(element, { opacity: 1, duration: 0.3 });
+      }
+    });
+  };
+
   useEffect(() => {
     setMounted(true);
 
@@ -61,13 +135,13 @@ export default function CaseStudies() {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('click', handleGlobalClick);
     };
-  }, [selectedProject]);
+  }, [selectedProject, handleCloseExpanded]); // Added handleCloseExpanded to dependency array
 
   const projects: Project[] = [
     { 
       id: 1, 
       title: "Pokedle.day", 
-      src: "/images/project1v3.png",
+      src: "/1.jpg",
       description: "Daily Pokémon guessing game",
       fullDescription: "A daily Pokémon guessing game inspired by Wordle, built with Next.js 15 and TypeScript. Features include a comprehensive comparison system for multiple Pokémon attributes, progressive hint system, autocomplete search, and streak tracking with game statistics.",
       technologies: ["Next.js", "TypeScript", "PostgreSQL", "CSS", "Neon DB"],
@@ -127,7 +201,7 @@ export default function CaseStudies() {
     { 
       id: 4, 
       title: "Halls of Despair", 
-      src: "/images/project4.png",
+      src: "/4.jpg",
       description: "PS1-style horror game",
       fullDescription: "A PS1/PSX-style survival horror game developed from scratch using Godot 4. All textures, models, and rigging were created in Blender, Krita, and Laigter. The game features AI pathfinding, third-person character control, low-poly aesthetics, and atmospheric lighting in a dungeon environment.",
       technologies: ["Godot 4", "Blender", "Krita", "Laigter", "GDScript"],
@@ -148,9 +222,7 @@ export default function CaseStudies() {
 
   const isDark = mounted && resolvedTheme === 'dark';
 
-  // Determine device type based on window width
-  const isMobile = windowWidth < 640;
-  const isTablet = windowWidth >= 640 && windowWidth < 1024;
+  // Determine device type based on window width - using these variables
   const isDesktop = windowWidth >= 1024;
 
   const handleProjectClick = (id: number, e: React.MouseEvent) => {
@@ -255,78 +327,6 @@ export default function CaseStudies() {
         }
       });
     }
-  };
-
-  const handleCloseExpanded = () => {
-    if (selectedProject === null || !overlayRef.current || !gridRef.current) return;
-
-    const index = projects.findIndex(p => p.id === selectedProject);
-    if (index === -1) return;
-
-    const card = projectElements[index];
-    if (!card) return;
-
-    const cardRect = card.getBoundingClientRect();
-    const gridRect = gridRef.current.getBoundingClientRect();
-
-    if (isDesktop) {
-      // Reset image saturation
-      const overlayImage = overlayRef.current.querySelector('.overlay-image') as HTMLElement;
-      if (overlayImage) {
-        gsap.to(overlayImage, {
-          filter: 'saturate(0.6)',
-          duration: 0.6,
-          ease: "power2.in"
-        });
-      }
-
-      // Set overflow to hidden to prevent content overflow during animation
-      gsap.set(overlayRef.current, { overflow: 'hidden' });
-
-      // First animate height back to card height
-      gsap.to(overlayRef.current, {
-        height: cardRect.height,
-        duration: 0.2,
-        ease: "power3.inOut",
-        onComplete: () => {
-          // Then animate back to card position
-          gsap.to(overlayRef.current, {
-            x: cardRect.left - gridRect.left,
-            y: cardRect.top - gridRect.top,
-            width: cardRect.width,
-            opacity: 0,
-            duration: 0.3,
-            ease: "power3.inOut",
-            onComplete: () => {
-              setSelectedProject(null);
-              if (overlayRef.current) {
-                overlayRef.current.style.display = 'none';
-              }
-            }
-          });
-        }
-      });
-    } else {
-      // For mobile and tablet, just fade out
-      gsap.to(overlayRef.current, {
-        opacity: 0,
-        duration: 0.2,
-        ease: "power3.inOut",
-        onComplete: () => {
-          setSelectedProject(null);
-          if (overlayRef.current) {
-            overlayRef.current.style.display = 'none';
-          }
-        }
-      });
-    }
-
-    // Restore opacity of ALL cards
-    projectElements.forEach(element => {
-      if (element) {
-        gsap.to(element, { opacity: 1, duration: 0.3 });
-      }
-    });
   };
 
   // Function to determine project color scheme
