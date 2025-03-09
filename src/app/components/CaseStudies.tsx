@@ -306,7 +306,7 @@ export default function CaseStudies() {
 
         // Step 2: Get height measurements
         let overlayHeight = 0;
-        let extraSpace = 40;
+        const extraSpace = 40;
         
         // Function to animate height and container
         const animateHeightAndContainer = () => {
