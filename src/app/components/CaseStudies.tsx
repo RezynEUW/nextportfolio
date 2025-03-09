@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { useTheme } from 'next-themes';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import { ExternalLink, Github } from 'lucide-react';
 
-  // Define project type for type-safety
+// Define project type for type-safety
 interface Project {
   id: number;
   title: string;
@@ -23,7 +23,9 @@ interface Project {
 }
 
 // For ScrollToPlugin support
-gsap.registerPlugin(ScrollToPlugin);
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollToPlugin);
+}
 
 export default function CaseStudies() {
   const [mounted, setMounted] = useState<boolean>(false);
@@ -40,7 +42,7 @@ export default function CaseStudies() {
     projectElements[index] = element;
   };
 
-  // Define handleCloseExpanded at the top level to fix dependency array issue
+  // Define handleCloseExpanded at the top level
   const handleCloseExpanded = () => {
     if (selectedProject === null || !overlayRef.current || !gridRef.current) return;
 
@@ -49,9 +51,6 @@ export default function CaseStudies() {
 
     const card = projectElements[index];
     if (!card) return;
-
-    const cardRect = card.getBoundingClientRect();
-    const gridRect = gridRef.current.getBoundingClientRect();
 
     if (isDesktop) {
       // For desktop, use a quick but still visible transition
@@ -124,7 +123,8 @@ export default function CaseStudies() {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('click', handleGlobalClick);
     };
-  }, [selectedProject, handleCloseExpanded]); // Added handleCloseExpanded to dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProject]);
 
   const projects: Project[] = [
     { 
@@ -262,13 +262,13 @@ export default function CaseStudies() {
           y: cardRect.top - gridRect.top,
           width: '100%', // Full width
           opacity: 1,
-          duration: 1.0, // Slowed down from 0.5
+          duration: 1.0,
           ease: "power3.inOut",
           onComplete: () => {
             // After width animation completes, animate height to auto
             gsap.to(overlay, {
               height: 'auto',
-              duration: 0.5, // Slowed down from 0.2
+              duration: 0.5,
               ease: "power3.inOut",
               onComplete: () => {
                 // When height animation completes, enable overflow scrolling
@@ -276,7 +276,7 @@ export default function CaseStudies() {
 
                 // Ensure it's visible and scrolled into view
                 gsap.to(window, {
-                  duration: 0.9, // Slowed down from 0.5
+                  duration: 0.9,
                   scrollTo: { y: cardRect.top + window.scrollY - 100, autoKill: false },
                   ease: "power3.inOut"
                 });
@@ -290,58 +290,62 @@ export default function CaseStudies() {
         if (overlayImage) {
           gsap.to(overlayImage, {
             filter: 'saturate(1)',
-            duration: 1.4, // Slowed down from 0.8
-            delay: 0.2, // Increased from 0.1
+            duration: 1.4,
+            delay: 0.2,
             ease: "power2.out"
           });
         }
       } else {
-        // MOBILE & TABLET: Unified approach that ensures no scrollbars
-        // First, start with the opacity fade in
+        // MOBILE & TABLET: Simple direct animation approach
+        // Step 1: Fade in
         gsap.to(overlay, {
           opacity: 1,
           duration: 0.3,
-          ease: "power3.inOut",
-          onComplete: () => {
-            // Get the natural content height
-            gsap.set(overlay, { overflow: 'visible', height: 'auto' });
-            const contentHeight = overlay.scrollHeight;
-            const additionalSpace = 40; // Add some extra space to ensure no scrolling
-            
-            // Reset to original card height
-            const cardRect = card.getBoundingClientRect();
-            gsap.set(overlay, { height: cardRect.height });
-            
-            // Expand both the card and the container to fit content
-            gsap.to(overlay, { 
-              height: contentHeight + additionalSpace,
-              duration: 0.5,
-              ease: "power3.out",
-              onComplete: () => {
-                // Ensure no scrollbars by setting overflow to visible
-                gsap.set(overlay, { overflow: 'visible' });
-              }
-            });
-            
-            // Also expand the parent container to accommodate the expanded card
-            if (containerRef.current && gridRef.current) {
-              // Get the bottom position of the expanded content
-              const gridRect = gridRef.current.getBoundingClientRect();
-              const expandedBottom = cardRect.top + contentHeight + additionalSpace;
-              const currentContainerBottom = containerRef.current.getBoundingClientRect().bottom;
+          ease: "power3.inOut"
+        });
+
+        // Step 2: Get height measurements
+        let overlayHeight = 0;
+        let extraSpace = 40;
+        
+        // Function to animate height and container
+        const animateHeightAndContainer = () => {
+          // Set height to auto to measure content
+          gsap.set(overlay, { overflow: 'visible', height: 'auto' });
+          
+          // Capture the height
+          overlayHeight = overlay.scrollHeight;
+          
+          // Reset to original height before animation
+          gsap.set(overlay, { height: cardRect.height });
+          
+          // Animate to the full height
+          gsap.to(overlay, {
+            height: overlayHeight + extraSpace,
+            duration: 0.5,
+            ease: "power3.out",
+            onComplete: () => {
+              gsap.set(overlay, { overflow: 'visible' });
               
-              // If expanded content would overflow container, extend container height
-              if (expandedBottom > currentContainerBottom) {
-                const additionalHeight = expandedBottom - currentContainerBottom + 60; // 60px buffer
-                gsap.to(containerRef.current, {
-                  paddingBottom: `${additionalHeight}px`,
-                  duration: 0.5,
-                  ease: "power3.out"
-                });
+              // Check if container needs to expand
+              if (containerRef.current) {
+                const totalExpandedHeight = cardRect.top + overlayHeight + extraSpace;
+                const containerBottom = containerRef.current.getBoundingClientRect().bottom;
+                
+                if (totalExpandedHeight > containerBottom) {
+                  gsap.to(containerRef.current, {
+                    paddingBottom: `${totalExpandedHeight - containerBottom + 60}px`,
+                    duration: 0.5,
+                    ease: "power3.out"
+                  });
+                }
               }
             }
-          }
-        });
+          });
+        };
+        
+        // Execute with a slight delay to ensure DOM is ready
+        setTimeout(animateHeightAndContainer, 50);
       }
 
       // Dim ALL cards to make the overlay stand out
@@ -570,7 +574,7 @@ export default function CaseStudies() {
                 return (
                   <div 
                     className="flex flex-col w-full bg-background cursor-pointer"
-                    style={{ boxShadow: 'none', filter: 'none' }}
+                    style={{ boxShadow: 'none', filter: 'none', maxHeight: 'none' }}
                     onClick={() => handleCloseExpanded()}
                   >
                     <div className="px-4 py-6">
