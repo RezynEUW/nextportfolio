@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useTheme } from 'next-themes';
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-// Import X only if you're using it, otherwise remove it from the import
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { ExternalLink, Github } from 'lucide-react';
 
-// Define project type for type-safety
+  // Define project type for type-safety
 interface Project {
   id: number;
   title: string;
@@ -21,6 +21,9 @@ interface Project {
     github: string;
   };
 }
+
+// For ScrollToPlugin support
+gsap.registerPlugin(ScrollToPlugin);
 
 export default function CaseStudies() {
   const [mounted, setMounted] = useState<boolean>(false);
@@ -51,32 +54,18 @@ export default function CaseStudies() {
     const gridRect = gridRef.current.getBoundingClientRect();
 
     if (isDesktop) {
-      // Reset image saturation
-      const overlayImage = overlayRef.current.querySelector('.overlay-image') as HTMLElement;
-      if (overlayImage) {
-        gsap.to(overlayImage, {
-          filter: 'saturate(0.6)',
-          duration: 0.6,
-          ease: "power2.in"
-        });
-      }
-
-      // Set overflow to hidden to prevent content overflow during animation
-      gsap.set(overlayRef.current, { overflow: 'hidden' });
-
-      // First animate height back to card height
+      // For desktop, use a quick but still visible transition
+      // First reduce opacity slightly to signal closing
       gsap.to(overlayRef.current, {
-        height: cardRect.height,
-        duration: 0.2,
-        ease: "power3.inOut",
+        opacity: 0.95,
+        duration: 0.1,
+        ease: "power2.out",
         onComplete: () => {
-          // Then animate back to card position
+          // Then quickly shrink width and fade out
           gsap.to(overlayRef.current, {
-            x: cardRect.left - gridRect.left,
-            y: cardRect.top - gridRect.top,
-            width: cardRect.width,
+            width: "98%",
             opacity: 0,
-            duration: 0.3,
+            duration: 0.25,
             ease: "power3.inOut",
             onComplete: () => {
               setSelectedProject(null);
@@ -88,11 +77,11 @@ export default function CaseStudies() {
         }
       });
     } else {
-      // For mobile and tablet, just fade out
+      // For mobile and tablet, use a quick fade out
       gsap.to(overlayRef.current, {
         opacity: 0,
         duration: 0.2,
-        ease: "power3.inOut",
+        ease: "power3.out",
         onComplete: () => {
           setSelectedProject(null);
           if (overlayRef.current) {
@@ -224,6 +213,8 @@ export default function CaseStudies() {
 
   // Determine device type based on window width - using these variables
   const isDesktop = windowWidth >= 1024;
+  const isTablet = windowWidth >= 640 && windowWidth < 1024;
+  const isMobile = windowWidth < 640;
 
   const handleProjectClick = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -273,13 +264,13 @@ export default function CaseStudies() {
           y: cardRect.top - gridRect.top,
           width: '100%', // Full width
           opacity: 1,
-          duration: 0.5,
+          duration: 1.0, // Slowed down from 0.5
           ease: "power3.inOut",
           onComplete: () => {
             // After width animation completes, animate height to auto
             gsap.to(overlay, {
               height: 'auto',
-              duration: 0.2, // Speed up height animation too
+              duration: 0.5, // Slowed down from 0.2
               ease: "power3.inOut",
               onComplete: () => {
                 // When height animation completes, enable overflow scrolling
@@ -287,7 +278,7 @@ export default function CaseStudies() {
 
                 // Ensure it's visible and scrolled into view
                 gsap.to(window, {
-                  duration: 0.5,
+                  duration: 0.9, // Slowed down from 0.5
                   scrollTo: { y: cardRect.top + window.scrollY - 100, autoKill: false },
                   ease: "power3.inOut"
                 });
@@ -301,21 +292,54 @@ export default function CaseStudies() {
         if (overlayImage) {
           gsap.to(overlayImage, {
             filter: 'saturate(1)',
-            duration: 0.8,
-            delay: 0.1,
+            duration: 1.4, // Slowed down from 0.8
+            delay: 0.2, // Increased from 0.1
             ease: "power2.out"
           });
         }
       } else {
-        // MOBILE & TABLET: Stay within card bounds
-        // Just fade in - maintain the exact size of the card
+        // MOBILE & TABLET: Unified approach that ensures no scrollbars
+        // First, start with the opacity fade in
         gsap.to(overlay, {
           opacity: 1,
           duration: 0.3,
           ease: "power3.inOut",
           onComplete: () => {
-            // Ensure content is visible without scrolling
-            gsap.set(overlay, { overflow: 'auto' });
+            // Get the natural content height
+            gsap.set(overlay, { overflow: 'visible', height: 'auto' });
+            const contentHeight = overlay.scrollHeight;
+            const additionalSpace = 40; // Add some extra space to ensure no scrolling
+            
+            // Reset to original card height
+            gsap.set(overlay, { height: cardRect.height });
+            
+            // Expand both the card and the container to fit content
+            gsap.to(overlay, { 
+              height: contentHeight + additionalSpace,
+              duration: 0.5,
+              ease: "power3.out",
+              onComplete: () => {
+                // Ensure no scrollbars by setting overflow to visible
+                gsap.set(overlay, { overflow: 'visible' });
+              }
+            });
+            
+            // Also expand the parent container to accommodate the expanded card
+            if (containerRef.current) {
+              // Get the bottom position of the expanded content
+              const expandedBottom = cardRect.top + contentHeight + additionalSpace;
+              const currentContainerBottom = containerRef.current.getBoundingClientRect().bottom;
+              
+              // If expanded content would overflow container, extend container height
+              if (expandedBottom > currentContainerBottom) {
+                const additionalHeight = expandedBottom - currentContainerBottom + 60; // 60px buffer
+                gsap.to(containerRef.current, {
+                  paddingBottom: `${additionalHeight}px`,
+                  duration: 0.5,
+                  ease: "power3.out"
+                });
+              }
+            }
           }
         });
       }
@@ -432,7 +456,7 @@ export default function CaseStudies() {
         {/* Expanded Project Overlay - Inside the grid container */}
         <div 
           ref={overlayRef}
-          className="absolute overflow-hidden overflow-y-auto max-h-[90vh] sm:max-h-[85vh] lg:max-h-[90vh] z-50 bg-background"
+          className="absolute overflow-hidden z-50 bg-background"
           style={{ display: 'none', left: 0, right: 0, boxShadow: 'none', filter: 'none' }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -542,15 +566,15 @@ export default function CaseStudies() {
                   </div>
                 );
               } else {
-                // MOBILE & TABLET: Simplified Card View
+                // MOBILE & TABLET: Card View that expands to full content height
                 return (
                   <div 
-                    className="flex flex-col h-full w-full overflow-auto bg-background justify-center cursor-pointer"
+                    className="flex flex-col w-full bg-background cursor-pointer"
                     style={{ boxShadow: 'none', filter: 'none' }}
                     onClick={() => handleCloseExpanded()}
                   >
-                    <div className="px-4 py-4 text-center my-auto">
-                      <h2 className="text-2xl font-semibold mb-1">
+                    <div className="px-4 py-6">
+                      <h2 className="text-2xl font-semibold mb-3">
                         <span className={`bg-gradient-to-r 
                           ${
                             selectedProject === 1 ? 'from-emerald-500 to-emerald-400' :
@@ -561,7 +585,7 @@ export default function CaseStudies() {
                           {project.title}
                         </span>
                       </h2>
-                      <p className="text-sm text-foreground/60 mb-5">
+                      <p className="text-sm text-foreground/60 mb-6">
                         {project.fullDescription}
                       </p>
 
@@ -585,10 +609,10 @@ export default function CaseStudies() {
                         </div>
                       </div>
 
-                      {/* Features list */}
+                      {/* Features list - now showing all features */}
                       <div className="mb-8">
                         <ul className="inline-block text-left">
-                          {project.features.slice(0, 3).map((feature, i) => (
+                          {project.features.map((feature, i) => (
                             <li key={i} className="flex items-start mb-3">
                               <span className={`${
                                 selectedProject === 1 ? 'text-emerald-500' :
@@ -613,13 +637,13 @@ export default function CaseStudies() {
                           className={`px-4 py-3 text-base font-medium flex items-center justify-center gap-2 flex-1
                             ${
                               selectedProject === 1 
-                                ? 'bg-gradient-to-r from-emerald-500/80 to-emerald-400/80 text-white' :
+                                ? 'bg-emerald-500 text-white' :
                               selectedProject === 2 
-                                ? 'bg-gradient-to-r from-blue-500/80 to-blue-400/80 text-white' :
+                                ? 'bg-blue-500 text-white' :
                               selectedProject === 3 
-                                ? 'bg-gradient-to-r from-indigo-500/80 to-indigo-400/80 text-white' :
-                              'bg-gradient-to-r from-purple-500/80 to-purple-400/80 text-white'
-                            } shadow-sm hover:shadow-md transition-all`}
+                                ? 'bg-indigo-500 text-white' :
+                              'bg-purple-500 text-white'
+                            }`}
                           onClick={(e: React.MouseEvent) => e.stopPropagation()}
                         >
                           <ExternalLink className="w-4 h-4" />
@@ -629,9 +653,7 @@ export default function CaseStudies() {
                           href={project.links.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`px-4 py-3 text-base font-medium flex items-center justify-center gap-2 flex-1
-                            bg-white/10 backdrop-blur-sm border border-white/20 text-white
-                            shadow-sm hover:shadow-md transition-all`}
+                          className="px-4 py-3 text-base font-medium flex items-center justify-center gap-2 flex-1 border border-white/20 bg-white/5"
                           onClick={(e: React.MouseEvent) => e.stopPropagation()}
                         >
                           <Github className="w-4 h-4" />
