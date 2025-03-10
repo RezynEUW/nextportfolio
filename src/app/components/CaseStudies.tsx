@@ -265,21 +265,17 @@ export default function CaseStudies() {
           duration: 1.0,
           ease: "power3.inOut",
           onComplete: () => {
-            // After width animation completes, animate height to auto
+            // After width animation completes, set a fixed height instead of auto
+            // to prevent scrolling
             gsap.to(overlay, {
-              height: 'auto',
+              height: '85vh', // Match the fixed height of the grid
               duration: 0.5,
               ease: "power3.inOut",
               onComplete: () => {
-                // When height animation completes, enable overflow scrolling
-                gsap.set(overlay, { overflow: 'auto' });
-
-                // Ensure it's visible and scrolled into view
-                gsap.to(window, {
-                  duration: 0.9,
-                  scrollTo: { y: cardRect.top + window.scrollY - 100, autoKill: false },
-                  ease: "power3.inOut"
-                });
+                // Set overflow to hidden to prevent scrolling
+                gsap.set(overlay, { overflow: 'hidden' });
+                
+                // No scrollTo animation to keep the page in place
               }
             });
           }
@@ -441,7 +437,7 @@ export default function CaseStudies() {
                 }`}
             >
               <div className="px-3 py-3 sm:px-4 sm:py-4 lg:px-8 lg:py-6">
-                <h3 className={`text-xl sm:text-2xl lg:text-5xl font-black font-fixelDisplay mb-1 lg:mb-2 
+                <h3 className={`text-xl sm:text-2xl lg:text-4xl font-black font-fixelDisplay mb-1 lg:mb-2 
                   ${isDark ? 'text-foreground' : 'text-black'}`}>
                   {project.title}
                 </h3>
@@ -499,8 +495,8 @@ export default function CaseStudies() {
                         </div>
                       </div>
                       
-                      {/* Right column - Project details */}
-                      <div className="col-span-7 p-8 py-12 h-full overflow-y-auto">
+                      {/* Right column - Project details - using overflow:hidden */}
+                      <div className="col-span-7 p-8 py-12 h-full overflow-hidden">
                         {/* Description */}
                         <div className="mb-12">
                           <p className="text-lg leading-relaxed">
