@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 
 // Define project type for type-safety
 interface Project {
@@ -216,9 +216,9 @@ export default function CaseStudies() {
 
   const handleProjectClick = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
-
-    // If already selected, close it
-    if (selectedProject === id) {
+    
+    // If there's already a selected project (expanded card), just close it and don't open a new one
+    if (selectedProject !== null) {
       handleCloseExpanded();
       return;
     }
@@ -431,7 +431,7 @@ export default function CaseStudies() {
             <div
               className={`absolute bottom-0 left-0 w-full bg-background
                 lg:transform lg:translate-y-full lg:group-hover:translate-y-0 
-                transition-all duration-1000 z-10
+                transition-all duration-1000 z-3
                 sm:translate-y-0 ${
                   isDark ? 'backdrop-blur-md bg-background/90' : ''
                 }`}
@@ -456,7 +456,7 @@ export default function CaseStudies() {
         {/* Expanded Project Overlay - Inside the grid container */}
         <div 
           ref={overlayRef}
-          className="absolute overflow-hidden z-50 bg-background"
+          className="absolute overflow-hidden z-3 bg-background"
           style={{ display: 'none', left: 0, right: 0, boxShadow: 'none', filter: 'none' }}
           onClick={(e) => e.stopPropagation()}
         >
@@ -471,7 +471,7 @@ export default function CaseStudies() {
               if (isDesktop) {
                 // DESKTOP: New minimalist design without labels
                 return (
-                  <div className="flex flex-col w-full" onClick={handleCloseExpanded}>
+                  <div className="flex flex-col w-full">
                     {/* Simple two-column layout with controlled height */}
                     <div className="grid grid-cols-12 gap-0 w-full h-[85vh]">
                       {/* Left column - Project image */}
@@ -534,7 +534,7 @@ export default function CaseStudies() {
                           </div>
                         </div>
                         
-                        {/* Action buttons - simple rectangular buttons */}
+                        {/* Action buttons - View Demo and Close buttons */}
                         <div className="flex gap-4">
                           <a 
                             href={project.links.demo}
@@ -548,18 +548,18 @@ export default function CaseStudies() {
                               View Demo
                             </span>
                           </a>
-                          <a 
-                            href={project.links.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <button 
                             className="px-6 py-4 flex-1 text-center border border-white/20 bg-white/5"
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleCloseExpanded();
+                            }}
                           >
                             <span className="flex items-center justify-center gap-2">
-                              <Github className="w-4 h-4" />
-                              View Code
+                              <X className="w-4 h-4" />
+                              Close
                             </span>
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -569,9 +569,8 @@ export default function CaseStudies() {
                 // MOBILE & TABLET: Card View that expands to full content height
                 return (
                   <div 
-                    className="flex flex-col w-full bg-background cursor-pointer"
+                    className="flex flex-col w-full bg-background"
                     style={{ boxShadow: 'none', filter: 'none', maxHeight: 'none' }}
-                    onClick={() => handleCloseExpanded()}
                   >
                     <div className="px-4 py-6">
                       <h2 className="text-2xl font-semibold mb-3">
@@ -644,21 +643,21 @@ export default function CaseStudies() {
                                 ? 'bg-indigo-500 text-white' :
                               'bg-purple-500 text-white'
                             }`}
-                          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <ExternalLink className="w-4 h-4" />
                           View Project
                         </a>
-                        <a 
-                          href={project.links.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button 
                           className="px-4 py-3 text-base font-medium flex items-center justify-center gap-2 flex-1 border border-white/20 bg-white/5"
-                          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCloseExpanded();
+                          }}
                         >
-                          <Github className="w-4 h-4" />
-                          View Code
-                        </a>
+                          <X className="w-4 h-4" />
+                          Close
+                        </button>
                       </div>
                     </div>
                   </div>
