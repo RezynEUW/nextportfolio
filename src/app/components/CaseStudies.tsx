@@ -633,7 +633,7 @@ export default function CaseStudies() {
                           href={project.links.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`px-4 py-3 text-base font-medium flex items-center justify-center gap-2 flex-1
+                          className={`px-4 py-3  text-base font-medium flex items-center justify-center gap-2 flex-1
                             ${
                               selectedProject === 1 
                                 ? 'bg-emerald-500 text-white' :
